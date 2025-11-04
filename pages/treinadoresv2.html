@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="pt" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Treinadores | Vila Plus</title>
+  <meta name="theme-color" content="#1f5073"/>
+
+  <!-- Favicon / Fonts / Icons -->
+  <link rel="icon" href="../assets/logoazulcinza.png" type="image/png"/>
+  <link rel="apple-touch-icon" href="../assets/logoazulcinza.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root{
+      --azul:#2563eb;--azul-escuro:#1f5073;--cinza-fundo:#f8f9fb;--cinza-card:#f1f3f7;--cinza-medio:#6b7280;
+      --dourado:#d4af37;--branco:#fff;--preto:#111827;--transition:.3s ease;--header-height:64px;--shadow:0 4px 12px rgba(0,0,0,.08);--shadow-hover:0 8px 24px rgba(0,0,0,.12)
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    img{display:block;max-width:100%;height:auto}
+    body{font-family:'Lato',sans-serif;color:var(--preto);background:var(--branco);line-height:1.6;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;color:var(--azul-escuro);font-weight:700;line-height:1.2}
+    h1{font-size:clamp(1.75rem,5vw,3rem)} h2{font-size:clamp(1.5rem,4vw,2.5rem)} h3{font-size:clamp(1.2rem,3vw,1.6rem)}
+    a{color:inherit;text-decoration:none;transition:var(--transition)}
+    .container{max-width:1200px;margin:0 auto;padding:0 1rem}
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 0.75rem 0;
+      background: var(--branco);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: var(--transition);
+      height: var(--header-height);
+    }
+
+    header.scrolled {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      padding: 0.5rem 0;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+      transition: var(--transition);
+    }
+
+    .logo-img:hover {
+      opacity: 0.9;
+      transform: scale(1.03);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin-left: 1.5rem;
+      position: relative;
+    }
+
+    nav ul li a {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--azul-escuro);
+      padding: 0.5rem 0;
+      display: block;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--dourado);
+      transition: var(--transition);
+    }
+
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--azul-escuro);
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      min-height: 44px;
+      min-width: 44px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* HERO */
+    .hero-treinadores{
+      position: relative;
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: var(--branco);
+      margin-top: var(--header-height);
+      padding: calc(3rem + env(safe-area-inset-top, 0px)) 1rem 3rem;
+      background:
+        linear-gradient(rgba(0,0,0,.64), rgba(0,0,0,.64)),
+        url('../assets/team-bg.jpg') center/cover no-repeat;
+      overflow: hidden;
+    }
+    .hero-treinadores h1{color:#fff;font-size: clamp(2rem, 4vw, 3rem);margin:0 0 .75rem}
+    .hero-treinadores p{font-size: clamp(1rem, 2.2vw, 1.15rem);opacity:.96;max-width:760px;margin:0 auto 1.25rem}
+    .hero-actions{display:inline-flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:.25rem}
+    .hero-actions .btn{margin-top:0}
+    @media (min-width:768px){.hero-treinadores{min-height:60vh;padding:4rem 2rem}}
+    @media (max-width:767px){.hero-treinadores{min-height:42vh;padding:2.25rem 1rem}.hero-actions{gap:.5rem}}
+
+    /* Botões */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;padding:.75rem 1.5rem;border:1px solid var(--dourado);color:var(--dourado);font-weight:700;letter-spacing:1px;text-transform:uppercase;font-size:.8rem;transition:var(--transition);cursor:pointer;text-align:center;border-radius:8px;min-height:44px}
+    .btn:hover{background:var(--dourado);color:#fff}
+    .btn-filled{background:var(--dourado);color:#fff}
+    .btn-filled:hover{background:transparent;color:var(--dourado)}
+    .btn-full{width:100%;margin-top:auto}
+
+    /* Section head */
+    section{padding:2rem 0}
+    .section-title{text-align:center;margin-bottom:1.5rem}
+    .section-title::after{content:'';display:block;width:80px;height:3px;background:var(--dourado);margin:1rem auto 0}
+
+    /* Filters */
+    .filtros{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:.75rem}
+    .filtro-btn{border:1px solid var(--dourado);background:transparent;border-radius:999px;padding:.4rem .9rem;font-weight:700;cursor:pointer}
+    .filtro-btn.active,.filtro-btn:hover{background:var(--dourado);color:#fff}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;align-items:stretch}
+    @media (min-width:1100px){.grid{grid-template-columns:repeat(4,1fr)}}
+
+    .card{background:#fff;border-radius:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden;transition:.2s transform}
+    .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+    .card-cover{position:relative;width:100%;aspect-ratio:3/4;background:var(--cinza-card);overflow:hidden}
+    .card-cover img{width:100%;height:100%;object-fit:cover;object-position:50% var(--focus-y, 50%);transition:transform .4s ease}
+    .card:hover .card-cover img{transform:scale(1.05)}
+    .badge{position:absolute;top:.75rem;right:.75rem;background:var(--dourado);color:#fff;font-weight:800;border-radius:999px;padding:.25rem .6rem;font-size:.7rem}
+    .card-body{padding:1.1rem;display:flex;flex-direction:column;gap:.6rem;flex:1;text-align:center}
+    .cargo{color:var(--dourado);font-weight:800;font-size:.9rem}
+    .tags{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+    .tag{font-size:.74rem;border:1px solid #e5e7eb;background:var(--cinza-fundo);border-radius:999px;padding:.25rem .6rem}
+    .hidden{display:none!important}
+
+    /* ===== MODAL COMPLETAMENTE REFEITO PARA MOBILE ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      z-index: 9999;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .modal-overlay.active {
+      display: block;
+    }
+
+    .modal-container {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header do modal - FIXO no topo */
+    .modal-header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      padding: 1rem;
+      border-bottom: 2px solid var(--cinza-fundo);
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .modal-header-content {
+      flex: 1;
+    }
+
+    .modal-header h2 {
+      color: var(--azul-escuro);
+      margin: 0 0 0.25rem 0;
+      font-size: 1.3rem;
+      line-height: 1.2;
+    }
+
+    .modal-cargo {
+      color: var(--dourado);
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* Botão FECHAR - SEMPRE VISÍVEL */
+    .modal-close-btn {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      border: 2px solid var(--dourado);
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .modal-close-btn:hover {
+      background: var(--dourado);
+    }
+
+    .modal-close-btn i {
+      color: var(--dourado);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .modal-close-btn:hover i {
+      color: white;
+    }
+
+    /* Imagem do treinador */
+    .modal-image {
+      width: 100%;
+      height: 40vh;
+      min-height: 250px;
+      background: var(--cinza-card);
+    }
+
+    .modal-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    /* Conteúdo do modal */
+    .modal-content {
+      padding: 1.5rem 1rem;
+      flex: 1;
+    }
+
+    .modal-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-section h3 {
+      color: var(--azul-escuro);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--dourado);
+      position: relative;
+    }
+
+    .modal-section p {
+      line-height: 1.6;
+      color: var(--cinza-medio);
+      margin-bottom: 0;
+    }
+
+    .modal-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .modal-list li {
+      margin-bottom: 0.75rem;
+      padding-left: 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .modal-list li i {
+      color: var(--dourado);
+      margin-top: 0.1rem;
+      flex-shrink: 0;
+    }
+
+    /* Contact box */
+    .contact-box {
+      background: var(--cinza-fundo);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+      border-left: 4px solid var(--dourado);
+    }
+
+    .contact-box h3 {
+      color: var(--azul-escuro);
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    .contact-box p {
+      color: var(--cinza-medio);
+      margin-bottom: 1rem;
+    }
+
+    .contact-box .btn {
+      width: 100%;
+    }
+
+    /* VERSÃO DESKTOP */
+    @media (min-width: 768px) {
+      .modal-overlay {
+        padding: 2rem;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+      }
+
+      .modal-container {
+        width: 90%;
+        max-width: 900px;
+        min-height: auto;
+        max-height: 90vh;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        display: grid;
+        grid-template-columns: 40% 60%;
+      }
+
+      .modal-header {
+        position: static;
+        grid-column: 1 / -1;
+        padding: 1.5rem;
+      }
+
+      .modal-image {
+        height: auto;
+        min-height: 100%;
+        grid-row: 2;
+      }
+
+      .modal-content {
+        padding: 1.5rem;
+        overflow-y: auto;
+        max-height: calc(90vh - 80px);
+      }
+
+      .contact-box .btn {
+        width: auto;
+      }
+    }
+
+    /* Melhorias para mobile pequeno */
+    @media (max-width: 360px) {
+      .modal-header {
+        padding: 0.75rem;
+      }
+
+      .modal-content {
+        padding: 1rem;
+      }
+
+      .modal-header h2 {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Candidatura */
+    .candidatura{background:var(--cinza-fundo)}
+    .cand-wrap{display:grid;grid-template-columns:1fr;gap:2rem;align-items:start}
+    .cand-card{background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:1.5rem}
+    .cand-card h3{margin-bottom:.75rem}
+    .form-group{margin-bottom:1rem}
+    .form-group label{display:block;margin-bottom:.5rem;font-weight:700;font-size:.9rem;color:var(--azul-escuro)}
+    .form-control{width:100%;padding:.75rem 1rem;border:1px solid #ddd;border-radius:6px;font-family:'Lato',sans-serif;font-size:1rem;transition:var(--transition)}
+    .form-control:focus{outline:0;border-color:var(--dourado);box-shadow:0 0 0 3px rgba(212,175,55,.2)}
+    textarea.form-control{min-height:120px;resize:vertical}
+    @media(min-width:992px){.cand-wrap{grid-template-columns:1.1fr 1fr;gap:2.5rem}}
+
+    /* Footer */
+    footer {
+      background-color: var(--azul-escuro);
+      color: var(--branco);
+      padding: 3rem 0 1.5rem;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-col h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.25rem;
+      color: var(--branco);
+    }
+
+    .footer-col p {
+      color: var(--cinza-card);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links ul li a {
+      color: var(--cinza-card);
+      transition: var(--transition);
+      display: block;
+      padding: 0.25rem 0;
+    }
+
+    .footer-links ul li a:hover {
+      color: var(--dourado);
+      padding-left: 0.25rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.1);
+      color: var(--branco);
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background-color: var(--dourado);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--cinza-card);
+      font-size: 0.9rem;
+    }
+
+    /* Acessibilidade */
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{outline:2px solid var(--dourado);outline-offset:2px}
+
+    /* FAB */
+    .floating-cta{position:fixed;right:1rem;bottom:1rem;z-index:9998}
+    .fab-contact{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background-color:var(--dourado);color:#fff;border:0;border-radius:999px;padding:.75rem 1rem;font-weight:800;letter-spacing:.3px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;min-height:50px;min-width:50px;text-decoration:none}
+    .fab-contact:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.3)}
+    .fab-contact.pulse{animation:fabPulse 2s infinite}
+    @keyframes fabPulse{0%{box-shadow:0 0 0 0 rgba(212,175,55,.55)}70%{box-shadow:0 0 0 14px rgba(212,175,55,0)}100%{box-shadow:0 0 0 0 rgba(212,175,55,0)}}
+    .fab-contact i{font-size:1.1rem}
+    @media(max-width:768px){.fab-contact span{display:none}.fab-contact{padding:.875rem}.fab-contact i{font-size:1.25rem}}
+
+    /* Scroll hint */
+    .scroll-hint{position:fixed;bottom:1.5rem;left:1.5rem;z-index:9997;color:var(--dourado);font-size:1.8rem;animation:bounce 1.5s infinite;opacity:.8;pointer-events:none}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+    .scroll-hint.hide{display:none}
+
+    /* Prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      .fab-contact.pulse{ animation: none; }
+      .card:hover .card-cover img{ transform: none; }
+      .scroll-hint{ animation: none; }
+    }
+
+    /* ==== Responsivo - Mobile ==== */
+    @media (max-width: 767px) {
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      nav ul {
+        display: none;
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background: var(--branco);
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        max-height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 0.75rem 0;
+      }
+    }
+
+    /* ==== Responsivo - Tablet e Desktop ==== */
+    @media (min-width: 768px) {
+      .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-container {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <img src="../assets/logoazulcinza.png" alt="VilaPlus Ginásio" class="logo-img">
+      </a>
+      <nav>
+        <ul id="main-menu">
+          <li><a href="index.html#home">Início</a></li>
+          <li><a href="servicosv2.html">Serviços</a></li>
+          <li><a href="projetosv2.html">Projetos</a></li>
+          <li><a href="portfoliov2.html">Galeria</a></li>
+          <li><a href="index.html#horarios">Horários</a></li>
+          <li><a href="parceriasv2.html">Parcerias</a></li>
+          <li><a href="lojav2.html">Loja</a></li>
+          <li><a href="noticiasv2.html">Notícias</a></li>
+          <li><a href="contactsv2.html">Contactos</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-treinadores">
+    <div class="container">
+      <h1 class="animate">Juntar-me à Equipa</h1>
+      <p class="animate delay-1">
+        Gostavas de fazer parte do VilaPlus? Conhece a equipa e envia já a tua candidatura.
+      </p>
+      <div class="hero-actions animate delay-2">
+        <a href="#treinadores" class="btn">Ver Equipa</a>
+        <a href="#candidatura" class="btn btn-filled">Candidatar-me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Treinadores -->
+  <section id="treinadores">
+    <div class="container">
+      <div class="section-title">
+        <h2>Nossos Treinadores</h2>
+        <p>Filtra por área de especialização</p>
+        <div class="filtros">
+          <button class="filtro-btn active" data-filter="all" aria-pressed="true">Todos</button>
+          <button class="filtro-btn" data-filter="pt" aria-pressed="false">PT</button>
+          <button class="filtro-btn" data-filter="aulas" aria-pressed="false">Aulas</button>
+          <button class="filtro-btn" data-filter="fisio" aria-pressed="false">Fisio</button>
+          <button class="filtro-btn" data-filter="especial" aria-pressed="false">Especial</button>
+        </div>
+      </div>
+
+      <div class="grid" id="gridTreinadores">
+        <!-- Ricardo -->
+        <article class="card" data-categories="pt aulas">
+          <div class="card-cover" style="--focus-y:40%;">
+            <img src="../assets/coach/ricardo.jpeg" alt="Ricardo Almeida" loading="lazy">
+            <span class="badge">Fundador</span>
+          </div>
+          <div class="card-body">
+            <h3>Ricardo Almeida</h3>
+            <span class="cargo">Personal Trainer</span>
+            <div class="tags">
+              <span class="tag">Treino Personalizado</span>
+              <span class="tag">Emagrecimento & Performance</span>
+              <span class="tag">Reabilitação</span>
+              <span class="tag">Online</span>
+            </div>
+            <button class="btn btn-full js-open-modal" data-id="ricardo">Ver Perfil Completo</button>
+          </div>
+        </article>
+
+        <!-- Tiago -->
+        <article class="card" data-categories="pt aulas">
+          <div class="card-cover" style="--focus-y:40%;">
+            <img src="../assets/coach/tiago.jpg" alt="Tiago Tavares Magalhães" loading="lazy">
+            <span class="badge">PT</span>
+          </div>
+          <div class="card-body">
+            <h3>Tiago Magalhães</h3>
+            <span class="cargo">Personal Trainer</span>
+            <div class="tags">
+              <span class="tag">Treino Personalizado</span>
+              <span class="tag">Aulas de Grupo</span>
+              <span class="tag">Treino Livre</span>
+            </div>
+            <button class="btn btn-full js-open-modal" data-id="tiago">Ver Perfil Completo</button>
+          </div>
+        </article>
+
+        <!-- Rita C. -->
+        <article class="card" data-categories="pt aulas">
+          <div class="card-cover" style="--focus-y:35%;">
+            <img src="../assets/coach/rita.jpg" alt="Rita Cerqueira" loading="lazy">
+            <span class="badge">PT</span>
+          </div>
+          <div class="card-body">
+            <h3>Rita Cerqueira</h3>
+            <span class="cargo">Personal Trainer</span>
+            <div class="tags">
+              <span class="tag">Força / Musculação</span>
+              <span class="tag">Funcional / HIIT</span>
+              <span class="tag">Avaliações Físicas</span>
+            </div>
+            <button class="btn btn-full js-open-modal" data-id="rita">Ver Perfil Completo</button>
+          </div>
+        </article>
+
+        <!-- Ana -->
+        <article class="card" data-categories="pt aulas">
+          <div class="card-cover" style="--focus-y:38%;">
+            <img src="../assets/coach/ana.jpg" alt="Ana Pinto" loading="lazy">
+            <span class="badge">PT</span>
+          </div>
+          <div class="card-body">
+            <h3>Ana Pinto</h3>
+            <span class="cargo">Personal Trainer</span>
+            <div class="tags">
+              <span class="tag">Pilates (Matwork &amp; Equipamentos)</span>
+              <span class="tag">Step</span>
+              <span class="tag">Localizada</span>
+              <span class="tag">Zumba Básico 1</span>
+              <span class="tag">Zumba Toning</span>
+            </div>
+            <button class="btn btn-full js-open-modal" data-id="ana">Ver Perfil Completo</button>
+          </div>
+        </article>
+
+        <!-- Diogo -->
+        <article class="card" data-categories="pt aulas">
+          <div class="card-cover" style="--focus-y:38%;">
+            <img src="../assets/coach/diogo.jpg" alt="Diogo Filipe Magalhães Vieira" loading="lazy">
+            <span class="badge">PT</span>
+          </div>
+          <div class="card-body">
+            <h3>Diogo Vieira</h3>
+            <span class="cargo">Personal Trainer</span>
+            <div class="tags">
+              <span class="tag">Treino Personalizado</span>
+              <span class="tag">Aulas de Grupo (Circuito / Funcional)</span>
+              <span class="tag">Treino de Força</span>
+            </div>
+            <button class="btn btn-full js-open-modal" data-id="diogo">Ver Perfil Completo</button>
+          </div>
+        </article>
+
+        <!-- Miguela -->
+        <article class="card" data-categories="fisio">
+          <div class="card-cover" style="--focus-y:42%;">
+            <img src="../assets/coach/miguela.jpg" alt="Miguela Queirós" loading="lazy">
+            <span class="badge">Fisioterapeuta</span>
+          </div>
+          <div class="card-body">
+            <h3>Miguela Queirós</h3>
+            <span class="cargo">Fisioterapeuta</span>
+            <div class="tags">
+              <span class="tag">Quiropraxia</span><span class="tag">Acupuntura</span><span class="tag">Pilates Clínico</span>
+            </div>
+            <button class="btn btn-full js-open-modal" data-id="miguela">Ver Perfil Completo</button>
+          </div>
+        </article>
+
+        <!-- Daniela -->
+        <article class="card" data-categories="especial">
+          <div class="card-cover" style="--focus-y:45%;">
+            <img src="../assets/coach/daniela.jpeg" alt="Daniela Custódio" loading="lazy">
+            <span class="badge">Nutricionista</span>
+          </div>
+          <div class="card-body">
+            <h3>Daniela Custódio</h3>
+            <span class="cargo">Nutrição Desportiva</span>
+            <div class="tags">
+              <span class="tag">Nutrição</span><span class="tag">Planos Alimentares</span><span class="tag">Emagrecimento</span>
+            </div>
+            <button class="btn btn-full js-open-modal" data-id="daniela">Ver Perfil Completo</button>
+          </div>
+        </article>
+
+        <!-- Rita Teixeira -->
+        <article class="card" data-categories="fisio aulas">
+          <div class="card-cover" style="--focus-y:42%;">
+            <img src="../assets/coach/rita_teixeira.jpg" alt="Rita Teixeira" loading="lazy">
+            <span class="badge">Instrutora de Pilates</span>
+          </div>
+          <div class="card-body">
+            <h3>Rita Teixeira</h3>
+            <span class="cargo">Instrutora de Pilates</span>
+            <div class="tags">
+              <span class="tag">Pilates Clínico</span>
+              <span class="tag">Aulas de Grupo</span>
+              <span class="tag">Fisioterapia</span>
+              <span class="tag">Massagens</span>
+            </div>
+            <button class="btn btn-full js-open-modal" data-id="rita_teixeira">Ver Perfil Completo</button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Candidatura -->
+  <section class="candidatura" id="candidatura">
+    <div class="container">
+      <div class="section-title">
+        <h2>Candidatura</h2>
+        <p>Conta-nos quem és e em que área queres colaborar. Respondemos rápido 👌</p>
+      </div>
+
+      <div class="cand-wrap">
+        <div class="cand-card">
+          <h3>Envia a tua candidatura</h3>
+          <form id="candForm"
+                action="https://formspree.io/f/myzpvyae"
+                method="POST"
+                enctype="multipart/form-data"
+                novalidate>
+            <div class="form-group">
+              <label for="cand_nome">Nome</label>
+              <input id="cand_nome" name="nome" class="form-control" required/>
+            </div>
+
+            <div class="form-group">
+              <label for="cand_email">Email</label>
+              <input type="email" id="cand_email" name="email" class="form-control" required/>
+            </div>
+
+            <div class="form-group">
+              <label for="cand_tel">Telefone</label>
+              <input type="tel" id="cand_tel" name="telefone" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+              <label for="cand_area">Área</label>
+              <select id="cand_area" name="area" class="form-control" required>
+                <option value="">Seleciona…</option>
+                <option value="personal-trainer">Personal Trainer</option>
+                <option value="aulas-grupo">Aulas de Grupo</option>
+                <option value="fisioterapia">Fisioterapia</option>
+                <option value="nutricao">Nutrição</option>
+                <option value="outra">Outra</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="cand_cv">Link para CV/Portefólio (opcional)</label>
+              <input id="cand_cv" name="cv_link" class="form-control" placeholder="ex.: https://…"/>
+            </div>
+
+            <div class="form-group">
+              <label for="cand_cv_file">Carregar CV (PDF, DOC ou DOCX)</label>
+              <input type="file" id="cand_cv_file" name="cv_file" class="form-control" accept=".pdf,.doc,.docx">
+              <small style="display:block;margin-top:.35rem;color:var(--cinza-medio);">Tamanho máximo recomendado: 0.5&nbsp;MB.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="cand_msg">Mensagem</label>
+              <textarea id="cand_msg" name="mensagem" class="form-control" required placeholder="Resumo de experiência, certificações, disponibilidade…"></textarea>
+            </div>
+
+            <input type="text" name="_gotcha" style="display:none"/>
+            <button type="submit" class="btn btn-filled">Enviar Candidatura</button>
+          </form>
+        </div>
+
+        <div class="cand-card">
+          <h3>Perfil do que procuramos</h3>
+          <ul style="list-style:none;margin:10px 0 0;padding:0">
+            <li style="margin-bottom:10px"><i class="fas fa-check" style="color:var(--dourado);margin-right:8px"></i> Formação em Educação Física ou áreas relacionadas</li>
+            <li style="margin-bottom:10px"><i class="fas fa-check" style="color:var(--dourado);margin-right:8px"></i> Conhecimento em treino personalizado e musculação</li>
+            <li style="margin-bottom:10px"><i class="fas fa-check" style="color:var(--dourado);margin-right:8px"></i> Boa comunicação e empatia com os clientes</li>
+            <li style="margin-bottom:10px"><i class="fas fa-check" style="color:var(--dourado);margin-right:8px"></i> Disponibilidade para horários flexíveis</li>
+            <li style="margin-bottom:10px"><i class="fas fa-check" style="color:var(--dourado);margin-right:8px"></i> Espírito de equipa e atitude proativa</li>
+          </ul>
+          <p style="margin-top:14px;color:var(--cinza-medio)">Dúvidas rápidas? <a href="mailto:info@vilaplus.pt">info@vilaplus.pt</a> • <a href="https://wa.me/351931999690" target="_blank" rel="noopener">WhatsApp</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal NOVO - completamente refeito -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-container" id="modalContainer">
+      <div class="modal-header">
+        <div class="modal-header-content">
+          <h2 id="modalTitle">Nome do Treinador</h2>
+          <p class="modal-cargo" id="modalCargo">Cargo do Treinador</p>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Fechar modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-image">
+        <img id="modalImage" alt="" src="">
+      </div>
+      
+      <div class="modal-content" id="modalContent">
+        <!-- O conteúdo será inserido aqui via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Vila Plus</h3>
+          <p>Saúde. Força. Comunidade.</p>
+          <p>O teu ginásio de eleição em Vila Caiz.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Links Rápidos</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html">Início</a></li>
+              <li><a href="servicosv2.html">Serviços</a></li>
+              <li><a href="projetosv2.html">Projetos</a></li>
+              <li><a href="portfoliov2.html">Galeria</a></li>
+              <li><a href="index.html#horarios">Horários</a></li>
+              <li><a href="parceriasv2.html">Parcerias</a></li>
+              <li><a href="lojav2.html">Loja</a></li>
+              <li><a href="noticiasv2.html">Notícias</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Serviços</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="servicosv2.html#musculacao">Musculação</a></li>
+              <li><a href="servicosv2.html#aulas">Aulas de Grupo</a></li>
+              <li><a href="servicosv2.html#personal">Treino Personalizados</a></li>
+              <li><a href="servicosv2.html#nutricao">Nutrição Desportiva</a></li>
+              <li><a href="servicosv2.html#online">Acompanhamento Online</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Redes Sociais</h3>
+          <div class="social-links">
+            <a href="https://www.facebook.com/p/Vila-Plus-61552410020366/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/vilaplus.pt/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/351931999690" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FAB -->
+  <div class="floating-cta">
+    <button class="fab-contact pulse" id="fabContact" aria-label="Marcar aula ou falar connosco">
+      <i class="fas fa-calendar-check" aria-hidden="true"></i>
+      <span>Marcar Aula</span>
+    </button>
+  </div>
+
+  <div class="scroll-hint" id="scrollHint" aria-hidden="true">
+    <i class="fas fa-angle-down"></i>
+  </div>
+
+<script>
+  // Scroll hint
+  (function(){
+    const hint = document.getElementById('scrollHint');
+    if(!hint) return;
+    function toggleHint(){
+      const scrollY = window.scrollY;
+      const winH = window.innerHeight;
+      const docH = document.body.scrollHeight;
+      if(scrollY + winH >= docH - 50) { hint.classList.add('hide'); }
+      else { hint.classList.remove('hide'); }
+    }
+    window.addEventListener('scroll', toggleHint);
+    window.addEventListener('resize', toggleHint);
+    document.addEventListener('DOMContentLoaded', toggleHint);
+  })();
+</script>
+
+<script>
+  // ===== Menu mobile =====
+  (function(){
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('main-menu');
+    if(!btn || !menu) return;
+
+    function lockBody(lock){
+      if(lock){
+        const sw = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.overflow = 'hidden';
+        if(sw>0) document.body.style.paddingRight = sw + 'px';
+      }else{
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      }
+    }
+
+    btn.addEventListener('click', ()=>{
+      const opened = menu.classList.toggle('show');
+      btn.setAttribute('aria-expanded', String(opened));
+      btn.innerHTML = opened ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+      lockBody(opened);
+    });
+
+    // Fechar ao clicar num link (mobile)
+    menu.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        if(window.innerWidth <= 768){
+          menu.classList.remove('show');
+          btn.setAttribute('aria-expanded','false');
+          btn.innerHTML = '<i class="fas fa-bars"></i>';
+          lockBody(false);
+        }
+      });
+    });
+
+    // Garantir desbloqueio ao passar para desktop
+    window.addEventListener('resize', ()=>{
+      if(window.innerWidth > 768){
+        menu.classList.remove('show');
+        btn.setAttribute('aria-expanded','false');
+        btn.innerHTML = '<i class="fas fa-bars"></i>';
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      }
+    });
+  })();
+
+  // ===== Filtros =====
+  (function(){
+    const btns = Array.from(document.querySelectorAll('.filtro-btn'));
+    const cards = Array.from(document.querySelectorAll('.card'));
+    const catsMap = new Map();
+    cards.forEach(card => {
+      const raw = (card.dataset.categories || '').toLowerCase();
+      const set = new Set(raw.split(/\s+/).filter(Boolean));
+      catsMap.set(card, set);
+    });
+    function applyFilter(key){
+      const f = (key || 'all').toLowerCase();
+      cards.forEach(card => {
+        const set = catsMap.get(card) || new Set();
+        const show = f === 'all' || set.has(f);
+        card.classList.toggle('hidden', !show);
+      });
+    }
+    btns.forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        e.preventDefault();
+        btns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        // ARIA pressed state
+        btns.forEach(b=>b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+        applyFilter(btn.dataset.filter);
+        void document.body.offsetHeight; // reflow p/ iOS
+      }, {passive:true});
+    });
+    // Estado inicial
+    btns.forEach(b=>b.setAttribute('aria-pressed', b.classList.contains('active') ? 'true' : 'false'));
+    applyFilter('all');
+  })();
+
+  // ===== MODAL NOVO - COMPLETAMENTE FUNCIONAL =====
+  (function(){
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalContainer = document.getElementById('modalContainer');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCargo = document.getElementById('modalCargo');
+    const modalImage = document.getElementById('modalImage');
+    const modalContent = document.getElementById('modalContent');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    
+    let currentCoach = null;
+    let scrollPosition = 0;
+
+    // Dados dos treinadores
+    const COACH_DATA = {
+      ricardo:{
+        nome:"Ricardo Almeida",
+        cargo:"Fundador & Personal Trainer",
+        img:"../assets/coach/ricardo.jpeg",
+        bio:"Fundador do VilaPlus. Lic. em Ciências do Desporto (Ramo Exercício Físico e Atividades de Academia) e Mestrado em Ensino de Educação Física. Especialista em emagrecimento, performance e reabilitação, com acompanhamento online.",
+        especialidades:[
+          "Treino Personalizado (Emagrecimento, Performance, Reabilitação de Lesões)",
+          "Acompanhamento Online"
+        ],
+        formacao:[
+          "Licenciatura em Ciências do Desporto — Exercício Físico e Atividades de Academia",
+          "Mestrado em Ensino de Educação Física",
+          "Pilates Clínico MW1 (APPI)",
+          "Prescrição de Exercício na Gravidez e Pós-Parto",
+          "Exercício na Perda de Peso",
+          "Prevenção de Lesões no Futebol"
+        ]
+      },
+      tiago:{
+        nome:"Tiago Tavares Magalhães",
+        cargo:"Personal Trainer",
+        img:"../assets/coach/tiago.jpg",
+        bio:"PT. Foco em treino personalizado, aulas de grupo e treino livre.",
+        especialidades:[
+          "Treino Personalizado",
+          "Aulas de Grupo",
+          "Treino Livre"
+        ],
+        formacao:[
+          "Curso Profissional Técnico de Desporto",
+          "Treinador UEFA C",
+          "Licenciado em Desporto",
+          "Técnico de Suporte Básico de Vida"
+        ]
+      },
+      rita:{
+        nome:"Rita Cerqueira",
+        cargo:"Personal Trainer",
+        img:"../assets/coach/rita.jpg",
+        bio:"PT. Foco em planeamento por objetivo, monitorização de resultados e aulas de grupo.",
+        especialidades:[
+          "Treino Personalizado (planos por objetivo)",
+          "Força / Musculação",
+          "Funcional / HIIT / Step / Aeróbica / Circuito / GAP",
+          "Avaliações Físicas"
+        ],
+        formacao:[
+          "Licenciatura em Ciências do Desporto — UTAD",
+          "Mestrado em Ensino da Educação Física — UTAD (a decorrer)"
+        ]
+      },
+      ana:{
+        nome:"Ana Pinto",
+        cargo:"Personal Trainer & Instrutora de Aulas de Grupo",
+        img:"../assets/coach/ana.jpg",
+        bio:"PT e instrutora de aulas de grupo com foco em Pilates, condicionamento e ritmos.",
+        especialidades:[
+          "Pilates (Matwork e Equipamentos)",
+          "Step",
+          "Localizada",
+          "Zumba Básico 1",
+          "Zumba Toning"
+        ],
+        formacao:[
+          "Formação em Ensino da Educação Física nos ensinos básico e secundário"
+        ]
+      },
+      diogo:{
+        nome:"Diogo Filipe Magalhães Vieira",
+        cargo:"Personal Trainer & Instrutor de Aulas de Grupo",
+        img:"../assets/coach/diogo.jpg",
+        bio:"PT com experiência em treino personalizado, aulas de grupo funcionais e treino de força. Foco em performance e condicionamento físico.",
+        especialidades:[
+          "Treino Personalizado",
+          "Aulas de Grupo (Circuito / Funcional)",
+          "Treino de Força"
+        ],
+        formacao:[
+          "Licenciatura em Treino Desportivo",
+          "Alto Rendimento - Preparador Físico Nível 1"
+        ]
+      },
+      miguela:{
+        nome:"Miguela Queirós",
+        cargo:"Fisioterapeuta",
+        img:"../assets/coach/miguela.jpg",
+        bio:"Fisioterapeuta com formação em quiropraxia, acupuntura/eletropuntura, ecografia e Pilates clínico. Foco em reabilitação funcional e dor músculo-esquelética.",
+        especialidades:[
+          "Quiropraxia",
+          "Acupuntura",
+          "Pilates Clínico",
+          "Reabilitação Perineal",
+          "Kinesiotaping",
+          "Ecografia"
+        ],
+        formacao:[
+          "Licenciatura em Fisioterapia",
+          "Quiropraxia da Coluna Vertebral",
+          "Acupuntura e Eletropuntura",
+          "Ecografia",
+          "Pilates Clínico Matwork 1",
+          "Reabilitação Perineal Activa",
+          "Kinesiotaping"
+        ]
+      },
+      daniela:{
+        nome:"Daniela Custódio",
+        cargo:"Nutricionista Desportiva",
+        img:"../assets/coach/daniela.jpeg",
+        bio:"Nutricionista (cédula 0935N) com certificação em Nutrição Desportiva e 14 anos de experiência em nutrição clínica, com foco em emagrecimento sustentável.",
+        especialidades:[
+          "Nutrição Desportiva",
+          "Emagrecimento",
+          "Nutrição Clínica",
+          "Planos Alimentares",
+          "Reeducação Alimentar",
+          "Suplementação"
+        ],
+        formacao:[
+          "Certificação em Nutrição Desportiva",
+          "14 anos de experiência em Nutrição Clínica (ênfase em emagrecimento)"
+        ]
+      },
+      rita_teixeira:{
+        nome:"Rita Teixeira",
+        cargo:"Instrutora de Pilates",
+        img:"../assets/coach/rita_teixeira.jpg",
+        bio:"Instrutora de Pilates e Fisioterapeuta. Foco em Pilates Clínico (individual, duo e aulas de grupo), tratamentos de fisioterapia e massagens.",
+        especialidades:[
+          "Pilates Clínico Individual e Duo",
+          "Aulas em Grupo de Pilates Clínico",
+          "Tratamentos de Fisioterapia",
+          "Massagens"
+        ],
+        formacao:[
+          "Licenciada em Fisioterapia",
+          "Pós-graduada em Fisioterapia Cardio-Respiratória",
+          "Curso Avançado em Reabilitação Desportiva",
+          "Curso de Fisioterapia Desportiva — Especialização em Futebol",
+          "Formação em Pilates Clínico MW1, MW2 e MW3",
+          "Formação de Pilates para Escoliose",
+          "Formação em Pilates de Equipamentos"
+        ]
+      }
+    };
+
+    function openModal(coachId) {
+      const coach = COACH_DATA[coachId];
+      if (!coach) return;
+      
+      currentCoach = coach;
+      
+      // Guardar posição do scroll
+      scrollPosition = window.pageYOffset;
+      
+      // Preencher dados do modal
+      modalTitle.textContent = coach.nome;
+      modalCargo.textContent = coach.cargo;
+      modalImage.src = coach.img;
+      modalImage.alt = coach.nome;
+      
+      // Construir conteúdo
+      let contentHTML = `
+        <div class="modal-section">
+          <h3>Biografia</h3>
+          <p>${coach.bio}</p>
+        </div>
+      `;
+      
+      if (coach.especialidades && coach.especialidades.length > 0) {
+        contentHTML += `
+          <div class="modal-section">
+            <h3>Especialidades</h3>
+            <ul class="modal-list">
+              ${coach.especialidades.map(esp => `<li><i class="fas fa-check"></i>${esp}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+      }
+      
+      if (coach.formacao && coach.formacao.length > 0) {
+        contentHTML += `
+          <div class="modal-section">
+            <h3>Formação & Certificações</h3>
+            <ul class="modal-list">
+              ${coach.formacao.map(form => `<li><i class="fas fa-certificate"></i>${form}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+      }
+      
+      // Adicionar contacto
+      const message = encodeURIComponent(`Olá,\nGostaria de marcar uma sessão/aula com: ${coach.nome}`);
+      const whatsappLink = `https://wa.me/351931999690?text=${message}`;
+      
+      contentHTML += `
+        <div class="contact-box">
+          <h3>Contacto</h3>
+          <p>Fala connosco diretamente:</p>
+          <a href="${whatsappLink}" class="btn btn-filled" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Marcar Sessão via WhatsApp
+          </a>
+        </div>
+      `;
+      
+      modalContent.innerHTML = contentHTML;
+      
+      // Mostrar modal
+      modalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.top = `-${scrollPosition}px`;
+      
+      // Focar no botão de fechar
+      setTimeout(() => modalCloseBtn.focus(), 100);
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      
+      // Restaurar scroll position
+      window.scrollTo(0, scrollPosition);
+      currentCoach = null;
+    }
+
+    // Event Listeners
+    document.querySelectorAll('.js-open-modal').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openModal(btn.dataset.id);
+      });
+    });
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    // Prevenir scroll do body quando modal está aberto
+    modalContainer.addEventListener('touchmove', (e) => {
+      e.stopPropagation();
+    }, { passive: false });
+
+  })();
+
+  // ===== Form – validação leve do tamanho do ficheiro =====
+  (function(){
+    const form = document.getElementById('candForm');
+    if(!form) return;
+    const fileInput = form.querySelector('#cand_cv_file');
+    const MAX = 0.5 * 1024 * 1024; // 0.5 MB
+    form.addEventListener('submit', (e)=>{
+      const f = fileInput?.files?.[0];
+      if(f && f.size > MAX){
+        e.preventDefault();
+        alert('O ficheiro é maior que 0.5 MB. Por favor, carrega um ficheiro mais pequeno.');
+      }
+    });
+  })();
+
+  // FAB
+  document.getElementById('fabContact').addEventListener('click',()=>{
+    const section=document.querySelector('#contact');
+    if(section){
+      const h=document.getElementById('header')?.offsetHeight||0;
+      const top=section.getBoundingClientRect().top+window.scrollY-h;
+      window.scrollTo({top,behavior:'smooth'});
+    }else{
+      location.href='contactsv2.html';
+    }
+  });
+</script>
+</body>
+</html>

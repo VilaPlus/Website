@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt" class="no-js">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Notícias | Vila Plus</title>
+  <link rel="icon" href="../assets/logoazulcinza.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logoazulcinza.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root{
+      --azul:#2563eb;--azul-escuro:#1f5073;--cinza-fundo:#f8f9fb;--cinza-card:#f1f3f7;
+      --cinza-medio:#6b7280;--dourado:#d4af37;--branco:#ffffff;--preto:#111827;
+      --transition:.3s ease;--radius:12px;--shadow:0 4px 12px rgba(0,0,0,.08);
+      --shadow-lg:0 10px 25px rgba(0,0,0,.12);--header-h:60px;--container-padding:1rem;--section-padding:3rem 0;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Lato',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--preto);background:var(--branco);line-height:1.6;padding-top:var(--header-h)}
+    img{max-width:100%;display:block;height:auto}
+    a{color:inherit;text-decoration:none;transition:var(--transition)}
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;color:var(--azul-escuro);line-height:1.2;margin:0 0 .75rem}
+    .container{width:100%;max-width:1200px;margin:0 auto;padding:0 var(--container-padding)}
+    section{padding:var(--section-padding);scroll-margin-top:var(--header-h)}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 1.5rem;border:1px solid var(--dourado);color:var(--dourado);font-weight:700;letter-spacing:.5px;text-transform:uppercase;font-size:.875rem;cursor:pointer;transition:var(--transition);border-radius:10px;min-height:44px}
+    .btn:hover{background:var(--dourado);color:#fff}
+    .btn-filled{background:var(--dourado);color:#fff}
+    .btn-filled:hover{background:transparent;color:var(--dourado)}
+
+    /* ===== HEADER (igual ao das Parcerias) ===== */
+    header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.75rem 0;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.05);transition:var(--transition);height:var(--header-h)}
+    header.scrolled{box-shadow:0 4px 15px rgba(0,0,0,.08);padding:.5rem 0}
+    .header-container{display:flex;justify-content:space-between;align-items:center;height:100%}
+    .logo-img{height:40px;width:auto;transition:var(--transition)}
+    .logo-img:hover{opacity:.9;transform:scale(1.03)}
+    nav ul{display:flex;list-style:none;margin:0;padding:0;gap:1.5rem}
+    nav ul li a{font-weight:700;font-size:.85rem;letter-spacing:.5px;text-transform:uppercase;color:var(--azul-escuro);padding:.5rem 0;position:relative;display:block}
+    nav ul li a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:var(--dourado);transition:var(--transition)}
+    nav ul li a:hover::after,nav ul li a[aria-current="page"]::after{width:100%}
+    .mobile-menu-btn{display:none;font-size:1.5rem;color:var(--azul-escuro);background:none;border:none;padding:.5rem;min-height:44px;min-width:44px;justify-content:center;align-items:center}
+
+    /* ===== [MENU MOBILE — PARCERIAS] ===== */
+    @media (max-width:767px){
+      nav ul{
+        display:none;
+        position:fixed;top:var(--header-h);left:0;width:100%;
+        background:#fff;flex-direction:column;padding:1rem;
+        box-shadow:0 10px 15px rgba(0,0,0,.1);
+        max-height:calc(100vh - var(--header-h));overflow-y:auto
+      }
+      nav ul.show{display:flex}
+      nav ul li{margin:.75rem 0}
+      .mobile-menu-btn{display:flex}
+    }
+
+    /* Hero */
+    .hero-noticias{min-height:46vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;background:linear-gradient(rgba(37,99,235,.75),rgba(31,80,115,.85)),url('noticias-hero.jpg') center/cover no-repeat;padding:3rem 1rem}
+    .hero-noticias h1{font-size:clamp(2rem,5vw,3rem);color:#fff}
+    .hero-noticias p{max-width:720px;margin:.5rem auto 0;color:rgba(255,255,255,.95)}
+
+    /* Notícias */
+    .noticias-section{background:var(--cinza-fundo)}
+    .section-title{text-align:center;margin-bottom:1.5rem;position:relative}
+    .section-title::after{content:'';display:block;width:80px;height:3px;background:var(--dourado);margin:.75rem auto 0}
+    .noticias-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+    @media (min-width:768px){.noticias-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:992px){.noticias-grid{grid-template-columns:repeat(3,1fr)}}
+    .noticia-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;border-bottom:3px solid transparent;transition:var(--transition)}
+    .noticia-card:hover{transform:translateY(-4px);border-bottom-color:var(--dourado);box-shadow:var(--shadow-lg)}
+    .noticia-media{aspect-ratio:16/9;overflow:hidden;background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(212,175,55,.08));display:flex;align-items:center;justify-content:center}
+    .noticia-media img{width:100%;height:100%;object-fit:cover}
+    .noticia-content{padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.6rem;flex:1}
+    .noticia-eyebrow{display:inline-block;font-weight:800;text-transform:uppercase;font-size:.75rem;letter-spacing:.04em;color:var(--azul-escuro);background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.18);padding:.25rem .5rem;border-radius:999px}
+    .noticia-content h3{font-size:1rem;color:var(--azul-escuro);margin:.25rem 0 .15rem}
+    .noticia-actions{margin-top:auto;display:flex}
+    .noticia-actions .btn{width:max-content}
+
+    /* Modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;padding:0;z-index:2000}
+    .modal.open{display:flex}
+    .modal-content{background:#fff;width:100%;height:100%;max-height:100vh;border-radius:0;overflow:hidden;display:flex;flex-direction:column}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;padding:1rem;border-bottom:1px solid var(--cinza-card);background:#fff;position:sticky;top:0;z-index:10}
+    .modal-title{font-size:1.2rem;color:var(--azul-escuro);margin:0}
+    .modal-close{background:transparent;border:0;font-size:1.6rem;cursor:pointer;color:var(--azul-escuro);padding:.25rem;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
+    .modal-body{padding:1rem;overflow:auto;display:grid;gap:.75rem}
+    .modal-body p{color:var(--cinza-medio);margin:0}
+    .modal-hashtags{display:flex;flex-wrap:wrap;gap:.5rem}
+    .modal-hashtags span{background:var(--cinza-card);color:#333;border-radius:999px;padding:.35rem .7rem;font-size:.8rem;font-weight:700}
+    @media (min-width:992px){
+      .modal{padding:1rem}
+      .modal-content{width:min(900px,95%);height:auto;max-height:90vh;border-radius:12px}
+    }
+
+    /* Footer */
+    footer{background-color:var(--azul-escuro);color:#fff;padding:3rem 0 1.5rem}
+    .footer-container{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-bottom:3rem;align-items:start;justify-items:start}
+    .footer-col h3{font-size:1.3rem;margin-bottom:1.25rem;color:#fff}
+    .footer-col p{color:var(--cinza-card);margin-bottom:1.25rem}
+    .footer-links ul{list-style:none;padding:0;margin:0}
+    .footer-links ul li{margin-bottom:.5rem}
+    .footer-links ul li a{color:var(--cinza-card);transition:var(--transition);display:block;padding:.25rem 0}
+    .footer-links ul li a:hover{color:var(--dourado);padding-left:.25rem}
+    .social-links{display:flex;gap:.75rem}
+    .social-links a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background-color:rgba(255,255,255,.1);color:#fff;transition:var(--transition)}
+    .social-links a:hover{background-color:var(--dourado);transform:translateY(-3px)}
+    @media (min-width:768px){:root{--container-padding:2rem;--section-padding:4rem 0}.footer-container{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:1024px){.footer-container{grid-template-columns:repeat(4,1fr)}}
+
+    /* Scroll hint */
+    .scroll-hint{position:fixed;bottom:1.5rem;left:1.5rem;z-index:9999;color:var(--dourado);font-size:1.8rem;animation:bounce 1.5s infinite;opacity:.8;pointer-events:none}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+    .scroll-hint.hide{display:none}
+
+    /* === MENU MOBILE — IGUAL AO PARCERIAS (patch) === */
+@media (max-width:767px){
+  /* garante a mesma altura do header */
+  :root{ --header-h:60px; }
+
+  nav ul{
+    display:none;
+    position:fixed;
+    top:var(--header-h);
+    left:0;
+    right:0;
+    width:100%;
+    background:#fff;
+    flex-direction:column;
+    padding:1rem;
+    gap:0; /* <-- zera o gap herdado do desktop */
+    box-shadow:0 10px 15px rgba(0,0,0,.1);
+    max-height:calc(100vh - var(--header-h));
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    scroll-behavior:auto;
+  }
+  nav ul.show{ display:flex; }
+
+  nav ul li{ margin:.75rem 0; }
+
+  /* mesmas dimensões dos links que nas Parcerias */
+  nav ul li a{
+    display:block;
+    padding:.5rem 0;
+    font-weight:700;
+    font-size:.85rem;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+  }
+
+  .mobile-menu-btn{
+    display:flex;
+    font-size:1.5rem;
+    min-width:44px;
+    min-height:44px;
+    justify-content:center;
+    align-items:center;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <a href="#noticias" class="sr-only">Saltar para o conteúdo</a>
+
+  <header id="header">
+    <div class="container header-container">
+      <a href="index.html" class="logo"><img src="../assets/logoazulcinza.png" alt="VilaPlus Ginásio" class="logo-img"></a>
+      <nav aria-label="Menu principal">
+        <ul id="main-menu">
+          <li><a href="index.html#home">Início</a></li>
+          <li><a href="servicosv2.html">Serviços</a></li>
+          <li><a href="projetosv2.html">Projetos</a></li>
+          <li><a href="portfoliov2.html">Galeria</a></li>
+          <li><a href="index.html#horarios">Horários</a></li>
+          <li><a href="parceriasv2.html">Parcerias</a></li>
+          <li><a href="lojav2.html">Loja</a></li>
+          <li><a href="noticiasv2.html" aria-current="page">Notícias</a></li>
+          <li><a href="contactsv2.html">Contactos</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-menu">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero-noticias">
+    <div class="container">
+      <h1>Notícias e Atualizações</h1>
+      <p>Novidades do Vila Plus.</p>
+    </div>
+  </section>
+
+  <section class="noticias-section" id="noticias" aria-labelledby="titulo-anuncio">
+    <div class="container">
+      <div class="section-title"><h2 id="titulo-anuncio">Notícias</h2></div>
+      <div class="noticias-grid">
+        <article class="noticia-card">
+          <div class="noticia-media">
+            <img src="../assets/inauguracao/europeia.jpg" alt="Atividades da Semana Europeia do Desporto no Vila Plus" loading="lazy">
+          </div>
+          <div class="noticia-content">
+            <span class="noticia-eyebrow">Comunidade</span>
+            <h3>Vila Plus em Movimento: Semana Europeia do Desporto</h3>
+            <div class="noticia-actions">
+              <a href="#semana" class="btn btn-filled open-news" data-news="semana"><i class="fa-regular fa-newspaper"></i> Ler notícia</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="noticia-card">
+          <div class="noticia-media">
+            <img src="../assets/inauguracao/0bfdc6bc-d98f-4491-b738-615dd6fb7dd2.jpg" alt="Inauguração Vila Plus" loading="lazy">
+          </div>
+          <div class="noticia-content">
+            <span class="noticia-eyebrow">Inauguração</span>
+            <h3>Vila Plus abriu portas em Vila Caiz</h3>
+            <div class="noticia-actions">
+              <a href="#anuncio" class="btn btn-filled open-news" data-news="anuncio"><i class="fa-regular fa-newspaper"></i> Ler notícia</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Vila Plus</h3>
+          <p>Saúde. Força. Comunidade.</p>
+          <p>O teu ginásio de eleição em Vila Caiz.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Links Rápidos</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html">Início</a></li>
+              <li><a href="servicosv2.html">Serviços</a></li>
+              <li><a href="projetosv2.html">Projetos</a></li>
+              <li><a href="portfoliov2.html">Galeria</a></li>
+              <li><a href="index.html#horarios">Horários</a></li>
+              <li><a href="parceriasv2.html">Parcerias</a></li>
+              <li><a href="lojav2.html">Loja</a></li>
+              <li><a href="contactsv2.html">Contactos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Redes Sociais</h3>
+          <div class="social-links">
+            <a href="https://www.facebook.com/p/Vila-Plus-61552410020366/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/vilaplus.pt/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/351931999690" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modais -->
+  <div class="modal" id="modal-anuncio" aria-hidden="true" role="dialog" aria-labelledby="title-anuncio">
+    <div class="modal-content" tabindex="-1">
+      <div class="modal-header">
+        <h3 class="modal-title" id="title-anuncio">Vila Plus abriu portas em Vila Caiz</h3>
+        <button class="modal-close" data-close aria-label="Fechar">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>A inauguração deste espaço vem abrir portas e dar resposta a algo que não havia em Vila Caiz.</p>
+        <p>No Vila Plus vamos proporcionar a todos as melhores condições possíveis nos diferentes serviços.</p>
+        <p>Mais do que um ginásio, este é um espaço focado em saúde e bem estar que oferece a toda a comunidade envolvente a possibilidade de trabalhar o corpo e a mente.</p>
+        <p>Descobre as nossas aulas de grupo, pilates, treino personalizado ou livre, aconselhamento nutricional e ainda serviços essenciais de saúde como fisioterapia. Vamos oferecer aulas para crianças e jovens por acreditarmos que cultivar hábitos saudáveis desde cedo é contribuir para uma vida adulta mais plena e feliz. Aconselhamos e adequamos o exercício físico para todas as mulheres que enfrentam o pré ou pós parto. E sempre que possível oferecer workshops em áreas da saúde e desporto.</p>
+        <p>Somos um ginásio para a Vila e tudo à volta, que pretende ser parte da comunidade, ouvir as suas necessidades e contribuir para uma melhor qualidade de vida.</p>
+        <div class="modal-hashtags" aria-label="Hashtags">
+          <span>#noVilaplus</span><span>#saude</span><span>#energia</span><span>#movimento</span><span>#gym</span><span>#gymmotivation</span><span>#workout</span><span>#vemtreinar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-semana" aria-hidden="true" role="dialog" aria-labelledby="title-semana">
+    <div class="modal-content" tabindex="-1">
+      <div class="modal-header">
+        <h3 class="modal-title" id="title-semana">Vila Plus em Movimento: Semana Europeia do Desporto</h3>
+        <button class="modal-close" data-close aria-label="Fechar">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Entre 20 e 30 de setembro, o Vila Plus transformou a freguesia num palco de energia e bem-estar. Para celebrar a Semana Europeia do Desporto, o ginásio organizou uma série de atividades abertas à comunidade: uma caminhada, aulas experimentais, workshops, massagens desportivas e até banhos de gelo — tudo pensado para inspirar pessoas de todas as idades a mexerem-se mais e melhor.</p>
+        <p>A iniciativa destacou-se não apenas pelo movimento, mas também pela energia e motivação que trouxe à comunidade. Membros e novos participantes puderam partilhar experiências, superar desafios e inspirar-se mutuamente, reforçando o espírito de grupo que caracteriza o Vila Plus.</p>
+        <p>Com esta iniciativa, o Vila Plus reafirma o seu compromisso com a saúde, o bem-estar e estilos de vida ativos na comunidade. Porque aqui, o movimento não tem idade e a motivação é contagiante.</p>
+        <div class="modal-hashtags" aria-label="Hashtags">
+          <span>#SemanaEuropeiaDoDesporto</span><span>#noVilaPlus</span><span>#Comunidade</span><span>#Saúde</span><span>#Movimento</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint" id="scrollHint" aria-hidden="true"><i class="fas fa-angle-down"></i></div>
+
+  <script>
+    // ===== [MENU MOBILE — PARCERIAS] (cópia 1:1) =====
+    document.addEventListener('DOMContentLoaded',function(){
+      const mobileMenuBtn=document.getElementById('mobile-menu-btn');
+      const mainMenu=document.getElementById('main-menu');
+
+      if(mobileMenuBtn&&mainMenu){
+        // Toggle menu + ícone
+        mobileMenuBtn.addEventListener('click',function(){
+          const isExp=this.getAttribute('aria-expanded')==='true';
+          this.setAttribute('aria-expanded',String(!isExp));
+          mainMenu.classList.toggle('show');
+          const icon=this.querySelector('i'); if(icon) icon.className=isExp?'fas fa-bars':'fas fa-times';
+        });
+
+        // Fechar ao clicar num link em mobile
+        mainMenu.querySelectorAll('a').forEach(a=>{
+          a.addEventListener('click',()=>{
+            if(window.innerWidth<=768){
+              mainMenu.classList.remove('show');
+              mobileMenuBtn.setAttribute('aria-expanded','false');
+              const icon=mobileMenuBtn.querySelector('i'); if(icon) icon.className='fas fa-bars';
+            }
+          });
+        });
+      }
+
+      // Header sombra ao scroll
+      const header=document.getElementById('header');
+      if(header){
+        const onScroll=()=>{ if(window.scrollY>100) header.classList.add('scrolled'); else header.classList.remove('scrolled'); };
+        onScroll(); window.addEventListener('scroll',onScroll);
+      }
+
+      // Smooth scroll para âncoras, compensando o header
+      document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+        anchor.addEventListener('click',e=>{
+          const id=anchor.getAttribute('href'); if(!id||id==='#') return;
+          const el=document.querySelector(id); if(!el) return;
+          e.preventDefault();
+          const top=el.getBoundingClientRect().top+window.scrollY-(document.getElementById('header')?.offsetHeight||0);
+          window.scrollTo({top,behavior:'smooth'});
+          if(history.pushState) history.pushState(null,'',id);
+        });
+      });
+    });
+
+    // Atualiza --header-h se o header mudar de altura (igual Parcerias)
+    (function(){
+      const header=document.getElementById('header'); if(!header) return;
+      const setVar=()=>document.documentElement.style.setProperty('--header-h',(header.offsetHeight||60)+'px');
+      ['DOMContentLoaded','load','resize','scroll'].forEach(ev=>window.addEventListener(ev,setVar));
+      if('ResizeObserver' in window){ new ResizeObserver(setVar).observe(header); }
+    })();
+
+    // Scroll hint (igual Parcerias)
+    (function(){
+      const hint=document.getElementById('scrollHint');
+      if(!hint) return;
+      function toggle(){
+        const y=window.scrollY, h=window.innerHeight, d=document.body.scrollHeight;
+        if(y+h>=d-50) hint.classList.add('hide'); else hint.classList.remove('hide');
+      }
+      window.addEventListener('scroll',toggle);
+      window.addEventListener('resize',toggle);
+      document.addEventListener('DOMContentLoaded',toggle);
+    })();
+
+    // Modais (mantido)
+    (function(){
+      const modals=new Map();
+      function lockBody(lock){
+        if(lock){const sw=window.innerWidth-document.documentElement.clientWidth;document.body.style.overflow='hidden';document.body.style.paddingRight=sw+'px';}
+        else{document.body.style.overflow='';document.body.style.paddingRight='';}
+      }
+      function openModal(key){
+        const modal=modals.get(key); if(!modal) return;
+        lockBody(true); modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+        modal.querySelector('.modal-content')?.focus();
+        if(history.pushState) history.pushState(null,'','#'+key); else window.location.hash=key;
+      }
+      function closeModal(modal){
+        modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); lockBody(false);
+        if(history.pushState) history.pushState('',document.title,window.location.pathname+window.location.search); else window.location.hash='';
+      }
+      document.querySelectorAll('.open-news[data-news]').forEach(link=>{
+        const key=link.dataset.news.trim(); const modal=document.getElementById('modal-'+key);
+        if(!key||!modal) return;
+        modals.set(key,modal);
+        link.addEventListener('click',e=>{e.preventDefault();openModal(key);});
+        const closeBtn=modal.querySelector('[data-close]'); closeBtn?.addEventListener('click',()=>closeModal(modal));
+        modal.addEventListener('click',e=>{if(e.target===modal) closeModal(modal);});
+        document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open')) closeModal(modal);});
+      });
+      if(location.hash){const key=location.hash.slice(1); if(modals.has(key)) openModal(key);}
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Parcerias | Vila Plus</title>
+  <link rel="icon" href="../assets/logoazulcinza.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logoazulcinza.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    /* ==== Design System (copiado do Contactos) ==== */
+    :root{
+      --azul:#2563eb;--azul-escuro:#1f5073;--cinza-fundo:#f8f9fb;--cinza-card:#f1f3f7;--cinza-medio:#6b7280;
+      --dourado:#d4af37;--branco:#fff;--preto:#111827;--transition:.3s ease;--radius:12px;--shadow:0 4px 12px rgba(0,0,0,.08);
+      --header-h:60px;--container-padding:1rem;--section-padding:3rem 0;
+    }
+
+    /* Reset/base (como em Contactos) */
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:'Lato',sans-serif;color:var(--preto);background:var(--branco);line-height:1.6;overflow-x:hidden;padding-top:var(--header-h)}
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700;line-height:1.2;color:var(--azul-escuro);margin-bottom:1rem}
+    h1{font-size:2.25rem} h2{font-size:1.875rem} h3{font-size:1.5rem} h4{font-size:1.25rem}
+    a{text-decoration:none;color:inherit;transition:var(--transition)}
+    .container{width:100%;max-width:1200px;margin:0 auto;padding:0 var(--container-padding)}
+    section{padding:var(--section-padding);scroll-margin-top:0}
+
+    /* Botões */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 1.5rem;border:1px solid var(--dourado);color:var(--dourado);font-weight:700;letter-spacing:.5px;text-transform:uppercase;font-size:.875rem;cursor:pointer;transition:var(--transition);border-radius:var(--radius);min-height:44px}
+    .btn:hover{background:var(--dourado);color:#fff}
+    .btn-filled{background:var(--dourado);color:#fff}.btn-filled:hover{background:transparent;color:var(--dourado)}
+    .btn-white{background:#fff;color:var(--azul-escuro);border-color:#fff}.btn-white:hover{background:transparent;color:#fff}
+
+    .section-title{text-align:center;margin-bottom:2.5rem;position:relative}
+    .section-title h2{font-size:2rem;margin-bottom:.75rem}
+    .section-title p{font-size:1.05rem;color:var(--cinza-medio);max-width:720px;margin:0 auto}
+    .section-title::after{content:'';display:block;width:80px;height:3px;background:var(--dourado);margin:1rem auto 0}
+
+    /* ==== Header (igual ao Contactos) ==== */
+    header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.75rem 0;background:var(--branco);box-shadow:0 2px 10px rgba(0,0,0,.05);transition:var(--transition);height:var(--header-h)}
+    header.scrolled{box-shadow:0 4px 15px rgba(0,0,0,.08);padding:.5rem 0}
+    .header-container{display:flex;justify-content:space-between;align-items:center;height:100%}
+    .logo-img{height:40px;width:auto;transition:var(--transition)} .logo-img:hover{opacity:.9;transform:scale(1.03)}
+    nav ul{display:flex;list-style:none;margin:0;padding:0}
+    nav ul li{margin-left:1.5rem;position:relative}
+    nav ul li a{font-weight:700;font-size:.85rem;letter-spacing:.5px;text-transform:uppercase;color:var(--azul-escuro);padding:.5rem 0;display:block}
+    nav ul li a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:var(--dourado);transition:var(--transition)}
+    nav ul li a:hover::after,nav ul li a.active::after,nav ul li a[aria-current="page"]::after{width:100%}
+    .mobile-menu-btn{display:none;font-size:1.5rem;cursor:pointer;color:var(--azul-escuro);background:none;border:none;padding:.5rem;min-height:44px;min-width:44px;justify-content:center;align-items:center}
+
+    /* ==== Hero / Conteúdo de Parcerias ==== */
+    .hero{min-height:40vh;display:flex;align-items:center;color:#fff;background:
+      linear-gradient(135deg,rgba(37,99,235,.82),rgba(31,80,115,.92)),
+      url('https://images.unsplash.com/photo-1527525443983-6e60c75fff46?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      padding:3rem 1rem}
+    .hero .inner{max-width:900px;margin:0 auto;text-align:center}
+    .hero h1{font-size:2.5rem;color:#fff;margin-bottom:.75rem}
+    .hero p{font-size:1.12rem;opacity:.96;max-width:760px;margin:0 auto 1.5rem}
+
+    .partners{padding:3rem 0}
+    .slider-container{position:relative;width:100%;overflow:hidden;padding:1rem 0}
+    .slider{display:flex;gap:1.5rem;padding:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .slider::-webkit-scrollbar{display:none}
+    .slider .item{flex:0 0 calc(100% - 2rem);scroll-snap-align:start;display:flex;justify-content:center}
+    @media(min-width:640px){.slider .item{flex:0 0 calc(50% - 1.5rem)}}
+    @media(min-width:1024px){.slider .item{flex:0 0 calc(33.333% - 1.5rem)}}
+    @media(min-width:1280px){.slider .item{flex:0 0 calc(25% - 1.5rem)}}
+    .partners .card{width:100%;max-width:320px;border:1px solid #e5e7eb;border-radius:var(--radius);box-shadow:var(--shadow);background:#fff;color:var(--preto);display:flex;flex-direction:column;align-items:center;padding:1.5rem;gap:1rem;text-align:center;transition:var(--transition)}
+    .partners .card:hover{transform:translateY(-5px)}
+    .partners .card .logo-wrap{display:flex;align-items:center;justify-content:center;width:100%;height:120px}
+    .partners .card .logo-wrap img{max-height:100%;max-width:100%;object-fit:contain}
+    .partners .card p{font-size:.95rem;color:var(--cinza-medio);margin:0;flex-grow:1}
+    .partners .card .actions{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;width:100%}
+    .partners .card .btn{padding:.75rem 1rem;font-size:.8rem;min-height:40px}
+    @media(max-width:640px){.partners .card .actions{flex-direction:column}.partners .card .btn{width:100%}}
+
+    .steps{background:var(--cinza-fundo)}
+    .steps-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
+    .step{background:#fff;border:1px solid #e9edf2;border-radius:12px;padding:1.5rem;box-shadow:var(--shadow);text-align:center}
+    .step i{font-size:2rem;color:var(--dourado);margin-bottom:.5rem}
+    .step h4{margin:.5rem 0 .75rem}
+    .step p{color:var(--cinza-medio);margin:0}
+    @media(min-width:768px){.steps-grid{grid-template-columns:repeat(3,1fr)}}
+
+    .form-card{background:linear-gradient(135deg,var(--azul),var(--azul-escuro));color:#fff;border-radius:16px;padding:2rem;box-shadow:0 10px 25px rgba(0,0,0,.12)}
+    .form-card h3{color:#fff;margin:0 0 .5rem}
+    .form-card p{opacity:.95;margin:0 0 1.5rem}
+    .form-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+    .input{width:100%;padding:.875rem 1rem;border-radius:12px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;outline:none;font-family:inherit;font-size:1rem}
+    .input::placeholder{color:rgba(255,255,255,.85)}
+    .input:focus{border-color:var(--dourado)}
+    textarea.input{resize:vertical;min-height:120px}
+    .checkbox{display:flex;align-items:center;gap:.75rem;font-size:.95rem}
+    .help{font-size:.85rem;opacity:.9;margin-top:.5rem}
+    .submit-row{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+    @media(min-width:640px){.form-grid{grid-template-columns:repeat(2,1fr)}.form-grid .full{grid-column:1/-1}}
+    #prozis-pedido .form-card{background:linear-gradient(135deg,#ef4444,#b91c1c)}
+    #prozis-pedido .form-header{display:flex;align-items:center;gap:.875rem;margin-bottom:.5rem}
+    #prozis-pedido .form-header img{height:32px;width:auto;border-radius:6px;background:#fff;padding:.25rem}
+
+    /* ==== Footer (EXATAMENTE como em Contactos) ==== */
+    footer{background-color:var(--azul-escuro);color:var(--branco);padding:3rem 0 1.5rem}
+    .footer-container{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-bottom:3rem}
+    .footer-col h3{font-size:1.3rem;margin-bottom:1.25rem;color:var(--branco)}
+    .footer-col p{color:var(--cinza-card);margin-bottom:1.25rem}
+    .footer-links ul{list-style:none;margin:0;padding:0}
+    .footer-links ul li{margin-bottom:.5rem}
+    .footer-links ul li a{color:var(--cinza-card);transition:var(--transition);display:block;padding:.25rem 0}
+    .footer-links ul li a:hover{color:var(--dourado);padding-left:.25rem}
+    .social-links{display:flex;gap:.75rem}
+    .social-links a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background-color:rgba(255,255,255,0.1);color:var(--branco);transition:var(--transition)}
+    .social-links a:hover{background-color:var(--dourado);transform:translateY(-3px)}
+    .footer-bottom{text-align:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);color:var(--cinza-card);font-size:.9rem}
+
+    /* ==== Animações / Responsivo ==== */
+    .animate{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+    .animate.show{opacity:1;transform:translateY(0)}
+    .delay-1{transition-delay:.15s}.delay-2{transition-delay:.3s}.delay-3{transition-delay:.45s}
+
+    @media (min-width:768px){
+      :root{--container-padding:2rem;--section-padding:4rem 0}
+      .hero{min-height:50vh;padding:4rem 2rem}
+      .footer-container{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (min-width:1024px){
+      .footer-container{grid-template-columns:repeat(4,1fr)}
+    }
+    @media (max-width:767px){
+      :root{--header-h:60px}
+      h1{font-size:2rem} h2{font-size:1.75rem} h3{font-size:1.375rem}
+      .mobile-menu-btn{display:flex}
+      nav ul{display:none;position:fixed;top:var(--header-h);left:0;width:100%;background:#fff;flex-direction:column;padding:1rem;box-shadow:0 10px 15px rgba(0,0,0,.1);max-height:calc(100vh - var(--header-h));overflow-y:auto}
+      nav ul.show{display:flex}
+      nav ul li{margin:.75rem 0}
+      .hero{min-height:40vh;padding:2rem 1rem}
+      .hero p{font-size:1rem}
+    }
+    @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+    @supports(-webkit-touch-callout:none){.hero{min-height:-webkit-fill-available;height:40vh}}
+
+    /* Scroll hint */
+    .scroll-hint{position:fixed;bottom:1.5rem;left:1.5rem;z-index:9999;color:var(--dourado);font-size:1.8rem;animation:bounce 1.5s infinite;opacity:.8;pointer-events:none}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+    .scroll-hint.hide{display:none}
+
+    /* FAB — fixo e não interfere no layout */
+    .floating-cta{position:fixed;right:1rem;bottom:1rem;z-index:10000}
+    .fab-contact{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--dourado);color:#fff;border:0;border-radius:999px;padding:1rem 1.1rem;font-weight:800;letter-spacing:.3px;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:transform .2s ease,box-shadow .2s ease;min-height:60px;min-width:60px}
+    .fab-contact:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
+    .fab-contact i{font-size:1.25rem}
+    @keyframes fabPulse{0%{box-shadow:0 0 0 0 rgba(212,175,55,.55)}70%{box-shadow:0 0 0 16px rgba(212,175,55,0)}100%{box-shadow:0 0 0 0 rgba(212,175,55,0)}}
+    .fab-contact.pulse{animation:fabPulse 2s infinite}
+    @media (max-width:767px){
+    .fab-contact span{ display:none; }      /* esconde o texto */
+    .fab-contact{ padding:1rem; min-width:60px; } /* fica redondinho */
+    .fab-contact i{ font-size:1.4rem; }     /* ícone um pouco maior */
+}
+
+/* ==== Parceiros (slider + grid híbrido) ==== */
+.partners{padding:3rem 0}
+.slider-container{position:relative;width:100%;overflow:hidden;padding:1rem 0}
+
+/* Modo mobile/tablet → slider horizontal */
+.slider{
+  display:flex;
+  gap:1.5rem;
+  padding:1rem;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.slider::-webkit-scrollbar{display:none}
+.slider .item{
+  flex:0 0 calc(100% - 2rem);
+  scroll-snap-align:start;
+  display:flex;
+  justify-content:center;
+}
+@media(min-width:640px){.slider .item{flex:0 0 calc(50% - 1.5rem)}}
+
+/* Desktop → grid fixo 3 + 2 */
+@media(min-width:1024px){
+  .slider{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    gap:1.5rem;
+    padding:1rem;
+    overflow:visible;
+    scroll-snap-type:none;
+    justify-items:stretch;
+  }
+  .slider .item{flex:initial;width:auto;scroll-snap-align:unset;display:flex}
+  .partners .card{width:100%;max-width:none;height:100%;display:flex;flex-direction:column}
+
+  /* posicionamento dos 5 cards */
+  .slider .item:nth-child(1){grid-column:2 / span 3}
+  .slider .item:nth-child(2){grid-column:5 / span 3}
+  .slider .item:nth-child(3){grid-column:8 / span 3}
+  .slider .item:nth-child(4){grid-column:4 / span 3}
+  .slider .item:nth-child(5){grid-column:7 / span 3}
+}
+
+.partners .card{
+  width:100%;
+  max-width:320px;
+  border:1px solid #e5e7eb;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  background:#fff;
+  color:var(--preto);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:1.5rem;
+  gap:1rem;
+  text-align:center;
+  transition:var(--transition);
+}
+.partners .card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.partners .card .logo-wrap{display:flex;align-items:center;justify-content:center;width:100%;height:120px}
+.partners .card .logo-wrap img{max-height:100%;max-width:100%;object-fit:contain}
+.partners .card p{font-size:.95rem;color:var(--cinza-medio);margin:0;flex-grow:1}
+.partners .card .actions{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;width:100%}
+.partners .card .btn{padding:.75rem 1rem;font-size:.8rem;min-height:40px}
+@media(max-width:640px){
+  .partners .card .actions{flex-direction:column}
+  .partners .card .btn{width:100%}
+}
+
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="container header-container">
+      <a href="index.html" class="logo"><img src="../assets/logoazulcinza.png" alt="VilaPlus Ginásio" class="logo-img"></a>
+      <nav>
+        <ul id="main-menu">
+          <li><a href="index.html#home">Início</a></li>
+          <li><a href="servicosv2.html">Serviços</a></li>
+          <li><a href="projetosv2.html">Projetos</a></li>
+          <li><a href="portfoliov2.html">Galeria</a></li>
+          <li><a href="index.html#horarios">Horários</a></li>
+          <li><a href="parceriasv2.html" aria-current="page">Parcerias</a></li>
+          <li><a href="lojav2.html">Loja</a></li>
+          <li><a href="noticiasv2.html">Notícias</a></li>
+          <li><a href="contactsv2.html">Contactos</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="inner animate">
+          <h1>Parcerias Vila Plus</h1>
+          <p>Criámos ligações a pensar em ti.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parceiros -->
+    <section class="partners" id="parceiros">
+      <div class="container">
+        <div class="section-title animate">
+          <h2>Parceiros Vila Plus</h2>
+          <p>Conhece os nossos parceiros. Torna-te sócio Vila Plus e aproveita os descontos.</p>
+        </div>
+
+        <div class="slider-container">
+          <div class="slider">
+            <div class="item animate delay-1">
+              <div class="card">
+                <div class="logo-wrap"><img src="../assets/partners/ib.avif" alt="INSIDE BOX" loading="lazy"></div>
+                <p>Equipamento & acessórios</p>
+                <div class="actions"><a class="btn" href="https://insidebox.pt/" target="_blank" rel="noopener"><i class="fa-solid fa-globe"></i> Visitar loja</a></div>
+              </div>
+            </div>
+
+            <div class="item animate delay-2">
+              <div class="card">
+                <div class="logo-wrap"><img src="../assets/partners/pr.png" alt="Prozis" loading="lazy"></div>
+                <p>Nutrição & alimentação</p>
+                <div class="actions">
+                  <a class="btn" href="https://www.prozis.com" target="_blank" rel="noopener"><i class="fa-solid fa-globe"></i> Ir ao site</a>
+                  <a class="btn" href="#prozis-pedido"><i class="fa-solid fa-cart-shopping"></i> Encomendar</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="item animate delay-3">
+              <div class="card">
+                <div class="logo-wrap"><img src="../assets/partners/vila.png" alt="GDC Vila Caiz" loading="lazy"></div>
+                <p>Parceiro desportivo</p>
+                <div class="actions"><a class="btn" href="https://www.instagram.com/gcdvilacaiz/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a></div>
+              </div>
+            </div>
+
+            <div class="item animate delay-1">
+              <div class="card">
+                <div class="logo-wrap"><img src="../assets/partners/Augusta_Peixoto.jpeg" alt="Augusta Peixoto Esteticista" loading="lazy"></div>
+                <p>Estética & bem-estar</p>
+                <div class="actions">
+                  <a class="btn" href="tel:351967244834"><i class="fa-solid fa-phone"></i> 967 244 834</a>
+                  <a class="btn" href="https://www.google.com/maps?q=Rua%20Padre%20%C3%81lvaro%20da%20Silva%20Barbosa%2C%204600-782%2C%20Vila%20Caiz" target="_blank" rel="noopener"><i class="fa-regular fa-map"></i> Localização</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="item animate delay-2">
+              <div class="card">
+                <div class="logo-wrap"><img src="../assets/partners/anas.jpg" alt="Ana´s Eventos" loading="lazy"></div>
+                <p>Organização de eventos</p>
+                <div class="actions"><a class="btn" href="https://www.instagram.com/anas_evento?igsh=NGd3YjF2ZXk5cXJj" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Pedido Prozis -->
+    <section id="prozis-pedido" class="brands" aria-labelledby="prozisTitle">
+      <div class="container" style="max-width:980px;">
+        <div class="form-card animate">
+          <div class="form-header"><img src="../assets/partners/pr.png" alt="Prozis"><h3 id="prozisTitle">Queres adquirir produtos Prozis com o nosso desconto exclusivo?</h3></div>
+          <p>Preenche o <strong>questionário</strong> abaixo e damos-te todas as informações.</p>
+
+          <form id="prozis-form" action="https://formspree.io/f/xqadoryk" method="POST" novalidate>
+            <div class="form-grid">
+              <div class="full"><label for="p_nome" class="sr-only">Nome</label><input class="input" type="text" id="p_nome" name="nome" placeholder="O teu nome" required></div>
+              <div class="full"><label for="p_email" class="sr-only">Email</label><input class="input" type="email" id="p_email" name="email" placeholder="O teu email" required></div>
+              <div class="full"><label for="p_link" class="sr-only">Link ou nome do produto</label><input class="input" type="text" id="p_link" name="produto" placeholder="Link completo do produto ou nome ex.: Whey Isolate 2kg" required></div>
+              <div><label for="p_qtd" class="sr-only">Quantidade</label><input class="input" type="number" id="p_qtd" name="quantidade" placeholder="Quantidade (opcional)" min="1"></div>
+              <div><label for="p_sabor" class="sr-only">Sabor/Tamanho</label><input class="input" type="text" id="p_sabor" name="sabor_tamanho" placeholder="Sabor / Tamanho (opcional)"></div>
+              <div class="full"><label for="p_obs" class="sr-only">Observações</label><textarea class="input" id="p_obs" name="observacoes" rows="3" placeholder="Observações (ex.: prazos, orçamento, alternativas)"></textarea></div>
+              <input type="hidden" name="_subject" value="Pedido de desconto Prozis - Vila Plus">
+              <input type="hidden" name="_language" value="pt">
+              <div class="full checkbox"><input type="checkbox" id="p_ok" required><label for="p_ok">Aceito ser contactado sobre este pedido.</label></div>
+              <div class="full submit-row"><button type="submit" class="btn btn-white"><i class="fa-regular fa-paper-plane"></i> Pedir desconto</button><span class="help" id="prozisHelp" aria-live="polite"></span></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Como funciona -->
+    <section class="steps" id="como-funciona">
+      <div class="container">
+        <div class="section-title animate">
+          <h2>Como nos tornamos parceiros</h2>
+          <p>Simples, transparente e rápido — damos-te o palco e cuidamos da ativação.</p>
+        </div>
+        <div class="steps-grid">
+          <div class="step animate delay-1"><i class="fa-solid fa-message"></i><h4>1) Fala connosco</h4><p>Diz-nos o teu objetivo e público. Respondemos em 24h.</p></div>
+          <div class="step animate delay-2"><i class="fa-solid fa-pen-ruler"></i><h4>2) Proposta</h4><p>Desenhamos benefícios e comunicação para ambos os lados.</p></div>
+          <div class="step animate delay-3"><i class="fa-solid fa-bullhorn"></i><h4>3) Ativação</h4><p>Campanhas, eventos e destaque no ginásio e nas redes.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulário de Parcerias -->
+    <section id="form-parcerias">
+      <div class="container">
+        <div class="form-card animate" role="form" aria-labelledby="formTitle">
+          <div style="margin-bottom:16px"><h3 id="formTitle">Queres juntar a tua marca ao Vila Plus?</h3><p>Envia-nos uma mensagem — respondemos sem compromisso.</p></div>
+          <form id="partner-form" action="https://formspree.io/f/xqadoryk" method="POST">
+            <div class="form-grid">
+              <div><label for="nome" class="sr-only">Nome</label><input class="input" type="text" id="nome" name="nome" placeholder="Nome" required></div>
+              <div><label for="email" class="sr-only">Email</label><input class="input" type="email" id="email" name="email" placeholder="Email" required></div>
+              <div><label for="empresa" class="sr-only">Empresa</label><input class="input" type="text" id="empresa" name="empresa" placeholder="Empresa (opcional)"></div>
+              <div><label for="telefone" class="sr-only">Telefone</label><input class="input" type="tel" id="telefone" name="telefone" placeholder="Telefone (opcional)"></div>
+              <div class="full"><label for="mensagem" class="sr-only">Mensagem</label><textarea class="input" id="mensagem" name="mensagem" rows="4" placeholder="Fala-nos da tua marca e objetivos" required></textarea></div>
+              <input type="hidden" name="_subject" value="Nova proposta de parceria - Vila Plus">
+              <input type="hidden" name="_language" value="pt">
+              <div class="full checkbox"><input type="checkbox" id="consent" required><label for="consent">Aceito ser contactado para efeitos desta parceria.</label></div>
+              <div class="full submit-row"><button type="submit" class="btn btn-white"><i class="fa-regular fa-paper-plane"></i> Enviar</button><span class="help" id="formHelp" aria-live="polite"></span></div>
+            </div>
+          </form>
+        </div>
+        <p style="font-size:.9rem;color:var(--cinza-medio);text-align:center;margin-top:12px">* Última atualização: 2025.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer (mesmo HTML do Contactos) ===== -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Vila Plus</h3>
+          <p>Saúde. Força. Comunidade.</p>
+          <p>O teu ginásio de eleição em Vila Caiz.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Links Rápidos</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html">Início</a></li>
+              <li><a href="servicosv2.html">Serviços</a></li>
+              <li><a href="projetosv2.html">Projetos</a></li>
+              <li><a href="portfoliov2.html">Galeria</a></li>
+              <li><a href="index.html#horarios">Horários</a></li>
+              <li><a href="lojav2.html">Loja</a></li>
+              <li><a href="noticiasv2.html">Notícias</a></li>
+              <li><a href="contactsv2.html">Contactos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Nesta Página</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="#parceiros">Parceiros</a></li>
+              <li><a href="#prozis-pedido">Pedido Prozis</a></li>
+              <li><a href="#como-funciona">Como funciona</a></li>
+              <li><a href="#form-parcerias">Propor Parceria</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Redes Sociais</h3>
+          <div class="social-links">
+            <a href="https://www.facebook.com/p/Vila-Plus-61552410020366/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/vilaplus.pt/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/351931999690" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FAB -->
+  <div class="floating-cta">
+    <button class="fab-contact pulse" id="fabContact" aria-label="Propor Parceria">
+      <i class="fas fa-calendar-check" aria-hidden="true"></i>
+      <span>Propor Parceria</span>
+    </button>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint" id="scrollHint" aria-hidden="true"><i class="fas fa-angle-down"></i></div>
+
+  <script>
+    // Scroll hint
+    (function(){
+      const hint=document.getElementById('scrollHint');
+      if(!hint) return;
+      function toggleHint(){
+        const y=window.scrollY, h=window.innerHeight, d=document.body.scrollHeight;
+        if(y+h>=d-50) hint.classList.add('hide'); else hint.classList.remove('hide');
+      }
+      window.addEventListener('scroll',toggleHint);
+      window.addEventListener('resize',toggleHint);
+      document.addEventListener('DOMContentLoaded',toggleHint);
+    })();
+
+    // Header/menu + efeitos (igual Contactos)
+    document.addEventListener('DOMContentLoaded',function(){
+      const mobileMenuBtn=document.getElementById('mobile-menu-btn');
+      const mainMenu=document.getElementById('main-menu');
+      if(mobileMenuBtn&&mainMenu){
+        mobileMenuBtn.addEventListener('click',function(){
+          const isExp=this.getAttribute('aria-expanded')==='true';
+          this.setAttribute('aria-expanded',String(!isExp));
+          mainMenu.classList.toggle('show');
+          const icon=this.querySelector('i'); if(icon) icon.className=isExp?'fas fa-bars':'fas fa-times';
+        });
+        mainMenu.querySelectorAll('a').forEach(a=>{
+          a.addEventListener('click',()=>{
+            if(window.innerWidth<=768){ mainMenu.classList.remove('show'); mobileMenuBtn.setAttribute('aria-expanded','false'); mobileMenuBtn.querySelector('i').className='fas fa-bars'; }
+          });
+        });
+      }
+
+      const header=document.getElementById('header');
+      if(header){ window.addEventListener('scroll',()=>{ if(window.scrollY>100) header.classList.add('scrolled'); else header.classList.remove('scrolled'); }); }
+
+      document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+        anchor.addEventListener('click',e=>{
+          const id=anchor.getAttribute('href'); if(!id||id==='#') return;
+          const el=document.querySelector(id); if(!el) return;
+          e.preventDefault();
+          const top=el.getBoundingClientRect().top+window.scrollY-(document.getElementById('header')?.offsetHeight||0);
+          window.scrollTo({top,behavior:'smooth'}); if(history.pushState) history.pushState(null,'',id);
+        });
+      });
+
+      // Reveal
+      const animateEls=document.querySelectorAll('.animate');
+      const reveal=()=>animateEls.forEach(el=>{ if(el.getBoundingClientRect().top<window.innerHeight-150) el.classList.add('show'); });
+      reveal(); window.addEventListener('scroll',reveal);
+
+      // FAB -> rolar para formulário de parcerias
+      document.getElementById('fabContact')?.addEventListener('click',()=>{
+        const section=document.querySelector('#form-parcerias');
+        if(section) window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });
+      });
+    });
+
+    // Atualiza --header-h se o header mudar de altura
+    (function(){
+      const header=document.getElementById('header'); if(!header) return;
+      const setVar=()=>document.documentElement.style.setProperty('--header-h',(header.offsetHeight||60)+'px');
+      ['DOMContentLoaded','load','resize','scroll'].forEach(ev=>window.addEventListener(ev,setVar));
+      if('ResizeObserver' in window){ new ResizeObserver(setVar).observe(header); }
+    })();
+
+    // Forms (Prozis)
+    (function(){
+      const form=document.getElementById('prozis-form'); const help=document.getElementById('prozisHelp');
+      form?.addEventListener('submit',async (e)=>{
+        e.preventDefault();
+        const ok=document.getElementById('p_ok')?.checked;
+        const nome=document.getElementById('p_nome')?.value.trim();
+        const email=document.getElementById('p_email')?.value.trim();
+        const link=document.getElementById('p_link')?.value.trim();
+        if(!nome||!email||!link||!ok){ help.textContent='Preenche nome, email, link/nome do produto e aceita o consentimento.'; return; }
+        help.textContent='A calcular desconto...';
+        try{
+          const resp=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+          if(resp.ok){ form.reset(); help.textContent='Recebemos o teu pedido! Respondemos com o valor com desconto.'; }
+          else{ const data=await resp.json().catch(()=>({})); help.textContent=data?.errors?.[0]?.message||'Não foi possível enviar agora. Tenta de novo.'; }
+        }catch{ help.textContent='Sem ligação. Tenta novamente dentro de momentos.' }
+      });
+    })();
+
+    // Forms (Parcerias)
+    (function(){
+      const form=document.getElementById('partner-form'); const help=document.getElementById('formHelp');
+      form?.addEventListener('submit',async (e)=>{
+        e.preventDefault();
+        const nome=document.getElementById('nome')?.value.trim();
+        const email=document.getElementById('email')?.value.trim();
+        const msg=document.getElementById('mensagem')?.value.trim();
+        const consent=document.getElementById('consent')?.checked;
+        if(!nome||!email||!msg||!consent){ help.textContent='Preenche os campos obrigatórios e aceita o consentimento.'; return; }
+        help.textContent='A enviar...';
+        try{
+          const resp=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+          if(resp.ok){ form.reset(); help.textContent='Obrigado! Recebemos a tua mensagem e vamos responder em breve.'; }
+          else{ const data=await resp.json().catch(()=>({})); help.textContent=data?.errors?.[0]?.message||'Ocorreu um erro ao enviar. Tenta novamente mais tarde.'; }
+        }catch{ help.textContent='Sem ligação ou serviço indisponível. Tenta novamente dentro de momentos.' }
+      });
+    })();
+  </script>
+</body>
+</html>

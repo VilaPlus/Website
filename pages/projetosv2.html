@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="pt" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>Projetos | Vila Plus</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/logoazulcinza.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logoazulcinza.png">
+
+  <!-- Fonts & Icons (iguais Contactos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* ===== Design System (igual Contactos) ===== */
+    :root{
+      --azul:#2563eb; --azul-escuro:#1f5073; --cinza-fundo:#f8f9fb; --cinza-card:#f1f3f7;
+      --cinza-medio:#6b7280; --dourado:#d4af37; --branco:#fff; --preto:#111827;
+      --transition:.3s ease; --radius:12px; --shadow:0 4px 12px rgba(0,0,0,.08);
+      --header-h:60px; --container-padding:1rem; --section-padding:3rem 0;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Lato',sans-serif;color:var(--preto);background:#fff;line-height:1.6;overflow-x:hidden;padding-top:var(--header-h)}
+    img,video{max-width:100%;height:auto;display:block}
+    a{text-decoration:none;color:inherit;transition:var(--transition)}
+    h1,h2,h3{font-family:'Playfair Display',serif;font-weight:700;color:var(--azul-escuro);line-height:1.2;margin-bottom:1rem}
+    h1{font-size:2.25rem} h2{font-size:1.875rem} h3{font-size:1.25rem}
+    .container{width:100%;max-width:1200px;margin:0 auto;padding:0 var(--container-padding)}
+    section{padding:var(--section-padding)}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 1.5rem;border:1px solid var(--dourado);color:var(--dourado);font-weight:700;letter-spacing:.5px;text-transform:uppercase;font-size:.875rem;border-radius:var(--radius);cursor:pointer;min-height:44px}
+    .btn:hover{background:var(--dourado);color:#fff}
+
+    /* ===== Header (copiado do Contactos) ===== */
+    header{
+      position:fixed;top:0;left:0;width:100%;z-index:1000;
+      padding:.75rem 0;background:var(--branco);
+      box-shadow:0 2px 10px rgba(0,0,0,.05);transition:var(--transition);
+      height:var(--header-h);
+    }
+    header.scrolled{box-shadow:0 4px 15px rgba(0,0,0,.08);padding:.5rem 0}
+    .header-container{display:flex;justify-content:space-between;align-items:center;height:100%}
+    .logo-img{height:40px;width:auto;transition:var(--transition)}
+    .logo-img:hover{opacity:.9;transform:scale(1.03)}
+    nav ul{display:flex;list-style:none}
+    nav ul li{margin-left:1.5rem;position:relative}
+    nav ul li a{
+      font-weight:700;font-size:.85rem;letter-spacing:.5px;text-transform:uppercase;
+      color:var(--azul-escuro);padding:.5rem 0;display:block;
+    }
+    nav ul li a::after{
+      content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;
+      background:var(--dourado);transition:var(--transition);
+    }
+    nav ul li a:hover::after, nav ul li a[aria-current="page"]::after{width:100%}
+    .mobile-menu-btn{
+      display:none;font-size:1.5rem;color:var(--azul-escuro);background:none;border:none;
+      padding:.5rem;min-height:44px;min-width:44px;justify-content:center;align-items:center;
+    }
+
+    /* ===== Responsivo header/menu (igual Contactos) ===== */
+    @media (max-width:767px){
+      :root{--header-h:60px}
+      .mobile-menu-btn{display:flex}
+      nav ul{
+        display:none;position:fixed;top:var(--header-h);left:0;width:100%;
+        background:var(--branco);flex-direction:column;padding:1rem;
+        box-shadow:0 10px 15px rgba(0,0,0,.1);
+        max-height:calc(100vh - var(--header-h));overflow-y:auto;
+      }
+      nav ul.show{display:flex}
+      nav ul li{margin:.75rem 0}
+    }
+
+    /* ===== HERO ===== */
+    .projetos-hero{
+      display:flex;align-items:center;justify-content:center;text-align:center;
+      background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(212,175,55,.08));
+      color:var(--preto);padding:3rem 1rem;min-height:40vh;
+    }
+    .projetos-hero p{font-size:1.05rem;color:var(--cinza-medio);max-width:720px;margin:0 auto}
+
+    /* ===== Cards ===== */
+    .wrap{background:var(--cinza-fundo);padding:var(--section-padding)}
+    .grid{display:grid;gap:1.2rem;grid-template-columns:1fr}
+    @media (min-width:768px){.grid{grid-template-columns:repeat(2,1fr)}}
+    .card{display:flex;flex-direction:column;min-height:100%;border-radius:14px;background:#fff;border:1px solid #eceff4;box-shadow:var(--shadow);overflow:hidden}
+    .card-media{aspect-ratio:16/9;background:var(--cinza-card);position:relative;overflow:hidden}
+    .card-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+    .card:hover .card-media img{transform:scale(1.055)}
+    .chip{position:absolute;top:.6rem;right:.6rem;background:var(--dourado);color:#fff;border-radius:999px;font-weight:900;font-size:.68rem;padding:.28rem .6rem}
+    .card-body{display:flex;flex-direction:column;gap:.6rem;padding:1rem}
+    .card-desc{color:var(--cinza-medio);font-size:.95rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:3.6em}
+    .features{list-style:none;margin:.2rem 0 0;padding:0;display:grid;gap:.35rem}
+    .features li{font-size:.9rem;color:#374151;padding-left:1.2rem;position:relative}
+    .features li i{position:absolute;left:0;top:.2rem;color:var(--dourado);font-size:.85rem}
+    .card-actions{margin-top:auto;display:flex;gap:.6rem;flex-wrap:wrap}
+
+    /* ===== Modal/Galeria (mantidos) ===== */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:2000}
+    .modal.open{display:flex}
+    .modal-content{background:#fff;width:100%;height:100%;max-height:100svh;display:flex;flex-direction:column;overflow:hidden;position:relative}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1rem;border-bottom:1px solid var(--cinza-card);position:sticky;top:0;background:#fff;z-index:5}
+    .modal-title{font-size:1.1rem;margin:0}
+    .modal-close{border:0;background:transparent;font-size:1.2rem;min-width:44px;min-height:44px;color:#fff;cursor:pointer;
+      position:absolute;top:10px;right:10px;border-radius:999px;width:44px;height:44px;display:grid;place-items:center;
+      background:rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.65)}
+    .modal-body{display:flex;flex-direction:column;min-height:0}
+    @media (min-width:992px){
+      .modal-content{width:min(1100px,95vw);height:auto;max-height:92vh;border-radius:14px}
+      .modal-body{display:grid;grid-template-columns:1.4fr 1fr}
+    }
+    .gallery{background:#000;display:flex;flex-direction:column;min-height:0}
+    .gallery-main{position:relative;min-height:240px;height:clamp(260px,42vh,60vh);display:flex;align-items:center;justify-content:center}
+    .gallery-slide{position:absolute;inset:0;display:none;align-items:center;justify-content:center}
+    .gallery-slide.active{display:flex}
+    .gallery-slide img{max-width:100%;max-height:100%;object-fit:contain}
+    .gallery-slide video{width:100%;height:100%;object-fit:contain;background:#000}
+    .gallery-prev,.gallery-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);color:#fff;border:0;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .gallery-prev{left:10px} .gallery-next{right:10px}
+    .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;padding:.6rem;background:#fff}
+    @media (min-width:768px){.thumbs{grid-template-columns:repeat(6,1fr)}}
+    .thumb{position:relative;height:56px;border:2px solid transparent;border-radius:6px;overflow:hidden;background:#111;cursor:pointer}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .thumb.video::after{content:'▶';position:absolute;right:4px;bottom:2px;color:#fff;font-size:.8rem}
+    .thumb.active{border-color:var(--dourado)}
+    .proj-text{padding:1rem;overflow:auto}
+    .proj-text p{color:var(--cinza-medio);margin:.5rem 0 1rem}
+    .meta{display:grid;gap:.6rem}
+    .meta .box{background:var(--cinza-fundo);border:1px solid #eceff4;border-radius:10px;padding:.8rem;font-size:.92rem}
+
+    /* ===== CTA/Form ===== */
+    .projetos-cta{background:linear-gradient(135deg,var(--azul),var(--azul-escuro));color:#fff;text-align:center}
+    .projetos-cta h2{color:#fff;margin-bottom:.5rem}
+    .projetos-cta p{max-width:700px;margin:0 auto 1.5rem;color:rgba(255,255,255,.92)}
+    .vp-form{max-width:880px;margin:1.5rem auto 0;background:rgba(255,255,255,.08);backdrop-filter:saturate(120%) blur(2px);padding:1.5rem;border-radius:12px;border:1px solid rgba(255,255,255,.12)}
+    .vp-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+    .vp-field{display:flex;flex-direction:column}
+    .vp-field label{font-weight:700;margin-bottom:.5rem;color:#fff;font-size:.9rem}
+    .vp-field input,.vp-field select,.vp-field textarea{background:#fff;border:1px solid var(--cinza-card);border-radius:8px;padding:.75rem 1rem;font-size:1rem;outline:0;transition:var(--transition);font-family:inherit}
+    .vp-field input:focus,.vp-field select:focus,.vp-field textarea:focus{border-color:var(--dourado);box-shadow:0 0 0 3px rgba(212,175,55,.18)}
+    .vp-hint{color:rgba(255,255,255,.9);font-size:.8rem;margin-top:.5rem}
+    .vp-error{display:none;color:#ffdddd;background:#7f1d1d;padding:.5rem .75rem;border-radius:6px;margin-top:.5rem;font-size:.8rem}
+    .vp-checkbox{display:flex;align-items:flex-start;gap:.75rem;margin-top:.5rem}
+    .vp-checkbox input{width:18px;height:18px;margin-top:.25rem;flex-shrink:0}
+    .vp-actions{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
+    .vp-status{margin-top:1rem;color:#fff;font-size:.9rem}
+    .vp-col-2{grid-column:1 / -1}
+    @media (min-width:768px){.vp-grid{grid-template-columns:1fr 1fr;gap:1.25rem}}
+
+    /* ===== Footer (copiado do Contactos) ===== */
+    footer{background:var(--azul-escuro);color:var(--branco);padding:3rem 0 1.5rem}
+    .footer-container{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-bottom:3rem}
+    .footer-col h3{font-size:1.3rem;margin:0 0 1.25rem;color:#fff}
+    .footer-col p{color:var(--cinza-card);margin:0 0 1.25rem}
+    .footer-links ul{list-style:none}
+    .footer-links li{margin:0 0 .5rem}
+    .footer-links a{color:#dfe6ff;display:block;padding:.25rem 0;transition:var(--transition)}
+    .footer-links a:hover{color:var(--dourado);padding-left:.25rem}
+    .social-links{display:flex;gap:.75rem}
+    .social-links a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff;transition:var(--transition)}
+    .social-links a:hover{background:var(--dourado);transform:translateY(-3px)}
+    .footer-bottom{text-align:center;border-top:1px solid rgba(255,255,255,.12);padding-top:1.5rem;color:#dfe6ff;font-size:.9rem}
+
+    /* ===== Responsivo (igual Contactos) ===== */
+    @media (min-width:768px){
+      :root{--container-padding:2rem}
+      .footer-container{grid-template-columns:repeat(2,1fr)}
+      .projetos-hero{min-height:50vh;padding:4rem 2rem}
+    }
+    @media (min-width:1024px){
+      .footer-container{grid-template-columns:repeat(4,1fr)}
+    }
+
+    /* === Hero compacto (≈280px) === */
+.projetos-hero{
+  min-height: 280px !important;
+  padding: 1.5rem 1rem !important;
+}
+
+/* Remove o aumento em ecrãs maiores */
+@media (min-width:768px){
+  .projetos-hero{ min-height: 280px !important; }
+}
+
+
+  </style>
+</head>
+<body>
+  <!-- Header (mesmo HTML do Contactos) -->
+  <header id="header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <img src="../assets/logoazulcinza.png" alt="VilaPlus Ginásio" class="logo-img">
+      </a>
+      <nav aria-label="Menu principal">
+        <ul id="main-menu">
+          <li><a href="index.html#home">Início</a></li>
+          <li><a href="servicosv2.html">Serviços</a></li>
+          <li><a href="projetosv2.html" aria-current="page">Projetos</a></li>
+          <li><a href="portfoliov2.html">Galeria</a></li>
+          <li><a href="index.html#horarios">Horários</a></li>
+          <li><a href="parceriasv2.html">Parcerias</a></li>
+          <li><a href="lojav2.html">Loja</a></li>
+          <li><a href="noticiasv2.html">Notícias</a></li>
+          <li><a href="contactsv2.html">Contactos</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="projetos-hero">
+      <div class="container">
+        <h1>Os Nossos Projetos</h1>
+        <p>Conhece as iniciativas que fazem do Vila Plus muito mais do que um ginásio.</p>
+      </div>
+    </section>
+
+    <!-- Projetos -->
+    <section id="projetos" class="wrap">
+      <div class="container">
+        <div class="grid">
+          <!-- OFF SEASON -->
+          <article class="card" id="off-season">
+            <div class="card-media">
+              <img src="../assets/projetos/off-season/1.jpg" alt="Off Season">
+              <div class="chip">Preparação Física</div>
+            </div>
+            <div class="card-body">
+              <h3>OFF SEASON</h3>
+              <p class="card-desc">O programa Off Season é uma oportunidade para melhorar a condição física, corrigir desequilíbrios musculares ou manter-te ativo entre épocas desportivas.</p>
+              <ul class="features">
+                <li><i class="fa-solid fa-check"></i> Avaliação física personalizada</li>
+                <li><i class="fa-solid fa-check"></i> Treinos no campo e no ginásio</li>
+                <li><i class="fa-solid fa-check"></i> Sessões em grupo e individuais</li>
+                <li><i class="fa-solid fa-check"></i> Suporte contínuo e acompanhamento</li>
+              </ul>
+              <div class="card-actions">
+                <a class="btn" style="background:var(--dourado);color:#fff;border-color:var(--dourado)" href="#off-season" data-project="off-season" class="open-project"><i class="fa-regular fa-image"></i> Detalhes</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROGRAMA 55+ -->
+          <article class="card" id="programa-55">
+            <div class="card-media">
+              <img src="../assets/projetos/programa-55/capa.jpg" alt="Programa 55+">
+              <div class="chip">Comunidade Sénior</div>
+            </div>
+            <div class="card-body">
+              <h3>Programa 55+</h3>
+              <p class="card-desc">Colaboração com a Junta de Freguesia de Vila Caiz. Mais do que treinar: energia, mobilidade e laços na comunidade.</p>
+              <ul class="features">
+                <li><i class="fa-solid fa-check"></i> Aulas seguras e acompanhadas</li>
+                <li><i class="fa-solid fa-check"></i> Exercício adaptado + convívio</li>
+                <li><i class="fa-solid fa-check"></i> Mobilidade e equilíbrio</li>
+                <li><i class="fa-solid fa-check"></i> Gratuito para +55</li>
+              </ul>
+              <div class="card-actions">
+                <a class="btn" style="background:var(--dourado);color:#fff;border-color:var(--dourado)" href="#programa-55" data-project="programa-55" class="open-project"><i class="fa-regular fa-image"></i> Detalhes</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PÕE-TE A BULIR -->
+          <article class="card" id="poe-te-a-bulir">
+            <div class="card-media">
+              <img src="../assets/projetos/poe-te-a-bulir/1.jpg" alt="Põe-te a Bulir">
+              <div class="chip">Ar Livre</div>
+            </div>
+            <div class="card-body">
+              <h3>Põe-te a Bulir</h3>
+              <p class="card-desc">Aulas gratuitas ao ar livre entre junho e setembro, na Av. General Silveira. Energia, ritmo e boa disposição.</p>
+              <ul class="features">
+                <li><i class="fa-solid fa-check"></i> Aulas gratuitas</li>
+                <li><i class="fa-solid fa-check"></i> Zumba e Aeróbica</li>
+                <li><i class="fa-solid fa-check"></i> Para todas as idades</li>
+                <li><i class="fa-solid fa-check"></i> Saúde e inclusão</li>
+              </ul>
+              <div class="card-actions">
+                <a class="btn" style="background:var(--dourado);color:#fff;border-color:var(--dourado)" href="#poe-te-a-bulir" data-project="poe-te-a-bulir" class="open-project"><i class="fa-regular fa-image"></i> Detalhes</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- TEAM BUILDING -->
+          <article class="card" id="team-building">
+            <div class="card-media">
+              <img src="../assets/projetos/team-building/1.jpg" alt="Team Building para empresas">
+              <div class="chip">Empresas & Equipas</div>
+            </div>
+            <div class="card-body">
+              <h3>Team Building</h3>
+              <p class="card-desc">Experiências físicas e motivadoras que fortalecem união, comunicação e energia coletiva.</p>
+              <ul class="features">
+                <li><i class="fa-solid fa-check"></i> Confiança e coesão</li>
+                <li><i class="fa-solid fa-check"></i> Indoor/Outdoor</li>
+                <li><i class="fa-solid fa-check"></i> Desafios colaborativos</li>
+                <li><i class="fa-solid fa-check"></i> Intensidade flexível</li>
+              </ul>
+              <div class="card-actions">
+                <a class="btn" style="background:var(--dourado);color:#fff;border-color:var(--dourado)" href="#team-building" data-project="team-building" class="open-project"><i class="fa-regular fa-image"></i> Detalhes</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA + Formulário -->
+    <section id="projetos-contacto" class="projetos-cta">
+      <div class="container">
+        <h2>Propor Projeto / Parceria</h2>
+        <p>Preenche o formulário e entramos em contacto brevemente.</p>
+
+        <form id="form-projetos" class="vp-form" action="https://formspree.io/f/xqadoryk" method="POST" novalidate>
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
+          <input type="hidden" name="_subject" value="Novo contacto: Projetos | Vila Plus">
+          <input type="hidden" name="_template" value="table">
+
+          <div class="vp-grid">
+            <div class="vp-field">
+              <label for="empresa">Empresa <span aria-hidden="true">*</span></label>
+              <input type="text" id="empresa" name="empresa" required placeholder="Nome da empresa">
+              <small class="vp-error">Indica o nome da empresa.</small>
+            </div>
+            <div class="vp-field">
+              <label for="website">Website (opcional)</label>
+              <input type="url" id="website" name="website" placeholder="https://exemplo.pt">
+              <small class="vp-hint">Inclui http(s):// para validação correta.</small>
+            </div>
+            <div class="vp-field">
+              <label for="nome">Nome do contacto <span aria-hidden="true">*</span></label>
+              <input type="text" id="nome" name="nome" required placeholder="O seu nome">
+              <small class="vp-error">Escreve o teu nome.</small>
+            </div>
+            <div class="vp-field">
+              <label for="email">Email <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required placeholder="email@empresa.pt">
+              <small class="vp-error">Indica um e-mail válido.</small>
+            </div>
+            <div class="vp-field">
+              <label for="telefone">Telefone (opcional)</label>
+              <input type="tel" id="telefone" name="telefone" placeholder="+351 ...">
+            </div>
+            <div class="vp-field">
+              <label for="assunto">Assunto <span aria-hidden="true">*</span></label>
+              <select id="assunto" name="assunto" required>
+                <option value="" disabled selected>Seleciona uma opção</option>
+                <option>Projeto Off Season</option>
+                <option>Programa 55+</option>
+                <option>Põe-te a Bulir</option>
+                <option>Team Building</option>
+                <option>Outro</option>
+              </select>
+              <small class="vp-error">Escolhe um assunto.</small>
+            </div>
+            <div class="vp-field vp-col-2">
+              <label for="mensagem">Mensagem <span aria-hidden="true">*</span></label>
+              <textarea id="mensagem" name="mensagem" rows="6" required placeholder="Explica-nos o objetivo do projeto, público-alvo, datas e locais pretendidos..."></textarea>
+              <small class="vp-error">Escreve uma mensagem.</small>
+            </div>
+            <div class="vp-checkbox vp-col-2">
+              <input type="checkbox" id="rgpd" name="rgpd" required>
+              <label for="rgpd">Li e aceito o tratamento dos meus dados para o contacto sobre este projeto.</label>
+              <small class="vp-error">É necessário aceitar para enviar.</small>
+            </div>
+          </div>
+
+          <div class="vp-actions">
+            <button class="btn" style="background:var(--dourado);color:#fff;border-color:var(--dourado)" type="submit">Enviar Pedido</button>
+            <button class="btn" type="reset">Limpar</button>
+          </div>
+
+          <p id="vp-status" class="vp-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (mesmo HTML do Contactos) -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Vila Plus</h3>
+          <p>Saúde. Força. Comunidade.</p>
+          <p>O teu ginásio de eleição em Vila Caiz.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Links Rápidos</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html#home">Início</a></li>
+              <li><a href="servicosv2.html">Serviços</a></li>
+              <li><a href="portfoliov2.html">Galeria</a></li>
+              <li><a href="index.html#horarios">Horários</a></li>
+              <li><a href="parceriasv2.html">Parcerias</a></li>
+              <li><a href="lojav2.html">Loja</a></li>
+              <li><a href="noticiasv2.html">Notícias</a></li>
+              <li><a href="contactsv2.html">Contactos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-col">
+  <h3>Projetos</h3>
+  <div class="footer-links">
+    <ul>
+      <li><a href="#off-season">OFF SEASON</a></li>
+      <li><a href="#programa-55">Programa 55+</a></li>
+      <li><a href="#poe-te-a-bulir">Põe-te a Bulir</a></li>
+      <li><a href="#team-building">Team Building</a></li>
+    </ul>
+  </div>
+</div>
+
+        <div class="footer-col">
+          <h3>Redes Sociais</h3>
+          <div class="social-links">
+            <a href="https://www.facebook.com/p/Vila-Plus-61552410020366/" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/vilaplus.pt/" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/351931999690" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts (iguais Contactos para header/menu + os teus modais/form) -->
+  <script>
+    // Atualiza --header-h conforme altura do header (igual Contactos)
+    (function(){
+      const header=document.getElementById('header'); if(!header) return;
+      const setVar=()=>document.documentElement.style.setProperty('--header-h',(header.offsetHeight||60)+'px');
+      ['DOMContentLoaded','load','resize','scroll'].forEach(ev=>window.addEventListener(ev,setVar));
+      if('ResizeObserver' in window){ new ResizeObserver(setVar).observe(header); }
+      setVar();
+    })();
+
+    // Menu mobile + sombra no scroll (igual Contactos)
+    (function(){
+      const btn=document.getElementById('mobile-menu-btn');
+      const menu=document.getElementById('main-menu');
+      const header=document.getElementById('header');
+      if(!btn||!menu) return;
+
+      btn.addEventListener('click', function(){
+        const exp=this.getAttribute('aria-expanded')==='true';
+        this.setAttribute('aria-expanded', String(!exp));
+        menu.classList.toggle('show');
+        const icon=this.querySelector('i'); if(icon) icon.className = exp ? 'fas fa-bars' : 'fas fa-times';
+      });
+
+      menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+        if (window.innerWidth <= 767) {
+          menu.classList.remove('show');
+          btn.setAttribute('aria-expanded','false');
+          const icon=btn.querySelector('i'); if(icon) icon.className='fas fa-bars';
+        }
+      }));
+
+      window.addEventListener('scroll',()=>{
+        if (window.scrollY > 100) header?.classList.add('scrolled');
+        else header?.classList.remove('scrolled');
+      });
+    })();
+  </script>
+
+  <!-- Modais + Galeria (o teu JS) -->
+ 
+
+  <!-- Modais (conteúdo) -->
+  <!-- OFF SEASON -->
+  <div class="modal" id="modal-off-season" aria-hidden="true" role="dialog" aria-labelledby="title-off-season">
+    <div class="modal-content" tabindex="-1">
+      <div class="modal-header">
+        <h3 class="modal-title" id="title-off-season">OFF SEASON — Detalhes</h3>
+        <button class="modal-close" data-close aria-label="Fechar"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="gallery" data-gallery="off-season">
+          <div class="gallery-main">
+            <div class="gallery-slide active" data-index="0" data-type="image"><img src="../assets/projetos/off-season/1.jpg" alt="OFF SEASON — 1"></div>
+            <div class="gallery-slide" data-index="1" data-type="image"><img src="../assets/projetos/off-season/2.jpg" alt="OFF SEASON — 2"></div>
+            <div class="gallery-slide" data-index="2" data-type="image"><img src="../assets/projetos/off-season/3.jpg" alt="OFF SEASON — 3"></div>
+            <div class="gallery-slide" data-index="3" data-type="video"><video src="../assets/projetos/off-season/off.mp4" controls preload="metadata" poster="../assets/projetos/off-season/3.jpg"></video></div>
+          </div>
+          <div class="thumbs">
+            <button class="thumb active" data-to="0" aria-label="Imagem 1"><img src="../assets/projetos/off-season/1.jpg" alt=""></button>
+            <button class="thumb" data-to="1" aria-label="Imagem 2"><img src="../assets/projetos/off-season/2.jpg" alt=""></button>
+            <button class="thumb" data-to="2" aria-label="Imagem 3"><img src="../assets/projetos/off-season/3.jpg" alt=""></button>
+            <button class="thumb video" data-to="3" aria-label="Vídeo"><img src="../assets/projetos/off-season/4.jpg" alt=""></button>
+          </div>
+        </div>
+        <div class="proj-text">
+          <h3>Sobre o Projeto</h3>
+          <p>Ideal para melhorar a condição física, corrigir desequilíbrios e manter a atividade entre épocas.</p>
+          <div class="meta">
+            <div class="box"><strong>Inclui</strong> Avaliação física, ginásio+campo, sessões individuais/grupo, suporte.</div>
+            <div class="box"><strong>Objetivos</strong> Evolução física, prevenção de lesões e consistência.</div>
+          </div>
+          <div style="margin-top:.6rem"><a href="contactsv2.html" class="btn" style="background:var(--dourado);color:#fff;border-color:var(--dourado)">Quero saber mais</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAMA 55+ -->
+  <div class="modal" id="modal-programa-55" aria-hidden="true" role="dialog" aria-labelledby="title-programa-55">
+    <div class="modal-content" tabindex="-1">
+      <div class="modal-header">
+        <h3 class="modal-title" id="title-programa-55">Programa 55+ — Detalhes</h3>
+        <button class="modal-close" data-close aria-label="Fechar"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="gallery" data-gallery="programa-55">
+          <div class="gallery-main">
+            <div class="gallery-slide active" data-index="0" data-type="video"><video src="../assets/projetos/programa-55/1.mp4" controls preload="metadata" poster="../assets/projetos/programa-55/capa.jpg"></video></div>
+            <div class="gallery-slide" data-index="1" data-type="video"><video src="../assets/projetos/programa-55/2.mp4" controls preload="metadata" poster="../assets/projetos/programa-55/capa.jpg"></video></div>
+            <div class="gallery-slide" data-index="2" data-type="video"><video src="../assets/projetos/programa-55/3.mp4" controls preload="metadata" poster="../assets/projetos/programa-55/capa.jpg"></video></div>
+          </div>
+          <div class="thumbs">
+            <button class="thumb video active" data-to="0" aria-label="Vídeo 1"><img src="../assets/projetos/programa-55/capa.jpg" alt=""></button>
+            <button class="thumb video" data-to="1" aria-label="Vídeo 2"><img src="../assets/projetos/programa-55/capa.jpg" alt=""></button>
+            <button class="thumb video" data-to="2" aria-label="Vídeo 3"><img src="../assets/projetos/programa-55/capa.jpg" alt=""></button>
+          </div>
+        </div>
+        <div class="proj-text">
+          <h3>Sobre o Projeto</h3>
+          <p>Iniciativa gratuita para a comunidade sénior com acompanhamento seguro e adaptado.</p>
+          <div class="meta">
+            <div class="box"><strong>Benefícios</strong> Mobilidade, equilíbrio, hábitos saudáveis e convívio.</div>
+            <div class="box"><strong>Para quem</strong> Maiores de 55 anos.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PÕE-TE A BULIR -->
+  <div class="modal" id="modal-poe-te-a-bulir" aria-hidden="true" role="dialog" aria-labelledby="title-poe-te-a-bulir">
+    <div class="modal-content" tabindex="-1">
+      <div class="modal-header">
+        <h3 class="modal-title" id="title-poe-te-a-bulir">Põe-te a Bulir — Detalhes</h3>
+        <button class="modal-close" data-close aria-label="Fechar"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="gallery" data-gallery="poe-te-a-bulir">
+          <div class="gallery-main">
+            <div class="gallery-slide active" data-index="0" data-type="image"><img src="../assets/projetos/poe-te-a-bulir/1.jpg" alt=""></div>
+            <div class="gallery-slide" data-index="1" data-type="image"><img src="../assets/projetos/poe-te-a-bulir/2.jpg" alt=""></div>
+            <div class="gallery-slide" data-index="2" data-type="image"><img src="../assets/projetos/poe-te-a-bulir/3.jpg" alt=""></div>
+            <div class="gallery-slide" data-index="3" data-type="image"><img src="../assets/projetos/poe-te-a-bulir/4.jpg" alt=""></div>
+          </div>
+          <div class="thumbs">
+            <button class="thumb active" data-to="0" aria-label="Imagem 1"><img src="../assets/projetos/poe-te-a-bulir/1.jpg" alt=""></button>
+            <button class="thumb" data-to="1" aria-label="Imagem 2"><img src="../assets/projetos/poe-te-a-bulir/2.jpg" alt=""></button>
+            <button class="thumb" data-to="2" aria-label="Imagem 3"><img src="../assets/projetos/poe-te-a-bulir/3.jpg" alt=""></button>
+            <button class="thumb" data-to="3" aria-label="Imagem 4"><img src="../assets/projetos/poe-te-a-bulir/4.jpg" alt=""></button>
+          </div>
+        </div>
+        <div class="proj-text">
+          <h3>Sobre o Projeto</h3>
+          <p>Aulas gratuitas ao ar livre aos fins-de-semana, entre junho e setembro.</p>
+          <div class="meta">
+            <div class="box"><strong>Modalidades</strong> Zumba, Aeróbica e aulas de ritmo.</div>
+            <div class="box"><strong>Inclusão</strong> Aberto a todas as idades e níveis.</div>
+          </div>
+          <div style="margin-top:.6rem"><a href="contactsv2.html" class="btn" style="background:var(--dourado);color:#fff;border-color:var(--dourado)">Quero participar</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM BUILDING -->
+  <div class="modal" id="modal-team-building" aria-hidden="true" role="dialog" aria-labelledby="title-team-building">
+    <div class="modal-content" tabindex="-1">
+      <div class="modal-header">
+        <h3 class="modal-title" id="title-team-building">Team Building — Detalhes</h3>
+        <button class="modal-close" data-close aria-label="Fechar"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="gallery" data-gallery="team-building">
+          <div class="gallery-main">
+            <div class="gallery-slide active" data-index="0" data-type="image"><img src="../assets/projetos/team-building/1.jpg" alt=""></div>
+            <div class="gallery-slide" data-index="1" data-type="image"><img src="../assets/projetos/team-building/2.jpg" alt=""></div>
+          </div>
+          <div class="thumbs">
+            <button class="thumb active" data-to="0" aria-label="Imagem 1"><img src="../assets/projetos/team-building/1.jpg" alt=""></button>
+            <button class="thumb" data-to="1" aria-label="Imagem 2"><img src="../assets/projetos/team-building/2.jpg" alt=""></button>
+          </div>
+        </div>
+        <div class="proj-text">
+          <h3>Sobre o Projeto</h3>
+          <p>Refresca a energia das equipas com desafios colaborativos e dinâmicas físicas.</p>
+          <div class="meta">
+            <div class="box"><strong>Objetivos</strong> Melhor ambiente, coesão e motivação.</div>
+            <div class="box"><strong>Formato</strong> Indoor/Outdoor, facilitadores certificados.</div>
+          </div>
+          <div style="margin-top:.6rem"><a href="#projetos-contacto" class="btn" style="background:var(--dourado);color:#fff;border-color:var(--dourado)">Pedir proposta</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <script>
+    (function(){
+      const modals={
+        'off-season':document.getElementById('modal-off-season'),
+        'programa-55':document.getElementById('modal-programa-55'),
+        'poe-te-a-bulir':document.getElementById('modal-poe-te-a-bulir'),
+        'team-building':document.getElementById('modal-team-building'),
+      };
+      const lock=(on)=>{ if(on){const sw=window.innerWidth-document.documentElement.clientWidth;document.body.style.overflow='hidden';if(sw>0)document.body.style.paddingRight=sw+'px';}else{document.body.style.overflow='';document.body.style.paddingRight='';} };
+      function closeModal(modal){
+        if(!modal) return; modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
+        modal.querySelectorAll('video').forEach(v=>{ try{v.pause(); v.currentTime=0;}catch{} });
+        lock(false); if (history.pushState) history.pushState('', document.title, window.location.pathname + window.location.search); else window.location.hash='';
+      }
+      function openModal(key){
+        const modal=modals[key]; if(!modal) return; lock(true);
+        modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+        const gallery=modal.querySelector('[data-gallery]');
+        if(gallery && !gallery.dataset.inited){ initGallery(gallery); gallery.dataset.inited='1'; }
+        gallery && gallery.dispatchEvent(new CustomEvent('gallery:show',{detail:{index:0}}));
+        (modal.querySelector('.modal-content')||modal).focus({preventScroll:true});
+        if (history.pushState) history.pushState(null,'',`#${key}`); else window.location.hash=`#${key}`;
+      }
+      document.querySelectorAll('[data-project]').forEach(l=>{
+        l.addEventListener('click',e=>{ e.preventDefault(); const key=l.dataset.project; if(key) openModal(key); });
+      });
+      document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=> closeModal(btn.closest('.modal'))));
+      document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) closeModal(m); }));
+      document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.modal.open').forEach(closeModal); });
+      function initGallery(gal){
+        const slides=gal.querySelectorAll('.gallery-slide');
+        const thumbs=gal.querySelectorAll('.thumb');
+        const prev=gal.querySelector('.gallery-prev');
+        const next=gal.querySelector('.gallery-next');
+        let current=0;
+        const show=(idx)=>{ if(idx<0) idx=slides.length-1; if(idx>=slides.length) idx=0;
+          slides.forEach((s,i)=>{ const a=i===idx; s.classList.toggle('active',a); if(!a) s.querySelectorAll('video').forEach(v=>{ try{v.pause();}catch{} }); });
+          thumbs.forEach((t,i)=>t.classList.toggle('active',i===idx)); current=idx;
+        };
+        prev?.addEventListener('click',()=>show(current-1));
+        next?.addEventListener('click',()=>show(current+1));
+        thumbs.forEach(t=>t.addEventListener('click',()=>show(parseInt(t.dataset.to,10)||0)));
+        let sx=0; const main=gal.querySelector('.gallery-main');
+        main.addEventListener('touchstart',e=>{ sx=e.changedTouches[0].screenX; },{passive:true});
+        main.addEventListener('touchend',e=>{ const dx=e.changedTouches[0].screenX - sx; if(Math.abs(dx)>50) show(dx>0?current-1:current+1); },{passive:true});
+        gal.addEventListener('gallery:show',e=>{ show(e.detail?.index ?? 0); });
+        show(0);
+      }
+      function openFromHash(){ const key=(location.hash||'').slice(1); if(modals[key]) openModal(key); }
+      window.addEventListener('DOMContentLoaded', openFromHash);
+      window.addEventListener('hashchange', openFromHash);
+    })();
+
+    // Form (o teu JS)
+    (function(){
+      const form=document.getElementById('form-projetos');
+      const statusEl=document.getElementById('vp-status');
+      if(!form) return;
+      const showErr = el => { el.closest('.vp-field, .vp-checkbox')?.querySelector('.vp-error')?.style.setProperty('display','block'); el.setAttribute('aria-invalid','true'); };
+      const clearErr = el => { el.closest('.vp-field, .vp-checkbox')?.querySelector('.vp-error')?.style.setProperty('display','none'); el.removeAttribute('aria-invalid'); };
+      form.querySelectorAll('input,select,textarea').forEach(el=>{
+        el.addEventListener('input',()=>clearErr(el));
+        el.addEventListener('change',()=>clearErr(el));
+      });
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault(); statusEl.textContent=''; let valid=true;
+        ['empresa','nome','email','assunto','mensagem','rgpd'].forEach(id=>{
+          const el=form.querySelector('#'+id); if(!el) return;
+          if((el.type==='checkbox' && !el.checked) || !(el.value||'').trim()){ showErr(el); valid=false; }
+        });
+        const website=form.website?.value?.trim();
+        if(website && !/^https?:\/\/.+/i.test(website)){ showErr(form.website); valid=false; }
+        if(!valid){ statusEl.textContent='Verifica os campos assinalados.'; statusEl.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+        const btn=form.querySelector('button[type="submit"]'); const txt=btn.textContent;
+        try{
+          btn.textContent='A enviar...'; btn.disabled=true;
+          const resp=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+          if(resp.ok){ form.reset(); statusEl.textContent='Obrigado! Recebemos a tua proposta. Responderemos em breve.'; }
+          else{ statusEl.textContent='Ups, ocorreu um erro ao enviar. Tenta novamente.'; }
+        }catch{ statusEl.textContent='Sem ligação. Tenta novamente dentro de momentos.'; }
+        finally{ btn.textContent=txt; btn.disabled=false; statusEl.scrollIntoView({behavior:'smooth',block:'center'}); }
+      });
+    })();
+  </script>
+</body>
+</html>

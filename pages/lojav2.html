@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="pt" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+    <title>Loja | Vila Plus</title>
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/logoazulcinza.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../assets/logoazulcinza.png" />
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+      /* ==== Design System (mobile first) ==== */
+      :root {
+        --azul: #2563eb;
+        --azul-escuro: #1f5073;
+        --cinza-fundo: #f8f9fb;
+        --cinza-card: #f1f3f7;
+        --cinza-medio: #6b7280;
+        --dourado: #d4af37;
+        --dourado-claro: #e6c965;
+        --branco: #fff;
+        --preto: #111827;
+        --transition: 0.3s ease;
+        --transition-slow: 0.6s ease;
+        --radius: 12px;
+        --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        --header-h: 60px;
+        --container-padding: 1rem;
+        --section-padding: 3rem 0;
+      }
+      /* Reset e estilos base */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; font-size: 16px; }
+      body { font-family: 'Lato', sans-serif; color: var(--preto); background: var(--branco); line-height: 1.6; overflow-x: hidden; padding-top: var(--header-h); }
+      h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; color: var(--azul-escuro); }
+      h1 { font-size: 2.25rem; }
+      h2 { font-size: 1.875rem; }
+      h3 { font-size: 1.5rem; }
+      h4 { font-size: 1.25rem; }
+      a { text-decoration: none; color: inherit; transition: var(--transition); }
+      .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--container-padding); }
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem 1.5rem; border: 1px solid var(--dourado); color: var(--dourado); font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.875rem; transition: var(--transition); cursor: pointer; text-align: center; position: relative; overflow: hidden; z-index: 1; border-radius: 8px; background: transparent; min-height: 44px; }
+      .btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--dourado); transition: var(--transition); z-index: -1; }
+      .btn:hover { color: var(--branco); }
+      .btn:hover::before { left: 0; }
+      .btn-filled { background: var(--dourado); color: var(--branco); }
+      .btn-filled::before { background: var(--branco); }
+      .btn-filled:hover { color: var(--dourado); }
+      .btn-small { padding: 0.75rem 1.25rem; font-size: 0.75rem; min-height: 36px; }
+      section { padding: var(--section-padding); scroll-margin-top: var(--header-h); }
+      .section-title { text-align: center; margin-bottom: 3rem; position: relative; }
+      .section-title h2 { font-size: 2rem; margin-bottom: 1rem; display: inline-block; }
+      .section-title h2::after { content: ''; display: block; width: 80px; height: 3px; background: var(--dourado); margin: 1rem auto 0; transition: var(--transition-slow); }
+      .section-title:hover h2::after { width: 120px; }
+      .section-title p { font-size: 1.1rem; color: var(--cinza-medio); max-width: 700px; margin: 0 auto; }
+      /* ==== Header ==== */
+      header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 0.75rem 0; transition: var(--transition); background: var(--branco); box-shadow: 0 2px 10px rgba(0,0,0,0.05); height: var(--header-h); }
+      header.scrolled { box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 0.5rem 0; }
+      .header-container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+      .logo-img { height: 40px; width: auto; transition: var(--transition); display: block; }
+      .logo-img:hover { opacity: 0.8; transform: scale(1.05); }
+      nav ul { display: flex; list-style: none; margin: 0; padding: 0; }
+      nav ul li { margin-left: 1.5rem; position: relative; }
+      nav ul li a { font-weight: 700; font-size: 0.85rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--azul-escuro); padding: 0.5rem 0; display: block; }
+      nav ul li a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--dourado); transition: var(--transition); }
+      nav ul li a:hover::after { width: 100%; }
+      .mobile-menu-btn { display: none; font-size: 1.5rem; cursor: pointer; color: var(--azul-escuro); background: none; border: none; padding: 0.5rem; min-height: 44px; min-width: 44px; justify-content: center; align-items: center; }
+      .cart-icon { position: relative; margin-left: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; }
+      .cart-count { position: absolute; top: -8px; right: -8px; background: var(--dourado); color: var(--branco); border-radius: 50%; width: 20px; height: 20px; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+      .hero-loja { min-height: clamp(360px, 70vh, 780px); max-height: 820px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--branco); background: linear-gradient(135deg, rgba(31,80,115,.85) 0%, rgba(31,80,115,.7) 100%), url('https://images.unsplash.com/photo-1527525443983-6e60c75fff46?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat; margin-top: 0; position: relative; overflow: hidden; padding: clamp(1rem, 4vw, 2rem) 1.25rem; }
+      .hero-loja::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--azul-escuro) 0%, rgba(31,80,115,.8) 100%); z-index: 0; pointer-events: none; }
+      .hero-loja .inner { position: relative; z-index: 1; width: min(900px, 92vw); margin: 0 auto; }
+      .hero-loja h1 { font-size: clamp(2rem, 5vw, 3.6rem); margin-bottom: clamp(0.625rem, 2vw, 1.25rem); color: #fff; line-height: 1.15; text-shadow: 0 2px 10px rgba(0,0,0,.2); }
+      .hero-loja p { font-size: clamp(1rem, 2.2vw, 1.25rem); max-width: 700px; margin: 0 auto clamp(1.125rem, 3vw, 1.875rem); opacity: 0.95; line-height: 1.6; }
+      @media (max-width: 480px) { .hero-loja { min-height: clamp(340px, 62vh, 560px); } }
+      @supports (-webkit-touch-callout: none) { .hero-loja { min-height: -webkit-fill-available; } }
+      /* ==== Categorias Loja ==== */
+      .categorias-loja { background: var(--cinza-fundo); padding: 3rem 0; }
+      .categorias-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2.5rem; }
+      .categoria-btn { padding: 0.75rem 1.5rem; background: var(--branco); border: 2px solid var(--azul); color: var(--azul); border-radius: 50px; font-weight: 700; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; z-index: 1; min-height: 44px; }
+      .categoria-btn::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 100%; background: var(--azul); transition: var(--transition); z-index: -1; border-radius: 50px; }
+      .categoria-btn:hover::before, .categoria-btn.active::before { width: 100%; }
+      .categoria-btn:hover, .categoria-btn.active { color: var(--branco); }
+      /* ==== Produtos ==== */
+      .produtos-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+      .produto-card { background: var(--branco); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); border-bottom: 3px solid transparent; display: flex; flex-direction: column; position: relative; }
+      .produto-card:hover { transform: translateY(-5px); border-bottom-color: var(--dourado); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+      .produto-imagem { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; position: relative; border-bottom: 1px solid var(--cinza-card); }
+      .produto-imagem::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%); opacity: 0; transition: var(--transition); }
+      .produto-card:hover .produto-imagem::after { opacity: 1; }
+      .produto-imagem img { width: 100%; height: 100%; object-fit: contain; transition: var(--transition-slow); padding: 0.5rem; background: var(--cinza-fundo); }
+      .produto-card:hover .produto-imagem img { transform: scale(1.05); }
+      .produto-info { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+      .produto-info h3 { font-size: 1.3rem; margin-bottom: 0.75rem; color: var(--azul-escuro); }
+      .produto-info p { margin-bottom: 1rem; color: var(--cinza-medio); flex-grow: 1; }
+      .produto-preco { font-size: 1.4rem; font-weight: 700; color: var(--azul); margin-bottom: 1rem; }
+      .produto-meta { display: flex; justify-content: space-between; align-items: center; margin-top: auto; gap: 0.75rem; flex-wrap: wrap; }
+      .produto-categoria { font-size: 0.8rem; padding: 0.25rem 0.75rem; background: var(--cinza-fundo); border-radius: 20px; color: var(--cinza-medio); transition: var(--transition); }
+      .produto-card:hover .produto-categoria { background: var(--azul); color: var(--branco); }
+      .produto-acoes { display: flex; gap: 0.5rem; }
+      /* ==== Seleção de Tamanhos & Cores ==== */
+      .tamanhos-container, .cores-container { display: none; margin-bottom: 1rem; width: 100%; }
+      .tamanhos-opcoes, .cores-opcoes { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+      .tamanho-btn, .cor-btn { padding: 0.5rem 0.75rem; border: 1px solid var(--cinza-medio); border-radius: 4px; background: var(--branco); cursor: pointer; font-size: 0.8rem; transition: var(--transition); min-width: 36px; min-height: 36px; display: inline-flex; align-items: center; justify-content: center; }
+      .tamanho-btn:hover, .cor-btn:hover { border-color: var(--azul); }
+      .tamanho-btn.selecionado, .cor-btn.selecionado { background: var(--azul); color: var(--branco); border-color: var(--azul); }
+      .tamanho-btn.esgotado, .cor-btn.esgotado { opacity: 0.5; cursor: not-allowed; text-decoration: line-through; }
+      .aviso-tamanho, .aviso-cor { color: #e53e3e; font-size: 0.8rem; margin-top: 0.25rem; display: none; }
+      /* ==== Carrinho Sidebar ==== */
+      .carrinho-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; display: none; opacity: 0; transition: opacity 0.3s ease; }
+      .carrinho-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100%; background: var(--branco); z-index: 2001; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; display: flex; flex-direction: column; }
+      .carrinho-header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; border-bottom: 1px solid var(--cinza-card); }
+      .carrinho-header h3 { margin: 0; font-size: 1.4rem; }
+      .carrinho-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--cinza-medio); min-height: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; }
+      .carrinho-body { flex: 1; overflow-y: auto; padding: 1.25rem; }
+      .carrinho-vazio { text-align: center; padding: 2.5rem 0; color: var(--cinza-medio); }
+      .carrinho-item { display: flex; margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--cinza-card); }
+      .carrinho-item-img { width: 80px; height: 80px; border-radius: 8px; overflow: hidden; margin-right: 1rem; flex-shrink: 0; }
+      .carrinho-item-img img { width: 100%; height: 100%; object-fit: cover; }
+      .carrinho-item-info { flex: 1; }
+      .carrinho-item-nome { font-weight: 700; margin-bottom: 0.25rem; font-size: 0.95rem; }
+      .carrinho-item-variantes { font-size: 0.8rem; color: var(--cinza-medio); margin-bottom: 0.25rem; }
+      .carrinho-item-preco { color: var(--azul); font-weight: 700; margin-bottom: 0.75rem; font-size: 0.95rem; }
+      .carrinho-item-controls { display: flex; align-items: center; gap: 0.75rem; }
+      .carrinho-item-quantidade { display: flex; align-items: center; gap: 0.5rem; }
+      .quantidade-btn { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--cinza-card); background: var(--branco); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; transition: var(--transition); }
+      .quantidade-btn:hover { background: var(--cinza-fundo); }
+      .carrinho-item-remover { color: #e53e3e; background: none; border: none; cursor: pointer; font-size: 0.9rem; transition: var(--transition); padding: 0.25rem; }
+      .carrinho-item-remover:hover { color: #c53030; }
+      .carrinho-footer { padding: 1.25rem; border-top: 1px solid var(--cinza-card); }
+      .carrinho-total { display: flex; justify-content: space-between; margin-bottom: 1.25rem; font-size: 1.2rem; font-weight: 700; }
+      .carrinho-botoes { display: flex; flex-direction: column; gap: 0.75rem; }
+      .carrinho-finalizar { width: 100%; }
+      /* ==== Footer & Floating CTA ==== */
+      footer { background: var(--azul-escuro); color: var(--branco); padding: 3rem 0 1.5rem; }
+      .footer-container { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+      .footer-col h3 { font-size: 1.3rem; margin-bottom: 1.25rem; color: var(--branco); font-weight: 700; }
+      .footer-col p { color: var(--cinza-card); margin-bottom: 1.25rem; }
+      .footer-links ul { list-style: none; }
+      .footer-links ul li { margin-bottom: 0.5rem; }
+      .footer-links ul li a { color: var(--cinza-card); transition: var(--transition); display: block; padding: 0.25rem 0; }
+      .footer-links ul li a:hover { color: var(--dourado); padding-left: 0.25rem; }
+      .social-links { display: flex; gap: 0.75rem; justify-content: flex-start; }
+      .social-links a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); color: var(--branco); transition: var(--transition); }
+      .social-links a:hover { background: var(--dourado); transform: translateY(-3px); }
+      .footer-bottom { text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); color: var(--cinza-card); font-size: 0.85rem; }
+      .floating-cta { position: fixed; right: 1rem; bottom: 1rem; z-index: 9999; }
+      .fab-contact { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--dourado); color: var(--branco); border: 0; border-radius: 999px; padding: 1rem; font-weight: 800; letter-spacing: 0.3px; text-transform: uppercase; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease; min-height: 60px; min-width: 60px; }
+      .fab-contact:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+      .fab-contact.pulse { animation: fabPulse 2s infinite; }
+      @keyframes fabPulse { 0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.55); } 70% { box-shadow: 0 0 0 16px rgba(212,175,55,0); } 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); } }
+      .fab-contact i { font-size: 1.25rem; }
+      /* ==== Animações ==== */
+      @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0); } }
+      .animate { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+      .animate.show { opacity: 1; transform: translateY(0); }
+      .delay-1 { transition-delay: 0.15s; }
+      .delay-2 { transition-delay: 0.3s; }
+      .delay-3 { transition-delay: 0.45s; }
+      /* ==== Responsividade - Tablet e Desktop ==== */
+      @media (min-width: 768px) {
+        :root { --container-padding: 2rem; --section-padding: 4rem 0; }
+        .produtos-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .footer-container { grid-template-columns: repeat(4, 1fr); }
+        .hero-loja { min-height: 50vh; padding: 4rem 2rem; }
+        .hero-loja h1 { font-size: 3rem; }
+        .carrinho-sidebar { width: 400px; right: -400px; }
+      }
+      @media (min-width: 1024px) { .produtos-grid { grid-template-columns: repeat(3, 1fr); } .categorias-container { gap: 1rem; } }
+      /* ==== Responsividade - Mobile ==== */
+      @media (max-width: 767px) {
+        :root { --header-h: 60px; }
+        h1 { font-size: 2rem; } h2 { font-size: 1.75rem; } h3 { font-size: 1.375rem; }
+        .mobile-menu-btn { display: flex; }
+        nav ul { display: none; position: fixed; top: var(--header-h); left: 0; width: 100%; background: var(--branco); flex-direction: column; padding: 1rem; box-shadow: 0 10px 15px rgba(0,0,0,0.1); max-height: calc(100vh - var(--header-h)); overflow-y: auto; }
+        nav ul.show { display: flex; }
+        nav ul li { margin: 0.75rem 0; }
+        .hero-loja { min-height: 40vh; padding: 2rem 1rem; }
+        .hero-loja h1 { font-size: 2rem; }
+        .hero-loja p { font-size: 1rem; }
+        .carrinho-sidebar { width: 100%; max-width: none; right: -100%; }
+        .fab-contact span { display: none; }
+        .fab-contact { padding: 1rem; }
+        .fab-contact i { font-size: 1.4rem; }
+        .produto-card { max-width: 400px; margin: 0 auto; }
+      }
+      /* Melhorias de acessibilidade */
+      @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } html { scroll-behavior: auto; } }
+      /* Melhorias para iOS */
+      @supports (-webkit-touch-callout: none) { .hero-loja { min-height: -webkit-fill-available; height: 40vh; } }
+      /* ==== Formulários (Loja / Prozis / Parcerias) ==== */
+      .form-card { background: var(--branco); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 2rem; }
+      .form-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+      .form-header img { max-height: 50px; width: auto; }
+      .form-card p { margin-bottom: 1.5rem; color: var(--cinza-medio); }
+      .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.5rem; }
+      .form-grid .full { grid-column: 1 / -1; }
+      .input, textarea.input, input.input { width: 100%; padding: 0.875rem 1rem; border: 1px solid var(--cinza-card); border-radius: 8px; font-size: 0.95rem; font-family: 'Lato', sans-serif; background: var(--cinza-fundo); transition: border var(--transition), background var(--transition); }
+      .input:focus, textarea.input:focus { outline: none; border-color: var(--azul); background: var(--branco); }
+      .checkbox { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--cinza-medio); }
+      .submit-row { display: flex; align-items: center; gap: 1rem; }
+      .submit-row .help { font-size: 0.85rem; color: var(--cinza-medio); }
+      .btn-white { background: var(--branco); color: var(--azul-escuro); border: 2px solid var(--azul); }
+      .btn-white:hover { background: var(--azul); color: var(--branco); }
+      @media (max-width: 767px) { .form-grid { grid-template-columns: 1fr; } }
+      /* ==== Aviso de Promoções ==== */
+      .promo-box { background: var(--azul); color: var(--branco); padding: 1.5rem 2rem; border-radius: var(--radius); box-shadow: var(--shadow); display: flex; align-items: center; gap: 1rem; margin: 2rem 0; text-align: left; }
+      .promo-box i { font-size: 1.5rem; color: var(--dourado); }
+      .promo-box p { margin: 0; font-size: 1rem; line-height: 1.5; }
+      @media (max-width: 600px) { .promo-box { flex-direction: column; text-align: center; } }
+      /* Scroll hint */
+      .scroll-hint { position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 9999; color: var(--dourado); font-size: 1.8rem; animation: bounce 1.5s infinite; opacity: 0.8; cursor: default; pointer-events: none; }
+      @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+      .scroll-hint.hide { display: none; }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+      <div class="container header-container">
+        <a href="index.html" class="logo">
+          <img src="../assets/logoazulcinza.png" alt="VilaPlus Ginásio" class="logo-img" />
+        </a>
+        <nav aria-label="Menu principal">
+          <ul id="main-menu">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="servicosv2.html">Serviços</a></li>
+            <li><a href="projetosv2.html">Projetos</a></li>
+            <li><a href="portfoliov2.html">Galeria</a></li>
+            <li><a href="index.html#horarios">Horários</a></li>
+            <li><a href="parceriasv2.html">Parcerias</a></li>
+            <li><a href="lojav2.html" aria-current="page">Loja</a></li>
+            <li><a href="noticiasv2.html">Notícias</a></li>
+            <li><a href="contactsv2.html">Contactos</a></li>
+          </ul>
+        </nav>
+        <div class="cart-icon" id="cart-icon" aria-label="Carrinho de compras">
+          <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+          <span class="cart-count" id="cart-count">0</span>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Loja -->
+    <section class="hero-loja">
+      <div class="container">
+        <div class="inner animate">
+          <h1>Loja Vila Plus</h1>
+          <p>Encontra tudo o que precisas para o teu treino e recuperação.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="promo-avisos animate">
+      <div class="container" style="max-width:900px;">
+        <div class="promo-box">
+          <i class="fas fa-tags" aria-hidden="true"></i>
+          <p>Temos sempre <strong>promoções ativas</strong>! <br>Ao finalizares a tua encomenda, alertamos-te sobre todas as ofertas disponíveis.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categorias Loja -->
+    <section class="categorias-loja" id="produtos">
+      <div class="container">
+        <div class="section-title animate">
+          <h2>Nossos Produtos</h2>
+          <p>Encontra tudo o que precisas para o teu treino e recuperação.</p>
+        </div>
+
+        <div class="categorias-container animate delay-1" role="tablist" aria-label="Categorias de produtos">
+          <button class="categoria-btn active" data-categoria="todos" role="tab" aria-selected="true">Todos</button>
+          <button class="categoria-btn" data-categoria="suplementos" role="tab" aria-selected="false">Suplementos</button>
+          <button class="categoria-btn" data-categoria="vestuario" role="tab" aria-selected="false">Vestuário</button>
+          <button class="categoria-btn" data-categoria="acessorios" role="tab" aria-selected="false">Acessórios</button>
+          <button class="categoria-btn" data-categoria="nutricao" role="tab" aria-selected="false">Nutrição</button>
+        </div>
+
+        <div class="produtos-grid" id="produtos-grid">
+          <!-- 1. T-shirt branca Vila Plus -->
+          <div class="produto-card animate delay-1" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/shop/camisola.jpg" alt="T-shirt branca Vila Plus" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>T-shirt branca Vila Plus</h3>
+              <p>T-shirt ideal para treinos e lifestyle. Logo Vila Plus.</p>
+              <div class="tamanhos-container" id="tamanhos-1">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="XS">XS</button>
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€5</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="1" data-name="T-shirt branca Vila Plus" data-price="5.00" data-image="../assets/shop/camisola.jpg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. T-shirt cinza Vila Plus -->
+          <div class="produto-card animate delay-2" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/shop/camisola_preta.jpg" alt="T-shirt cinza Vila Plus" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>T-shirt cinza Vila Plus</h3>
+              <p>Clássica e versátil, em cinza com logo Vila Plus.</p>
+              <div class="tamanhos-container" id="tamanhos-2">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="XS">XS</button>
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€7</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="2" data-name="T-shirt cinza Vila Plus" data-price="7.00" data-image="../assets/shop/camisola_preta.jpg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. T-shirt Vila Plus x Pico 960 -->
+          <div class="produto-card animate delay-3" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/shop/camisola_pico_1.jpg" alt="T-shirt Vila Plus x Pico 960" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>T-shirt Vila Plus x Pico 960</h3>
+              <p>Edição especial Pico 960. Leve, respirável, perfeita para treinos intensos.</p>
+              <div class="tamanhos-container" id="tamanhos-3">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€3</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="3" data-name="T-shirt Vila Plus x Pico 960" data-price="3.00" data-image="../assets/shop/camisola_pico_1.jpg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. T-shirt Vila Plus One More Step -->
+          <div class="produto-card animate delay-1" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/shop/camisola_onemore.jpg" alt="T-shirt Vila Plus One More Step" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>T-shirt Vila Plus One More Step Together</h3>
+              <p>Motivação em cada treino: "One More Step Together". Corte unissexo.</p>
+              <div class="tamanhos-container" id="tamanhos-4">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€4</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="4" data-name="T-shirt Vila Plus One More Step" data-price="4.00" data-image="../assets/shop/camisola_onemore.jpg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Toalha -->
+          <div class="produto-card animate delay-2" data-categoria="acessorios">
+            <div class="produto-imagem">
+              <img src="../assets/shop/toalha.jpg" alt="Toalha Vila Plus" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>Toalha Vila Plus</h3>
+              <p>Toalha macia e absorvente, perfeita para treino e balneário. Várias cores.</p>
+              <div class="cores-container" id="cores-5">
+                <div class="cores-opcoes">
+                  <button class="cor-btn" data-cor="Rosa">Rosa</button>
+                  <button class="cor-btn" data-cor="Cinza">Cinza</button>
+                  <button class="cor-btn" data-cor="Branca">Branca</button>
+                  <button class="cor-btn" data-cor="Azul">Azul</button>
+                </div>
+                <div class="aviso-cor">Por favor, selecione uma cor</div>
+              </div>
+              <div class="produto-preco">€7</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Acessórios</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="5" data-name="Toalha Vila Plus" data-price="7.00" data-image="../assets/shop/toalha.jpg" data-tem-cor="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Garrafa -->
+          <div class="produto-card animate delay-3" data-categoria="acessorios">
+            <div class="produto-imagem">
+              <img src="../assets/shop/garrafa.jpeg" alt="Garrafa Vila Plus" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>Garrafa Vila Plus</h3>
+              <p>Garrafa reutilizável 500ml. Mantém-te hidratado/a durante todo o treino.</p>
+              <div class="produto-preco">€5</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Acessórios</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="6" data-name="Garrafa Vila Plus" data-price="5.00" data-image="../assets/shop/garrafa.jpeg">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. Tank Top Prozis x Vila Plus (foto 1) -->
+          <div class="produto-card animate delay-1" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/shop/beat_the_odds.jpg" alt="Tank Top Prozis x Vila Plus" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>Tank Top Prozis x Vila Plus</h3>
+              <p>Parceria Prozis: tecido leve e elástico para máxima liberdade de movimentos.</p>
+              <div class="tamanhos-container" id="tamanhos-7">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€15</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="7" data-name="Tank Top Prozis x Vila Plus" data-price="15.00" data-image="../assets/shop/beat_the_odds.jpg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. Tank Top Prozis x Vila Plus (preto) -->
+          <div class="produto-card animate delay-1" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/coach/tank_top_preto.jpeg" alt="Tank Top Prozis x Vila Plus - Preto" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>Tank Top Prozis x Vila Plus (Preto)</h3>
+              <p>Parceria Prozis: tecido leve e elástico para máxima liberdade de movimentos.</p>
+              <div class="tamanhos-container" id="tamanhos-9">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€15</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="9" data-name="Tank Top Prozis x Vila Plus (Preto)" data-price="15.00" data-image="../assets/coach/tank_top_preto.jpeg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. Tank Top Prozis x Vila Plus (foto WhatsApp 11.41.48) -->
+          <div class="produto-card animate delay-1" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/shop/WhatsApp Image 2025-09-13 at 11.41.48.jpeg" alt="Tank Top Prozis x Vila Plus" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>Tank Top Prozis x Vila Plus</h3>
+              <p>Parceria Prozis: tecido leve e elástico para máxima liberdade de movimentos.</p>
+              <div class="tamanhos-container" id="tamanhos-10">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€15</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="10" data-name="Tank Top Prozis x Vila Plus" data-price="15.00" data-image="../assets/shop/WhatsApp Image 2025-09-13 at 11.41.48.jpeg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11. Tank Top Prozis x Vila Plus (foto WhatsApp 11.41.49) -->
+          <div class="produto-card animate delay-1" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/shop/WhatsApp Image 2025-09-13 at 11.41.49.jpeg" alt="Tank Top Prozis x Vila Plus" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>Tank Top Prozis x Vila Plus</h3>
+              <p>Parceria Prozis: tecido leve e elástico para máxima liberdade de movimentos.</p>
+              <div class="tamanhos-container" id="tamanhos-11">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€15</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="11" data-name="Tank Top Prozis x Vila Plus" data-price="15.00" data-image="../assets/shop/WhatsApp Image 2025-09-13 at 11.41.49.jpeg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12. Top Prozis x Vila Plus (foto WhatsApp 11.41.48 (2)) -->
+          <div class="produto-card animate delay-1" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/shop/WhatsApp Image 2025-09-13 at 11.41.48 (2).jpeg" alt="Top Prozis x Vila Plus" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>Top Prozis x Vila Plus</h3>
+              <p>Parceria Prozis: tecido leve e elástico para máxima liberdade de movimentos.</p>
+              <div class="tamanhos-container" id="tamanhos-12">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€15</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="12" data-name="Top Prozis x Vila Plus" data-price="15.00" data-image="../assets/shop/WhatsApp Image 2025-09-13 at 11.41.48 (2).jpeg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13. Top Prozis x Vila Plus (foto WhatsApp 11.41.49 (2)) -->
+          <div class="produto-card animate delay-1" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/shop/WhatsApp Image 2025-09-13 at 11.41.49 (2).jpeg" alt="Top Prozis x Vila Plus" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>Top Prozis x Vila Plus</h3>
+              <p>Parceria Prozis: tecido leve e elástico para máxima liberdade de movimentos.</p>
+              <div class="tamanhos-container" id="tamanhos-13">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€15</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="13" data-name="Top Prozis x Vila Plus" data-price="15.00" data-image="../assets/shop/WhatsApp Image 2025-09-13 at 11.41.49 (2).jpeg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 14. Calções Prozis x Vila Plus (foto WhatsApp 11.41.49 (1)) -->
+          <div class="produto-card animate delay-1" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/shop/WhatsApp Image 2025-09-13 at 11.41.49 (1).jpeg" alt="Calções Prozis x Vila Plus" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>Calções Prozis x Vila Plus</h3>
+              <p>Parceria Prozis: tecido leve e elástico para máxima liberdade de movimentos.</p>
+              <div class="tamanhos-container" id="tamanhos-14">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€20</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="14" data-name="Calções Prozis x Vila Plus" data-price="20.00" data-image="../assets/shop/WhatsApp Image 2025-09-13 at 11.41.49 (1).jpeg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 15. Calções Prozis x Vila Plus (foto WhatsApp 11.41.49 (3)) -->
+          <div class="produto-card animate delay-1" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/shop/WhatsApp Image 2025-09-13 at 11.41.49 (3).jpeg" alt="Calções Prozis x Vila Plus" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>Calções Prozis x Vila Plus</h3>
+              <p>Parceria Prozis: tecido leve e elástico para máxima liberdade de movimentos.</p>
+              <div class="tamanhos-container" id="tamanhos-15">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€20</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="15" data-name="Calções Prozis x Vila Plus" data-price="20.00" data-image="../assets/shop/WhatsApp Image 2025-09-13 at 11.41.49 (3).jpeg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. Corsários (Capri Leggings) -->
+          <div class="produto-card animate delay-2" data-categoria="vestuario">
+            <div class="produto-imagem">
+              <img src="../assets/shop/capri.jpeg" alt="Corsários Vila Plus" loading="lazy"/>
+            </div>
+            <div class="produto-info">
+              <h3>Corsários</h3>
+              <p>Conforto e mobilidade para treino. Tecido respirável.</p>
+              <div class="tamanhos-container" id="tamanhos-8">
+                <div class="tamanhos-opcoes">
+                  <button class="tamanho-btn" data-tamanho="S">S</button>
+                  <button class="tamanho-btn" data-tamanho="M">M</button>
+                  <button class="tamanho-btn" data-tamanho="L">L</button>
+                  <button class="tamanho-btn" data-tamanho="XL">XL</button>
+                </div>
+                <div class="aviso-tamanho">Por favor, selecione um tamanho</div>
+              </div>
+              <div class="produto-preco">€20</div>
+              <div class="produto-meta">
+                <span class="produto-categoria">Vestuário</span>
+                <div class="produto-acoes">
+                  <button class="btn btn-small btn-add-cart" data-id="8" data-name="Corsários" data-price="20.00" data-image="../assets/shop/capri.jpeg" data-tem-tamanho="true">Adicionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulário alternativo de encomenda -->
+    <section id="form-encomenda" class="brands" aria-labelledby="formEncomendaTitle">
+      <div class="container" style="max-width:980px;">
+        <div class="form-card animate">
+          <div class="form-header">
+            <h3 id="formEncomendaTitle">Não conseguiste finalizar a tua encomenda?</h3>
+          </div>
+          <p>Preenche o formulário abaixo e trataremos da tua encomenda diretamente contigo.</p>
+          <form id="encomenda-form" action="https://formspree.io/f/xqadoryk" method="POST" novalidate>
+            <div class="form-grid">
+              <div class="full">
+                <label for="e_nome" class="sr-only">Nome</label>
+                <input class="input" type="text" id="e_nome" name="nome" placeholder="O teu nome" required>
+              </div>
+              <div class="full">
+                <label for="e_email" class="sr-only">Email</label>
+                <input class="input" type="email" id="e_email" name="email" placeholder="O teu email" required>
+              </div>
+              <div class="full">
+                <label for="e_produto" class="sr-only">Produto(s)</label>
+                <input class="input" type="text" id="e_produto" name="produto" placeholder="Produto(s) pretendido(s)" required>
+              </div>
+              <div>
+                <label for="e_qtd" class="sr-only">Quantidade</label>
+                <input class="input" type="number" id="e_qtd" name="quantidade" placeholder="Quantidade (opcional)" min="1">
+              </div>
+              <div>
+                <label for="e_obs" class="sr-only">Observações</label>
+                <textarea class="input" id="e_obs" name="observacoes" rows="3" placeholder="Observações (ex.: tamanhos, prazos, orçamento, alternativas)"></textarea>
+              </div>
+              <input type="hidden" name="_subject" value="Encomenda Loja Vila Plus">
+              <input type="hidden" name="_language" value="pt">
+              <div class="full checkbox">
+                <input type="checkbox" id="e_ok" required>
+                <label for="e_ok">Aceito ser contactado sobre este pedido.</label>
+              </div>
+              <div class="full submit-row">
+                <button type="submit" class="btn btn-filled"><i class="fa-regular fa-paper-plane"></i> Enviar Encomenda</button>
+                <span class="help" id="encomendaHelp" aria-live="polite"></span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-container">
+          <div class="footer-col animate">
+            <h3>Vila Plus</h3>
+            <p>Saúde. Força. Comunidade.</p>
+            <p>O teu ginásio de eleição em Vila Caiz.</p>
+          </div>
+          <div class="footer-col animate delay-1">
+            <h3>Links Rápidos</h3>
+            <div class="footer-links">
+              <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="servicosv2.html">Serviços</a></li>
+                <li><a href="projetosv2.html">Projetos</a></li>
+                <li><a href="portfoliov2.html">Galeria</a></li>
+                <li><a href="index.html#horarios">Horários</a></li>
+                <li><a href="parceriasv2.html">Parcerias</a></li>
+                <li><a href="noticiasv2.html">Notícias</a></li>
+                <li><a href="contactsv2.html">Contactos</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-col animate delay-2">
+            <h3>Categorias</h3>
+            <div class="footer-links">
+              <ul>
+                <li><a href="#" data-categoria="suplementos">Suplementos</a></li>
+                <li><a href="#" data-categoria="vestuario">Vestuário</a></li>
+                <li><a href="#" data-categoria="acessorios">Acessórios</a></li>
+                <li><a href="#" data-categoria="nutricao">Nutrição</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-col animate delay-3">
+            <h3>Redes Sociais</h3>
+            <div class="social-links">
+              <a href="https://www.facebook.com/p/Vila-Plus-61552410020366/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/vilaplus.pt/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://wa.me/351931999690" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating CTA -->
+    <div class="floating-cta">
+      <button class="fab-contact pulse" id="fabContact" aria-label="Ver carrinho">
+        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+        <span>Ver Carrinho</span>
+      </button>
+    </div>
+
+    <!-- Carrinho Sidebar -->
+    <div class="carrinho-overlay" id="carrinho-overlay" aria-hidden="true"></div>
+    <div class="carrinho-sidebar" id="carrinho-sidebar" role="dialog" aria-label="Carrinho">
+      <div class="carrinho-header">
+        <h3>O Teu Carrinho</h3>
+        <button class="carrinho-close" id="carrinho-close" aria-label="Fechar carrinho">&times;</button>
+      </div>
+      <div class="carrinho-body" id="carrinho-body">
+        <div class="carrinho-vazio" id="carrinho-vazio">
+          <i class="fas fa-shopping-cart" style="font-size:3rem;margin-bottom:15px;opacity:0.3" aria-hidden="true"></i>
+          <p>O teu carrinho está vazio</p>
+        </div>
+      </div>
+      <div class="carrinho-footer">
+        <div class="carrinho-total">
+          <span>Total:</span>
+          <span id="carrinho-total">€0,00</span>
+        </div>
+        <div class="carrinho-botoes">
+          <button class="btn btn-filled carrinho-finalizar" id="carrinho-finalizar" disabled>Finalizar Encomenda</button>
+          <button class="btn" id="carrinho-continuar">Continuar a Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint" id="scrollHint" aria-hidden="true">
+      <i class="fas fa-angle-down"></i>
+    </div>
+
+    <script>
+      (function(){
+        const hint = document.getElementById('scrollHint');
+        if(!hint) return;
+        function toggleHint(){
+          const scrollY = window.scrollY;
+          const winH = window.innerHeight;
+          const docH = document.body.scrollHeight;
+          if(scrollY + winH >= docH - 50) { hint.classList.add('hide'); } else { hint.classList.remove('hide'); }
+        }
+        window.addEventListener('scroll', toggleHint);
+        window.addEventListener('resize', toggleHint);
+        document.addEventListener('DOMContentLoaded', toggleHint);
+      })();
+    </script>
+
+    <script>
+      // =============================================
+      // FUNÇÕES GERAIS E INICIALIZAÇÃO
+      // =============================================
+      document.addEventListener('DOMContentLoaded', function() {
+        // Menu mobile
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mainMenu = document.getElementById('main-menu');
+        if (mobileMenuBtn && mainMenu) {
+          mobileMenuBtn.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            mainMenu.classList.toggle('show');
+            const icon = this.querySelector('i');
+            if (icon) { icon.className = isExpanded ? 'fas fa-bars' : 'fas fa-times'; }
+          });
+          const menuItems = mainMenu.querySelectorAll('a');
+          menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+              if (window.innerWidth <= 768) {
+                mainMenu.classList.remove('show');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+              }
+            });
+          });
+        }
+
+        // Header shadow on scroll
+        const header = document.getElementById('header');
+        if (header) {
+          window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) { header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
+          });
+        }
+
+        // Smooth scroll para âncoras internas
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              e.preventDefault();
+              const headerHeight = document.getElementById('header').offsetHeight;
+              const y = targetElement.offsetTop - headerHeight;
+              window.scrollTo({ top: y, behavior: 'smooth' });
+              history.pushState(null, '', targetId);
+            }
+          });
+        });
+
+        // Reveal on scroll animation
+        const animateElements = document.querySelectorAll('.animate');
+        function checkScroll() {
+          animateElements.forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            const elementVisible = 150;
+            if (elementTop < window.innerHeight - elementVisible) { el.classList.add('show'); }
+          });
+        }
+        checkScroll();
+        window.addEventListener('scroll', checkScroll);
+        function revealAllIfAtBottom() {
+          const atBottom = window.scrollY + window.innerHeight >= document.body.scrollHeight - 2;
+          if (atBottom) {
+            document.querySelectorAll('.animate:not(.show)').forEach(el => el.classList.add('show'));
+          }
+        }
+        revealAllIfAtBottom();
+        window.addEventListener('scroll', revealAllIfAtBottom);
+        window.addEventListener('resize', revealAllIfAtBottom);
+
+        // Filtro de categorias
+        const categoriaBtns = document.querySelectorAll('.categoria-btn');
+        const produtoCards = document.querySelectorAll('.produto-card');
+        categoriaBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            categoriaBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            const cat = btn.getAttribute('data-categoria');
+            produtoCards.forEach(card => {
+              card.style.display = (cat === 'todos' || card.getAttribute('data-categoria') === cat) ? 'flex' : 'none';
+            });
+            window.scrollTo({ top: document.querySelector('.categorias-loja').offsetTop - 100, behavior: 'smooth' });
+          });
+        });
+
+        // Links de categoria no footer
+        document.querySelectorAll('.footer-links a[data-categoria]').forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const cat = link.getAttribute('data-categoria');
+            categoriaBtns.forEach(b => { if (b.getAttribute('data-categoria') === cat) { b.click(); } });
+          });
+        });
+
+        // ===== SELEÇÃO DE TAMANHOS & CORES =====
+        let tamanhoSelecionado = {};
+        let corSelecionada = {};
+
+        // Mostrar/ocultar seleção de tamanhos/cores quando clica em Adicionar
+        document.querySelectorAll('.btn-add-cart').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = btn.getAttribute('data-id');
+            const temTamanho = btn.getAttribute('data-tem-tamanho') === 'true';
+            const temCor = btn.getAttribute('data-tem-cor') === 'true';
+            const tamanhosContainer = document.getElementById(`tamanhos-${id}`);
+            const coresContainer = document.getElementById(`cores-${id}`);
+            if ((temTamanho && tamanhosContainer && tamanhosContainer.style.display !== 'block') || (temCor && coresContainer && coresContainer.style.display !== 'block')) {
+              e.preventDefault();
+              document.querySelectorAll('.tamanhos-container').forEach(c => c.style.display = 'none');
+              document.querySelectorAll('.cores-container').forEach(c => c.style.display = 'none');
+              if (temTamanho && tamanhosContainer) tamanhosContainer.style.display = 'block';
+              if (temCor && coresContainer) coresContainer.style.display = 'block';
+              return;
+            }
+          }, true);
+        });
+
+        // Selecionar tamanho
+        document.querySelectorAll('.tamanho-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            if (this.classList.contains('esgotado')) return;
+            const productCard = this.closest('.produto-card');
+            const addBtn = productCard.querySelector('.btn-add-cart');
+            const productId = addBtn.getAttribute('data-id');
+            productCard.querySelectorAll('.tamanho-btn').forEach(b => b.classList.remove('selecionado'));
+            this.classList.add('selecionado');
+            tamanhoSelecionado[productId] = this.getAttribute('data-tamanho');
+            const aviso = productCard.querySelector('.aviso-tamanho'); if (aviso) aviso.style.display = 'none';
+          });
+        });
+
+        // Selecionar cor
+        document.querySelectorAll('.cor-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            if (this.classList.contains('esgotado')) return;
+            const productCard = this.closest('.produto-card');
+            const addBtn = productCard.querySelector('.btn-add-cart');
+            const productId = addBtn.getAttribute('data-id');
+            productCard.querySelectorAll('.cor-btn').forEach(b => b.classList.remove('selecionado'));
+            this.classList.add('selecionado');
+            corSelecionada[productId] = this.getAttribute('data-cor');
+            const aviso = productCard.querySelector('.aviso-cor'); if (aviso) aviso.style.display = 'none';
+          });
+        });
+
+        // ===== CARRINHO DE COMPRAS =====
+        let carrinho = JSON.parse(localStorage.getItem('carrinhoVilaPlus')) || [];
+        const cartCount = document.getElementById('cart-count');
+        const cartIcon = document.getElementById('cart-icon');
+        const carrinhoOverlay = document.getElementById('carrinho-overlay');
+        const carrinhoSidebar = document.getElementById('carrinho-sidebar');
+        const carrinhoClose = document.getElementById('carrinho-close');
+        const carrinhoBody = document.getElementById('carrinho-body');
+        const carrinhoVazio = document.getElementById('carrinho-vazio');
+        const carrinhoTotal = document.getElementById('carrinho-total');
+        const carrinhoFinalizar = document.getElementById('carrinho-finalizar');
+        const carrinhoContinuar = document.getElementById('carrinho-continuar');
+        const fabContact = document.getElementById('fabContact');
+
+        function salvarCarrinho() { localStorage.setItem('carrinhoVilaPlus', JSON.stringify(carrinho)); }
+        function atualizarContadorCarrinho() {
+          const totalItens = carrinho.reduce((total, item) => total + item.quantidade, 0);
+          cartCount.textContent = totalItens;
+          cartCount.style.display = totalItens > 0 ? 'flex' : 'none';
+        }
+        function abrirCarrinho() {
+          carrinhoOverlay.style.display = 'block';
+          setTimeout(() => { carrinhoOverlay.style.opacity = '1'; carrinhoSidebar.style.right = '0'; }, 10);
+          renderizarCarrinho();
+        }
+        function fecharCarrinho() {
+          carrinhoOverlay.style.opacity = '0';
+          carrinhoSidebar.style.right = '-100%';
+          setTimeout(() => { carrinhoOverlay.style.display = 'none'; }, 300);
+        }
+        function renderizarCarrinho() {
+          if (carrinho.length === 0) {
+            carrinhoVazio.style.display = 'block';
+            carrinhoBody.innerHTML = '';
+            carrinhoTotal.textContent = '€0,00';
+            carrinhoFinalizar.disabled = true;
+            return;
+          }
+          carrinhoVazio.style.display = 'none';
+          carrinhoFinalizar.disabled = false;
+          let html = '';
+          let total = 0;
+          carrinho.forEach((item, index) => {
+            const itemTotal = item.preco * item.quantidade; total += itemTotal;
+            const variantes = [ item.tamanho ? `Tamanho: ${item.tamanho}` : null, item.cor ? `Cor: ${item.cor}` : null ].filter(Boolean).join(' · ');
+            html += `
+              <div class="carrinho-item">
+                <div class="carrinho-item-img"><img src="${item.imagem}" alt="${item.nome}" /></div>
+                <div class="carrinho-item-info">
+                  <div class="carrinho-item-nome">${item.nome}</div>
+                  ${variantes ? `<div class="carrinho-item-variantes">${variantes}</div>` : ''}
+                  <div class="carrinho-item-preco">€${item.preco.toFixed(2)}</div>
+                  <div class="carrinho-item-controls">
+                    <div class="carrinho-item-quantidade">
+                      <button class="quantidade-btn" onclick="alterarQuantidade(${index}, -1)">-</button>
+                      <span>${item.quantidade}</span>
+                      <button class="quantidade-btn" onclick="alterarQuantidade(${index}, 1)">+</button>
+                    </div>
+                    <button class="carrinho-item-remover" onclick="removerItem(${index})"><i class="fas fa-trash"></i></button>
+                  </div>
+                </div>
+              </div>`;
+          });
+          carrinhoBody.innerHTML = html;
+          carrinhoTotal.textContent = `€${total.toFixed(2)}`;
+        }
+
+        // Expor controlos no escopo global para onclick inline
+        window.alterarQuantidade = function(index, delta) {
+          carrinho[index].quantidade += delta;
+          if (carrinho[index].quantidade <= 0) { carrinho.splice(index, 1); }
+          salvarCarrinho(); atualizarContadorCarrinho(); renderizarCarrinho();
+        }
+        window.removerItem = function(index) {
+          carrinho.splice(index, 1); salvarCarrinho(); atualizarContadorCarrinho(); renderizarCarrinho();
+        }
+
+        function adicionarAoCarrinho(id, nome, preco, imagem, temTamanho, temCor) {
+          if (temTamanho && (!tamanhoSelecionado[id] || tamanhoSelecionado[id] === '')) {
+            const aviso = document.querySelector(`#tamanhos-${id} .aviso-tamanho`); if (aviso) aviso.style.display = 'block'; return;
+          }
+          if (temCor && (!corSelecionada[id] || corSelecionada[id] === '')) {
+            const aviso = document.querySelector(`#cores-${id} .aviso-cor`); if (aviso) aviso.style.display = 'block'; return;
+          }
+          const tamanho = temTamanho ? tamanhoSelecionado[id] : null;
+          const cor = temCor ? corSelecionada[id] : null;
+          const itemId = [id, tamanho || null, cor || null].filter(Boolean).join('-');
+          const itemExistente = carrinho.find(item => item.id === itemId);
+          if (itemExistente) { itemExistente.quantidade += 1; }
+          else { carrinho.push({ id: itemId, originalId: id, nome, preco, imagem, tamanho, cor, quantidade: 1 }); }
+          salvarCarrinho(); atualizarContadorCarrinho();
+          const btn = document.querySelector(`.btn-add-cart[data-id="${id}"]`);
+          if (btn) {
+            const originalText = btn.textContent; btn.textContent = '✓ Adicionado'; btn.disabled = true;
+            const tamanhosContainer = document.getElementById(`tamanhos-${id}`); if (tamanhosContainer) tamanhosContainer.style.display = 'none';
+            const coresContainer = document.getElementById(`cores-${id}`); if (coresContainer) coresContainer.style.display = 'none';
+            setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 1200);
+          }
+        }
+
+        function finalizarPedido() {
+          if (carrinho.length === 0) return;
+          let mensagem = "Olá,%0A%0AFiz a seguinte encomenda no website:%0A%0A";
+          carrinho.forEach(item => {
+            const variantes = [ item.tamanho ? `Tamanho: ${item.tamanho}` : null, item.cor ? `Cor: ${item.cor}` : null ].filter(Boolean).join(', ');
+            mensagem += `- ${item.nome}${variantes ? ` (${variantes})` : ''} (x${item.quantidade}) - €${(item.preco * item.quantidade).toFixed(2)}%0A`;
+          });
+          const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+          mensagem += `%0ATotal: €${total.toFixed(2)}%0A%0AComo procedo?%0AObrigado.`;
+          carrinho = []; salvarCarrinho(); atualizarContadorCarrinho(); renderizarCarrinho(); fecharCarrinho();
+          window.open(`https://wa.me/351931999690?text=${mensagem}`, '_blank');
+        }
+
+        // Event Listeners de carrinho
+        document.querySelectorAll('.btn-add-cart').forEach(btn => {
+          btn.addEventListener('click', (ev) => {
+            const id = btn.getAttribute('data-id');
+            const nome = btn.getAttribute('data-name');
+            const preco = parseFloat(btn.getAttribute('data-price'));
+            const imagem = btn.getAttribute('data-image');
+            const temTamanho = btn.getAttribute('data-tem-tamanho') === 'true';
+            const temCor = btn.getAttribute('data-tem-cor') === 'true';
+            const precisaSelecionarTamanho = temTamanho && !tamanhoSelecionado[id];
+            const precisaSelecionarCor   = temCor && !corSelecionada[id];
+            if (precisaSelecionarTamanho || precisaSelecionarCor) return;
+            adicionarAoCarrinho(id, nome, preco, imagem, temTamanho, temCor);
+          });
+        });
+
+        // Abrir/Fechar carrinho
+        cartIcon.addEventListener('click', abrirCarrinho);
+        fabContact.addEventListener('click', abrirCarrinho);
+        carrinhoClose.addEventListener('click', fecharCarrinho);
+        carrinhoOverlay.addEventListener('click', fecharCarrinho);
+        carrinhoContinuar.addEventListener('click', fecharCarrinho);
+        carrinhoFinalizar.addEventListener('click', finalizarPedido);
+
+        // Inicializar
+        atualizarContadorCarrinho();
+      });
+    </script>
+  </body>
+</html>

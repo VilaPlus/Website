@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="pt" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Vila Plus</title>
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/logoazulcinza.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logoazulcinza.png">
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+  :root{
+    --azul:#1f5073; --azul-escuro:#1f5073; --cinza-fundo:#f8f9fb; --cinza-card:#f1f3f7;
+    --cinza-medio:#6b7280; --dourado:#d4af37; --branco:#ffffff; --preto:#111827;
+    --transition: all .3s ease;
+    --header-h: 60px;
+    --alert-bar-h: 40px;
+
+    /* Sobre */
+    --about-bg: linear-gradient(180deg, #f7fbff 0%, #ffffff 60%);
+    --card-bg:#ffffff; --card-border:rgba(0,0,0,0.06); --card-shadow:0 6px 24px rgba(0,0,0,0.06);
+    --radius-2xl:16px; --radius-3xl:22px;
+    --badge-bg:#eaf3ff; --badge-border:#d6e7ff; --badge-color:#2a66ff;
+
+    /* Tipografia responsiva */
+    --base-font-size:16px; --scale-ratio:1.2;
+    --text-sm:.875rem; --text-base:1rem; --text-lg:1.125rem; --text-xl:1.25rem;
+    --text-2xl:1.5rem; --text-3xl:1.875rem; --text-4xl:2.25rem;
+
+    --container-padding:1rem; --section-padding:3.5rem;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;font-size:var(--base-font-size)}
+  body{
+    font-family:'Lato',sans-serif; color:var(--preto); background:var(--branco);
+    line-height:1.6; overflow-x:hidden; font-size:var(--text-base);
+  }
+  h1,h2,h3,h4,h5,h6{
+    font-family:'Playfair Display',serif; font-weight:700; line-height:1.2; margin-bottom:1rem; color:var(--azul-escuro)
+  }
+  h1{font-size:var(--text-3xl)} h2{font-size:var(--text-2xl)} h3{font-size:var(--text-xl)} h4{font-size:var(--text-lg)}
+  a{ text-decoration:none; color:inherit; transition:var(--transition); -webkit-tap-highlight-color:transparent }
+  .container{ width:100%; max-width:1400px; margin:0 auto; padding:0 var(--container-padding) }
+
+  /* ===== ALERT BAR ===== */
+  .alert-bar{
+    position:fixed; top:0; left:0; width:100%; height:var(--alert-bar-h);
+    background:linear-gradient(90deg,var(--dourado) 0%,#e6c44a 100%); color:var(--azul-escuro);
+    display:flex; align-items:center; justify-content:center; z-index:2000;
+    font-weight:700; font-size:var(--text-sm); overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.1);
+    animation:gentlePulse 3s infinite; padding:0 3rem 0 1rem;
+  }
+  .alert-bar a{ display:flex; align-items:center; justify-content:center; gap:.5rem; padding:.5rem; height:100%; width:100%; text-align:center; flex-wrap:wrap }
+  .alert-bar a:hover{ background:rgba(255,255,255,.2) }
+  .alert-bar .close-alert{ position:absolute; right:1rem; cursor:pointer; font-size:var(--text-lg); padding:.25rem; background:transparent; border:0; color:inherit }
+  .alert-bar .close-alert:hover{ color:var(--branco) }
+  @keyframes gentlePulse{0%,100%{opacity:1}50%{opacity:.85}}
+
+  /* ===== BOTÕES ===== */
+  .btn{
+    display:inline-block; padding:.75rem 1.5rem; border:1px solid var(--dourado); color:var(--dourado);
+    font-weight:700; letter-spacing:1px; text-transform:uppercase; font-size:var(--text-sm);
+    transition:var(--transition); cursor:pointer; text-align:center; border-radius:10px; background:transparent;
+    min-height:44px;
+  }
+  .btn:hover{background:var(--dourado);color:var(--branco)}
+  .btn-filled{background:var(--dourado);color:var(--branco)}
+  .btn-filled:hover{background:transparent;color:var(--dourado)}
+  .mobile-menu-btn{
+    display:none; font-size:1.5rem; border:0; background:transparent; color:var(--azul-escuro);
+    padding:.5rem; min-height:44px; min-width:44px; justify-content:center; align-items:center;
+  }
+
+  /* ===== SEÇÕES BASE ===== */
+  section{ padding:var(--section-padding) 0 }
+  .section-title{ text-align:center; margin-bottom:3rem; position:relative }
+  .section-title h2{ font-size:var(--text-3xl); color:var(--azul-escuro); margin-bottom:1rem }
+  .section-title p{ font-size:var(--text-lg); color:var(--cinza-medio); max-width:700px; margin:0 auto }
+  .section-title::after{ content:''; display:block; width:80px; height:3px; background:var(--dourado); margin:1.5rem auto 0 }
+
+  /* ===== HERO (vídeo) ===== */
+  .hero{
+    padding:0;
+    height:calc(100dvh - var(--header-h) - var(--alert-bar-h));
+    margin-top:calc(var(--header-h) + var(--alert-bar-h));
+    position:relative; display:flex; align-items:center; justify-content:center;
+    color:var(--branco); text-align:center; background:none; overflow:hidden;
+  }
+  @supports not (height:100dvh){
+    .hero{ height:calc(100vh - var(--header-h) - var(--alert-bar-h)) }
+  }
+  .hero video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; pointer-events:none; z-index:-1 }
+  .hero::before{ content:''; position:absolute; inset:0; background:rgba(0,0,0,.6); z-index:0 }
+  .hero-content{ position:relative; z-index:1; max-width:900px; padding:0 var(--container-padding); margin:0 auto }
+  .hero-content h1{ font-size:clamp(2rem,5vw,3.5rem); margin-bottom:1.5rem; line-height:1.1; color:var(--branco) }
+  .hero-content p{ font-size:clamp(1rem,2.5vw,1.25rem); margin:0 auto 2rem; max-width:720px; color:#e8ecf4 }
+  .hero-buttons{ display:flex; justify-content:center; gap:1rem; flex-wrap:wrap }
+
+  /* ===== Serviços (slider) ===== */
+  .services{ background:var(--branco) }
+  .services .slider{
+    width:100%; height:var(--height); overflow:hidden;
+    mask-image:linear-gradient(to right, transparent, #000 10% 90%, transparent);
+    -webkit-mask-image:linear-gradient(to right, transparent, #000 10% 90%, transparent);
+    margin-bottom:1.5rem; --width:300px; --height:340px; --quantity:6;
+  }
+  .services .slider .list{ display:flex; width:100%; min-width:calc(var(--width)*var(--quantity)); position:relative }
+  .services .slider .list .item{
+    width:var(--width); height:var(--height); position:absolute; left:calc((var(--position) - 1) * var(--width));
+    animation:autoRun 16s linear infinite; animation-delay:calc((16s / var(--quantity)) * (var(--position) - 1) - 16s) !important;
+    animation-fill-mode:both; transition:filter .5s;
+  }
+  .services .slider:hover .item{ animation-play-state:paused !important; filter:grayscale(1) }
+  .services .slider .item:hover{ filter:grayscale(0) }
+  @keyframes autoRun{ from{left:100%} to{left:calc(var(--width)*-1)} }
+  .services .service-card{
+    width:100%; height:100%; padding:1.5rem; background:var(--cinza-fundo); border:1px solid #ddd; border-radius:8px;
+    box-shadow:0 5px 15px rgba(0,0,0,.05); text-align:center; display:flex; flex-direction:column; justify-content:space-between; align-items:center;
+  }
+  .services .service-icon{ font-size:2.5rem; color:var(--dourado); margin-bottom:1rem }
+  .services .service-card h3{ font-size:var(--text-xl); margin-bottom:.75rem; color:var(--azul-escuro) }
+  .services .service-card p{ color:var(--cinza-medio); font-size:var(--text-sm) }
+  .services .service-card .btn{ display:none !important }
+  .services .services-button-container{ display:flex; justify-content:center; gap:1rem; margin-top:1.5rem; flex-wrap:wrap }
+
+  /* ===== Horários ===== */
+  .horarios{ background:var(--cinza-fundo); padding:3rem 0 }
+  .horarios-container{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:1.5rem; max-width:1000px; margin:0 auto }
+  .horario-dia{ background:var(--branco); border-radius:8px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,.05); transition:var(--transition); border-top:4px solid var(--dourado) }
+  .horario-dia:hover{ transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,.1) }
+  .horario-dia.fechado{ border-top-color:var(--cinza-medio); opacity:.85 }
+  .dia-header{ background:var(--azul); color:var(--branco); padding:1.5rem; display:flex; justify-content:space-between; align-items:center }
+  .dia-header h3{ margin:0; font-size:var(--text-xl); color:var(--branco) }
+  .dia-icon{ font-size:1.5rem; color:var(--dourado) }
+  .horario-periodos{ padding:1.5rem }
+  .periodo{ display:flex; align-items:center; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px dashed #ddd }
+  .periodo:last-child{ margin-bottom:0; padding-bottom:0; border-bottom:none }
+  .periodo-icon{ font-size:1.5rem; color:var(--dourado); margin-right:1rem; width:40px; height:40px; background:rgba(184,134,11,.1); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0 }
+  .periodo-info h4{ margin:0 0 .5rem 0; font-size:var(--text-base); color:var(--azul-escuro) }
+  .periodo-info p{ margin:0; font-size:var(--text-sm); color:var(--cinza-medio) }
+  .periodo-info-full{ text-align:center; padding:1.5rem 0 }
+  .periodo-info-full p{ margin:0; font-size:var(--text-base); color:var(--cinza-medio) }
+  .periodo-info-full i{ margin-right:.5rem; color:var(--cinza-medio) }
+  .horarios-nota{ max-width:800px; margin:2.5rem auto 0; padding:1rem 1.5rem; background:rgba(184,134,11,.1); border-left:4px solid var(--dourado); font-size:var(--text-sm); border-radius:0 8px 8px 0 }
+  .horarios-nota i{ color:var(--dourado); margin-right:.5rem }
+
+  /* Barra de estado + CTA */
+  .schedule-status{ display:flex; align-items:center; gap:.75rem; background:rgba(0,0,0,.03); border:1px solid #eee; padding:1rem; border-radius:10px; margin:0 auto 1.5rem; max-width:800px }
+  .schedule-status .badge{ display:inline-block; width:10px; height:10px; border-radius:50%; background:#aaa; box-shadow:0 0 0 0 rgba(0,0,0,0); flex-shrink:0 }
+  .schedule-status .hint{ color:var(--cinza-medio); margin-left:auto; font-size:var(--text-sm) }
+  .badge-open{ background:#16a34a !important; box-shadow:0 0 0 8px rgba(22,163,74,.12) }
+  .badge-soon{ background:#f59e0b !important; box-shadow:0 0 0 8px rgba(245,158,11,.12) }
+  .badge-closed{ background:#ef4444 !important; box-shadow:0 0 0 8px rgba(239,68,68,.12) }
+  .schedule-cta{ display:flex; justify-content:center; gap:1rem; margin:1.5rem 0 0; flex-wrap:wrap }
+  #classStatusBar{ border-color:#e9e9e9 }
+  .pill{ display:inline-block; padding:.25rem .5rem; border-radius:999px; border:1px solid rgba(0,0,0,.08); background:rgba(0,0,0,.03); font-weight:700; font-size:var(--text-sm) }
+
+  /* ===== Team CTA ===== */
+  .team-cta{ background:var(--cinza-fundo); padding:3rem 0 }
+  .team-cta-content{ display:flex; align-items:center; gap:2rem; margin-top:2.5rem }
+  .team-cta-image{ flex:1; position:relative; border-radius:12px; overflow:hidden; min-height:300px; box-shadow:0 20px 40px rgba(0,0,0,.1) }
+  .team-cta-image img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease }
+  .zoom-effect:hover img{ transform:scale(1.03) }
+  .overlay{ position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg,rgba(37,99,235,.3) 0%,rgba(212,175,55,.3) 100%) }
+  .team-cta-text{ flex:1 }
+  .team-cta-text h3{ font-size:var(--text-2xl); color:var(--azul-escuro); margin-bottom:1.5rem }
+  .team-cta-text p{ font-size:var(--text-base); color:var(--cinza-medio); margin-bottom:1.5rem }
+  .team-highlights{ list-style:none; margin-bottom:2rem }
+  .team-highlights li{ margin-bottom:.75rem; font-size:var(--text-base); position:relative; padding-left:2rem }
+  .team-highlights i{ color:var(--dourado); position:absolute; left:0; top:.25rem; font-size:1.2rem }
+
+  /* ===== Contactos ===== */
+  .contact{ background:var(--cinza-fundo) }
+  .contact-container{ display:flex; gap:2rem }
+  .contact-info{ flex:1 }
+  .contact-info h3{ font-size:var(--text-2xl); margin-bottom:1.5rem; color:var(--azul-escuro) }
+  .contact-details{ margin-bottom:2.5rem }
+  .contact-item{ display:flex; align-items:flex-start; margin-bottom:1.5rem }
+  .contact-icon{ font-size:1.2rem; color:var(--dourado); margin-right:1rem; margin-top:.25rem; min-width:20px; text-align:center; flex-shrink:0 }
+  .contact-text h4{ font-size:var(--text-lg); margin-bottom:.5rem; color:var(--azul-escuro) }
+  .contact-text p,.contact-text a{ color:var(--cinza-medio); font-size:var(--text-base) }
+  .contact-text a:hover{ color:var(--dourado) }
+  .contact-form{ flex:1; background:var(--branco); padding:2.5rem; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,.05) }
+  .form-group{ margin-bottom:1.5rem }
+  .form-group label{ display:block; margin-bottom:.5rem; font-weight:700; font-size:var(--text-sm); color:var(--azul-escuro) }
+  .form-control{
+    width:100%; padding:.75rem 1rem; border:1px solid #ddd; font-family:'Lato',sans-serif; font-size:var(--text-base);
+    transition:var(--transition); border-radius:4px;
+  }
+  .form-control:focus{ outline:0; border-color:var(--dourado); box-shadow:0 0 0 3px rgba(212,175,55,.2) }
+  textarea.form-control{ min-height:150px; resize:vertical }
+
+  /* ===== Animations ===== */
+  .animate{ opacity:0; transform:translateY(20px); transition:opacity .8s ease-out, transform .8s ease-out }
+  .animate.show{ opacity:1; transform:translateY(0) }
+  .delay-1{transition-delay:.2s} .delay-2{transition-delay:.4s} .delay-3{transition-delay:.6s}
+
+  /* ===== Acessibilidade / reduz movimento ===== */
+  @media (prefers-reduced-motion:reduce){
+    .hero video{display:none}
+    .hero{background:#0b1220}
+    .services .slider .list{ position:static; display:flex; gap:1rem; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding-bottom:1rem; mask-image:none; -webkit-mask-image:none }
+    .services .slider .list .item{ position:relative; left:auto; animation:none !important; filter:none !important; scroll-snap-align:start; flex-shrink:0 }
+    .alert-bar{ animation:none }
+    .fab-contact.pulse{ animation:none }
+  }
+
+  /* ===== Sobre — versões ===== */
+  .about--enhanced{ background:var(--about-bg); padding-top:clamp(2.5rem,4vw,4rem); padding-bottom:clamp(2.5rem,4vw,4rem) }
+  .about--enhanced .section-title .lead{ max-width:60ch; margin-inline:auto; opacity:.9; line-height:1.6; font-size:var(--text-lg) }
+  .about--enhanced .about-content{ display:grid; grid-template-columns:1fr; gap:clamp(1.5rem,3vw,2.5rem); align-items:start }
+  @media (min-width:900px){ .about--enhanced .about-content{ grid-template-columns:1.1fr .9fr } }
+  .about--enhanced .about-paragraph{ max-width:70ch; line-height:1.75; text-wrap:balance; font-size:var(--text-base) }
+  .about--enhanced .about-image img{ border-radius:var(--radius-3xl); box-shadow:0 12px 40px rgba(0,0,0,.10); object-fit:cover }
+  .about--enhanced .about-values h3{ margin-top:1.75rem; margin-bottom:.75rem }
+
+  .values-grid{ list-style:none; padding:0; margin:0; display:grid; gap:.9rem; grid-template-columns:1fr; counter-reset:valores }
+  @media (min-width:680px){ .values-grid{ grid-template-columns:1fr 1fr } }
+  @media (min-width:1100px){ .values-grid{ grid-template-columns:1fr 1fr 1fr } }
+  .values-grid > li{ position:relative; counter-increment:valores; display:grid; grid-template-columns:auto 1fr; align-items:start; gap:.75rem }
+  .values-grid .badge{ inline-size:36px; block-size:36px; border-radius:50%; background:var(--badge-bg); border:1px solid var(--badge-border); box-shadow:inset 0 2px 6px rgba(0,0,0,.03); display:grid; place-items:center; transform:translateY(4px); flex-shrink:0 }
+  .values-grid .badge::before{ content:counter(valores); font-weight:700; font-size:.95rem; color:var(--badge-color) }
+  .value-card{ background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius-2xl); padding:1rem 1.1rem; box-shadow:var(--card-shadow); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease }
+  .value-card p{ margin:0; line-height:1.6; text-wrap:pretty; font-size:var(--text-base) }
+  .value-card strong{ display:inline-block; margin-bottom:.2rem }
+  .values-grid > li:hover .value-card, .values-grid > li:focus-within .value-card{ transform:translateY(-2px); box-shadow:0 10px 28px rgba(0,0,0,.10); border-color:rgba(42,102,255,.18) }
+
+  .about--simple{ background:#fff; padding-top:3rem; padding-bottom:3rem }
+  .about--simple .about-lead{ max-width:60ch; margin:0 auto; color:var(--cinza-medio); line-height:1.7; font-size:var(--text-lg) }
+  .about--simple .about-grid{ display:grid; grid-template-columns:1fr; gap:2rem; align-items:start; margin-top:2rem }
+  @media (min-width:992px){ .about--simple .about-grid{ grid-template-columns:1.1fr .9fr; gap:3rem } }
+  .about--simple .about-col p{ font-size:var(--text-base); line-height:1.8; margin-bottom:1.5rem }
+  .about--simple .about-media img{ width:100%; height:auto; display:block; border-radius:10px; box-shadow:none; object-fit:cover }
+  .about--simple .about-values h3{ margin-top:1.5rem; margin-bottom:.5rem }
+
+  /* About — compacto */
+  .about--clean .section-title{ margin-bottom:1.75rem }
+  .about--clean .about-lead{ color:var(--cinza-medio); line-height:1.6 }
+  .about--clean .about-wrap{ display:grid; grid-template-columns:1fr; gap:1.25rem; align-items:start }
+  .about--clean .about-col h3{ margin-bottom:.6rem; color:var(--azul-escuro) }
+  .about--clean .about-col p{ margin-bottom:.9rem }
+  .about--clean .about-media{ border-radius:10px; overflow:hidden }
+  .about--clean .about-media img{ width:100%; height:auto; display:block; object-fit:cover }
+  .btn-link{ appearance:none; border:0; background:none; cursor:pointer; color:var(--azul-escuro); font-weight:800; padding:.25rem 0; text-decoration:underline; text-underline-offset:3px; margin:.25rem 0 .6rem }
+  .about--clean [data-collapsible]{ display:none }
+  .about--clean .show-more[data-toggle="about"]{ display:inline-block }
+  .about--clean .about-values h3{ margin-top:1rem; margin-bottom:.6rem }
+  .about--clean .values-grid{ list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:.6rem 1rem }
+  .about--clean .values-grid li{ position:relative; padding-left:.9rem; line-height:1.45; font-size:.9rem; color:#374151 }
+  .about--clean .values-grid li::before{ content:""; position:absolute; left:0; top:.6em; width:6px; height:6px; border-radius:50%; background:var(--dourado) }
+  .about--clean .values-grid strong{ color:var(--azul-escuro) }
+  .about--clean .values-grid .is-extra{ display:none }
+  .about--clean .show-more[data-toggle="values"]{ display:inline-block }
+  @media (min-width:992px){
+    .about--clean .about-wrap{ grid-template-columns:1.1fr .9fr; gap:2rem }
+    .about--clean [data-collapsible]{ display:block }
+    .about--clean .show-more[data-toggle="about"]{ display:none }
+    .about--clean .values-grid .is-extra{ display:list-item }
+    .about--clean .show-more[data-toggle="values"]{ display:none }
+  }
+
+  /* ===== WhatsApp FAB ===== */
+  .floating-cta{ position:fixed; right:1.5rem; bottom:1.5rem; z-index:9999 }
+  .fab-contact{
+    display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:var(--dourado); color:var(--branco);
+    border:0; border-radius:999px; padding:1rem; font-weight:800; letter-spacing:.3px; text-transform:uppercase; cursor:pointer;
+    box-shadow:0 8px 24px rgba(0,0,0,.25); transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease; min-height:60px; min-width:60px
+  }
+  .fab-contact:hover{ transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,.3) }
+  .fab-contact.pulse{ animation:fabPulse 2s infinite }
+  @keyframes fabPulse{ 0%{box-shadow:0 0 0 0 rgba(212,175,55,.55)} 70%{box-shadow:0 0 0 16px rgba(212,175,55,0)} 100%{box-shadow:0 0 0 0 rgba(212,175,55,0)} }
+  .fab-contact i{ font-size:1.5rem }
+
+  /* ===== Scroll hint ===== */
+  .scroll-hint{ position:fixed; bottom:1.5rem; left:1.5rem; z-index:9999; color:var(--dourado); font-size:1.8rem; animation:bounce 1.5s infinite; opacity:.8; pointer-events:none }
+  @keyframes bounce{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(8px) } }
+  .scroll-hint.hide{ display:none }
+  .hero{ position:relative; overflow:hidden }
+  .hero-videos{ position:absolute; inset:0; z-index:-1 }
+  .hero-video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .6s ease; pointer-events:none }
+  .hero-video.show{ opacity:1 }
+  .hero::before{ content:''; position:absolute; inset:0; background:rgba(0,0,0,.6); z-index:0 }
+
+  /* ===== HEADER/FOOTER “NOTÍCIAS” — SCOPED ===== */
+  .news-header{
+    position:fixed; top:var(--alert-bar-h,0px); left:0; right:0; height:var(--header-h);
+    background:var(--branco); padding:.75rem 0; box-shadow:0 2px 10px rgba(0,0,0,.05);
+    z-index:1000; transition:var(--transition);
+  }
+  .news-header.scrolled{ box-shadow:0 4px 15px rgba(0,0,0,.08); padding:.5rem 0 }
+  .news-header .header-container{ display:flex; justify-content:space-between; align-items:center; height:100% }
+  .news-header .logo-img{ height:40px; width:auto; transition:var(--transition) }
+  .news-header .logo-img:hover{ opacity:.9; transform:scale(1.03) }
+  .news-header nav ul{ list-style:none; display:flex; gap:1.5rem; margin:0; padding:0 }
+  .news-header nav ul li a{
+    font-weight:700; font-size:.85rem; letter-spacing:.5px; text-transform:uppercase;
+    color:var(--azul-escuro); padding:.5rem 0; position:relative; display:block;
+  }
+  .news-header nav ul li a::after{
+    content:''; position:absolute; bottom:-6px; left:0; height:2px; width:0; background:var(--dourado); transition:var(--transition);
+  }
+  .news-header nav ul li a:hover::after,
+  .news-header nav ul li a[aria-current="page"]::after{ width:100% }
+
+@media (max-width:768px){
+  .news-header nav ul{
+    /* estado fechado */
+    display:none;
+    position:fixed;
+    left:0; right:0;
+    top: calc(var(--alert-bar-h, 0px) + var(--header-h));
+    bottom:0; /* ocupa até ao fundo */
+    background: var(--branco);
+    flex-direction: column;
+    gap: .25rem;
+    padding: 1rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 10px 15px rgba(0,0,0,.1);
+    z-index: 3000; /* acima do header/alert */
+  }
+  .news-header nav ul.show{ display:flex; }
+
+  /* Itens grandes e fáceis de clicar */
+  .news-header nav ul li a{
+    display:block;
+    padding: .9rem 0;
+    font-size: 1rem;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+  }
+  .news-header nav ul li:last-child a{ border-bottom:0; }
+
+  /* botão hambúrguer visível no mobile (já tens) */
+  .mobile-menu-btn{ display:flex; }
+}
+
+
+  /* Ajuste do 1º bloco com header fixo + alert bar */
+  .hero, section#home{
+    margin-top:calc(var(--alert-bar-h,0px) + var(--header-h));
+    height:calc(100dvh - var(--alert-bar-h,0px) - var(--header-h));
+  }
+  @supports not (height:100dvh){
+    .hero, section#home{ height:calc(100vh - var(--alert-bar-h,0px) - var(--header-h)) }
+  }
+
+  /* Footer “Notícias” */
+  .footer-news{ background:var(--azul-escuro); color:var(--branco); padding:3rem 0 1.5rem }
+  .footer-news .footer-container{ display:grid; grid-template-columns:1fr; gap:2.5rem; margin-bottom:3rem; align-items:start }
+  .footer-news .footer-col h3{ font-size:1.3rem; margin-bottom:1.25rem; color:var(--branco); font-weight:700 }
+  .footer-news .footer-col p{ color:var(--cinza-card); margin:0 0 1.25rem; line-height:1.5 }
+  .footer-news .footer-links ul{ list-style:none; margin:0; padding:0 }
+  .footer-news .footer-links li{ margin:0 0 .5rem }
+  .footer-news .footer-links a{ color:var(--cinza-card); transition:var(--transition); display:block; padding:.25rem 0 }
+  .footer-news .footer-links a:hover{ color:var(--dourado); padding-left:.25rem }
+  .footer-news .social-links{ display:flex; gap:.75rem }
+  .footer-news .social-links a{
+    display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%;
+    background:rgba(255,255,255,.1); color:var(--branco); transition:var(--transition);
+  }
+  .footer-news .social-links a:hover{ background:var(--dourado); transform:translateY(-3px) }
+  .footer-news .footer-bottom{ text-align:center; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,.1); color:var(--cinza-card); font-size:.9rem }
+  @media (min-width:768px){ .footer-news .footer-container{ grid-template-columns:repeat(2,1fr) } }
+  @media (min-width:1024px){ .footer-news .footer-container{ grid-template-columns:repeat(4,1fr) } }
+
+  /* ===== MEDIA QUERIES ===== */
+  @media (min-width:768px){
+    :root{ --base-font-size:17px; --container-padding:1.5rem; --section-padding:4rem }
+    .alert-bar{ font-size:var(--text-base); height:44px }
+    .hero-content h1{ font-size:clamp(2.5rem,5vw,3.5rem) }
+    .services .slider{ --width:320px; --height:360px }
+  }
+  @media (min-width:1024px){
+    :root{ --base-font-size:18px; --container-padding:2rem }
+    h1{ font-size:var(--text-4xl) } h2{ font-size:var(--text-3xl) }
+    .contact-container{ flex-direction:row }
+    .team-cta-content{ flex-direction:row }
+  }
+  @media (max-width:767px){
+    :root{ --container-padding:1rem; --section-padding:3rem }
+    .alert-bar{ font-size:.75rem; height:44px; padding:0 2.5rem 0 .5rem }
+    .alert-bar a{ flex-direction:column; gap:.25rem; padding:.25rem }
+    .alert-bar .close-alert{ right:.5rem }
+    .header-container{ padding:0 }
+    .logo-img{ height:35px }
+    .hero-buttons{ flex-direction:column; align-items:center }
+    .btn{ width:100%; max-width:280px }
+    .services .slider{ --width:85vw; --height:320px }
+    .services .slider:hover .item{ filter:none }
+    .contact-container{ flex-direction:column }
+    .team-cta-content{ flex-direction:column }
+    .team-cta-image{ min-height:250px; width:100% }
+    .horarios-container{ grid-template-columns:1fr }
+    .schedule-status{ flex-wrap:wrap; padding:.75rem }
+    .schedule-status .hint{ margin-left:0; width:100%; margin-top:.5rem }
+    .schedule-cta{ flex-direction:column; align-items:center }
+    .schedule-cta .btn{ width:100%; max-width:280px }
+  }
+  @media (max-width:360px){
+    :root{ --container-padding:.75rem }
+    .alert-bar{ font-size:.7rem }
+    .services .slider{ --width:92vw; --height:300px }
+    .services .service-card{ padding:1rem }
+    .contact-form{ padding:1.5rem }
+  }
+
+  /* ===== PATCH: header/footer idênticos aos Contactos ===== */
+  .news-header{ height:64px; padding:0.5rem 0; }
+  .news-header .logo-img{ height:36px; }
+  .news-header nav ul{ gap:1.25rem; }
+  .news-header nav a{
+    font-size:.85rem; letter-spacing:.5px; text-transform:uppercase;
+    padding:.35rem 0; line-height:1;
+  }
+  .news-header nav a::after{ bottom:-4px; height:2px; }
+
+  @media (max-width:768px){
+    .news-header nav ul{
+      top: calc(var(--alert-bar-h, 0px) + 64px);
+      max-height: calc(100vh - (var(--alert-bar-h, 0px) + 64px));
+    }
+  }
+
+  .footer-news{ padding:2rem 0 1rem; }
+  .footer-news .footer-container{ gap:1.5rem; margin-bottom:2rem; }
+  .footer-news .footer-col h3{ font-size:1.1rem; margin-bottom:1rem; line-height:1.2; }
+  .footer-news .footer-col p,
+  .footer-news .footer-links a{ font-size:.9rem; line-height:1.5; }
+  .footer-news .footer-links li{ margin:0 0 .35rem; }
+  .footer-news .social-links{ gap:.6rem; }
+  .footer-news .social-links a{ width:36px; height:36px; font-size:1rem; }
+  .footer-news .footer-bottom{ padding-top:1rem; font-size:.85rem; }
+  .footer-news .footer-links a:hover{ padding-left:.25rem; }
+
+  /* ABOUT: rotator */
+  .about-rotator{ position:relative; border-radius:10px; overflow:hidden; aspect-ratio:16/9; box-shadow:none; }
+  .about-rotator-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .8s ease; display:block; }
+  .about-rotator-img.show{ opacity:1; }
+  @media (prefers-reduced-motion: reduce){ .about-rotator-img{ transition:none; } }
+  /* === FIX: garantir que tudo usa 64px como altura do header === */
+:root{ --header-h:64px; }
+.news-header{ height:64px; padding:.5rem 0; }
+.news-header .logo-img{ height:36px; }
+.news-header nav ul{ gap:1.25rem; }
+.news-header nav a{
+  font-size:.85rem; letter-spacing:.5px; text-transform:uppercase;
+  padding:.35rem 0; line-height:1;
+}
+.news-header nav a::after{ bottom:-4px; height:2px; }
+
+</style>
+</head>
+<body>
+
+  <!-- ALERT BAR (mantida) -->
+  <div class="alert-bar" id="alertBar">
+    <a href="https://www.regyfit.com/admin2/modulos/crm/site_integrations/aula_experimental.php?id_box=2064&id_int=4&acs=d78b8f480898e2d6afd80418263be90f&lang=pt&site=n&fbclid=PAZXh0bgNhZW0CMTEAAafmyBy-INRUgPOiyO9N9Gz0QhRmH2X-SOyLBk1gMgL4qdRUkq2E4wqLmTMW6g_aem_CJP8uMTZhEZiXG90FXNDbw">
+      <i class="fas fa-gift"></i>
+      <span>AULA EXPERIMENTAL GRATUITA - Clica para marcar!</span>
+    </a>
+  </div>
+
+  <!-- HEADER (igual ao dos Contactos; posicionado abaixo da alert bar) -->
+  <header id="header" class="news-header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <img src="../assets/logoazulcinza.png" alt="VilaPlus Ginásio" class="logo-img">
+      </a>
+
+      <nav aria-label="Menu principal">
+        <ul id="main-menu">
+          <li><a href="index.html#home" aria-current="page">Início</a></li>
+          <li><a href="servicosv2.html">Serviços</a></li>
+          <li><a href="projetosv2.html">Projetos</a></li>
+          <li><a href="portfoliov2.html">Galeria</a></li>
+          <li><a href="index.html#horarios">Horários</a></li>
+          <li><a href="parceriasv2.html">Parcerias</a></li>
+          <li><a href="lojav2.html">Loja</a></li>
+          <li><a href="noticiasv2.html">Notícias</a></li>
+          <li><a href="contactsv2.html">Contactos</a></li>
+        </ul>
+      </nav>
+
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-menu">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-videos">
+      <video class="hero-video v0" autoplay muted playsinline preload="metadata" poster="../assets/hero-poster.jpg"></video>
+      <video class="hero-video v1" autoplay muted playsinline preload="metadata" poster="../assets/hero-poster.jpg"></video>
+    </div>
+
+    <div class="container">
+      <div class="hero-content animate">
+        <h1>Faz da preguiça a tua maior força e junta-te a nós!</h1>
+        <p>O primeiro passo já deste: chegaste ao Vila Plus. 
+          <br> <br>Aqui ficas a conhecer o espaço onde a tua energia ganha vida e os teus objetivos se tornam possíveis. <br>Agora só falta calçar as sapatilhas e começar a tua transformação.</p>
+        <div class="hero-buttons">
+          <a href="contactsv2.html" class="btn btn-filled">Inscreve-te Já</a>
+          <a href="#services" class="btn">Explorar Serviços</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Serviços -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-title animate">
+        <h2>Serviços</h2>
+        <p>Descobre os nossos serviços e encontra o caminho ideal para atingires os teus objetivos.</p>
+      </div>
+
+      <div class="slider" style="--quantity:6">
+        <div class="list">
+          <div class="item" style="--position:1">
+            <div class="service-card animate delay-1">
+              <div class="service-icon"><i class="fas fa-user-md"></i></div>
+              <h3>Treino Personalizado</h3>
+              <p>Cada pessoa é única. O teu treino também.</p>
+            </div>
+          </div>
+
+          <div class="item" style="--position:2">
+            <div class="service-card animate delay-2">
+              <div class="service-icon"><i class="fas fa-laptop-medical"></i></div>
+              <h3>Acompanhamento Online</h3>
+              <p>Planos de treino personalizados e orientação nutricional à distância.</p>
+            </div>
+          </div>
+
+          <div class="item" style="--position:3">
+            <div class="service-card animate delay-3">
+              <div class="service-icon"><i class="fas fa-dumbbell"></i></div>
+              <h3>Musculação</h3>
+              <p>Constrói força, define objetivos, supera-te todos os dias.</p>
+            </div>
+          </div>
+
+          <div class="item" style="--position:4">
+            <div class="service-card animate delay-1">
+              <div class="service-icon"><i class="fas fa-running"></i></div>
+              <h3>Aulas de Grupo</h3>
+              <p>Kickboxing, Pilates Clínico, Zumba, Circuito, STEP, Funcional, HIIT, Aeróbica, GAP.</p>
+            </div>
+          </div>
+
+          <div class="item" style="--position:5">
+            <div class="service-card animate delay-2">
+              <div class="service-icon"><i class="fas fa-procedures"></i></div>
+              <h3>Fisioterapia</h3>
+              <p>Tratamentos específicos a pensar no teu bem-estar.</p>
+            </div>
+          </div>
+
+          <div class="item" style="--position:6">
+            <div class="service-card animate delay-3">
+              <div class="service-icon"><i class="fas fa-utensils"></i></div>
+              <h3>Nutrição</h3>
+              <p>Transforma a tua alimentação, transforma o teu corpo.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="services-button-container">
+        <a href="https://www.regyfit.com/admin2/modulos/crm/site_integrations/aula_experimental.php?id_box=2064&id_int=4&acs=d78b8f480898e2d6afd80418263be90f&lang=pt&site=n&fbclid=PAZXh0bgNhZW0CMTEAAafmyBy-INRUgPOiyO9N9Gz0QhRmH2X-SOyLBk1gMgL4qdRUkq2E4wqLmTMW6g_aem_CJP8uMTZhEZiXG90FXNDbw" class="btn btn-filled animate delay-2">Marcar Aula Experimental</a>
+        <a href="servicosv2.html" class="btn animate delay-3">Saber Mais</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Horários -->
+  <section class="horarios" id="horarios">
+    <div class="container">
+      <div class="section-title animate">
+        <h2>Horários</h2>
+        <p>Planifica os seus treinos de acordo com a nossa disponibilidade</p>
+      </div>
+
+      <div class="schedule-status" aria-live="polite">
+        <span class="badge" id="openBadge">•</span>
+        <span id="statusText">A calcular…</span>
+        <span id="nextChange" class="hint"></span>
+      </div>
+
+      <div class="schedule-status" aria-live="polite" id="classStatusBar">
+        <span class="badge" id="classBadge">•</span>
+        <span id="classStatusText">A calcular…</span>
+        <span id="classHint" class="hint"></span>
+      </div>
+
+      <div class="horarios-container">
+        <div class="horario-dia animate delay-1">
+          <div class="dia-header">
+            <h3>Segunda a Sexta</h3>
+            <div class="dia-icon"><i class="fas fa-calendar-alt"></i></div>
+          </div>
+          <div class="horario-periodos">
+            <div class="periodo">
+              <div class="periodo-icon"><i class="fas fa-sun"></i></div>
+              <div class="periodo-info">
+                <h4>Manhã</h4>
+                <p>7:00 - 13:00</p>
+              </div>
+            </div>
+            <div class="periodo">
+              <div class="periodo-icon"><i class="fas fa-moon"></i></div>
+              <div class="periodo-info">
+                <h4>Tarde/Noite</h4>
+                <p>16:00 - 22:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="horario-dia animate delay-2">
+          <div class="dia-header">
+            <h3>Sábado</h3>
+            <div class="dia-icon"><i class="fas fa-calendar-day"></i></div>
+          </div>
+          <div class="horario-periodos">
+            <div class="periodo">
+              <div class="periodo-icon"><i class="fas fa-sun"></i></div>
+              <div class="periodo-info">
+                <h4>Manhã</h4>
+                <p>Abertura pelas 9:00</p>
+              </div>
+            </div>
+            <div class="periodo">
+              <div class="periodo-icon"><i class="fas fa-moon"></i></div>
+              <div class="periodo-info">
+                <h4>Tarde</h4>
+                <p>Fecha às 17:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="schedule-cta">
+        <a class="btn" href="https://www.google.com/maps?q=Rua%20Padre%20%C3%81lvaro%20da%20Silva%20Barbosa%2C%204600-782%2C%20Vila%20Caiz" target="_blank" rel="noopener">Como Chegar</a>
+        <a class="btn btn-filled" href="https://www.regyfit.com/admin2/modulos/crm/site_integrations/aula_experimental.php?id_box=2064&id_int=4&acs=d78b8f480898e2d6afd80418263be90f&lang=pt&site=n&fbclid=PAZXh0bgNhZW0CMTEAAafmyBy-INRUgPOiyO9N9Gz0QhRmH2X-SOyLBk1gMgL4qdRUkq2E4wqLmTMW6g_aem_CJP8uMTZhEZiXG90FXNDbw">Marcar Aula</a>
+        <a class="btn" href="servicosv2.html#horarios-aulas">Horários Aulas</a>      
+      </div>
+
+      <div class="horarios-nota animate">
+        <p><i class="fas fa-info-circle"></i> <strong>Nota:</strong> Os horários podem sofrer ajustes em feriados. Consulte as nossas redes sociais para atualizações.</p>
+      </div>
+    </div>
+
+    <!-- SEO JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HealthClub",
+      "name": "Ginásio Vila Plus",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Padre Álvaro da Silva Barbosa",
+        "postalCode": "4600-782",
+        "addressLocality": "Vila Caiz",
+        "addressCountry": "PT"
+      },
+      "telephone": "+351931999690",
+      "openingHoursSpecification": [
+        {"@type": "OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"13:00"},
+        {"@type": "OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"16:00","closes":"22:00"},
+        {"@type": "OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"17:00"}
+      ]
+    }
+    </script>
+  </section>
+
+  <!-- Treinadores CTA -->
+  <section class="team-cta" id="team">
+    <div class="container">
+      <div class="section-title animate">
+        <h2>Treinadores</h2>
+        <p>Uma equipa de especialistas pronta para te ajudar a atingir os teus objetivos</p>
+      </div>
+
+      <div class="team-cta-content animate delay-1">
+        <div class="team-cta-image">
+          <img src="../assets/gym-old.jpg" alt="Equipa VilaPlus" class="zoom-effect">
+          <div class="overlay"></div>
+        </div>
+
+        <div class="team-cta-text">
+          <h3>Profissionais Certificados</h3>
+          <p>No Vila Plus, contamos com uma equipa multidisciplinar de treinadores, fisioterapeutas e nutricionistas dedicados ao teu sucesso.</p>
+          <ul class="team-highlights">
+            <li><i class="fas fa-check-circle"></i> Profissionais especializados</li>
+            <li><i class="fas fa-check-circle"></i> Acompanhamento personalizado</li>
+            <li><i class="fas fa-check-circle"></i> Planos adaptados ao teu nível</li>
+          </ul>
+          <a href="treinadoresv2.html" class="btn btn-filled">Conheça Toda a Equipa</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="about about--clean" id="about">
+  <div class="container">
+    <div class="section-title animate">
+      <h2>Sobre</h2>
+      <p class="about-lead">
+        Espaço onde o corpo ganha força, a mente encontra equilíbrio e a comunidade cresce unida.
+      </p>
+    </div>
+
+    <div class="about-wrap">
+      <div class="about-col">
+        <h3>História</h3>
+        <p>
+          O Vila Plus nasceu em 2023 com um propósito claro: inspirar a comunidade a adotar hábitos de vida mais saudáveis e comprovar o impacto positivo do exercício físico.
+        </p>
+        <div class="more-text" data-collapsible>
+          <p>
+            Mais do que máquinas ou treinos, somos feitos de pessoas, de energia e de partilha. O que nos distingue é a proximidade com cada membro, a paixão genuína pelo exercício físico e a motivação constante para superar limites.
+          </p>
+        </div>
+        <button class="btn-link show-more" data-toggle="about">Ver mais</button>
+      </div>
+
+      <div class="about-media">
+        <img src="/assets/logos/logoazulcinza.png" alt="Logo Vila Plus" class="about-logo">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Contactos -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-title animate">
+        <h2>Contactos</h2>
+        <p>Estamos à tua disposição para qualquer questão ou marcação.</p>
+      </div>
+
+      <div class="contact-container">
+        <div class="contact-info animate delay-1">
+          <h3>Entre em Contacto</h3>
+
+          <div class="contact-details">
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div class="contact-text">
+                <h4>Localização</h4>
+                <p>Rua Padre Álvaro da Silva Barbosa, 4600-782, Vila Caiz</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-phone"></i></div>
+              <div class="contact-text">
+                <h4>Telefone</h4>
+                <p>+351 931 999 690</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+              <div class="contact-text">
+                <h4>Email</h4>
+                <a href="mailto:info@vilaplus.pt">info@vilaplus.pt</a>
+              </div>
+            </div>
+          </div>
+
+          <h3>Redes Sociais</h3>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fab fa-facebook-f"></i></div>
+            <div class="contact-text">
+              <h4>Facebook</h4>
+              <a href="https://www.facebook.com/p/Vila-Plus-61552410020366/" target="_blank">facebook.com/vilaplus</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+            <div class="contact-text">
+              <h4>Instagram</h4>
+              <a href="https://www.instagram.com/vilaplus.pt/" target="_blank">@vilaplus.pt</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form animate delay-2">
+          <form id="contactForm" action="https://formspree.io/f/xqadoryk" method="POST">
+            <div class="form-group">
+              <label for="name">Nome</label>
+              <input type="text" id="name" name="name" class="form-control" autocomplete="name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-control" autocomplete="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Assunto</label>
+              <input type="text" id="subject" name="subject" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Mensagem</label>
+              <textarea id="message" name="message" class="form-control" required></textarea>
+            </div>
+
+            <input type="text" name="_gotcha" style="display:none">
+            <button type="submit" class="btn btn-filled">Enviar Mensagem</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (igual ao dos Contactos) -->
+  <footer class="footer-news">
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Vila Plus</h3>
+          <p>Saúde. Força. Comunidade.</p>
+          <p>O teu ginásio de eleição em Vila Caiz.</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Links Rápidos</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html">Início</a></li>
+              <li><a href="servicosv2.html">Serviços</a></li>
+              <li><a href="projetosv2.html">Projetos</a></li>
+              <li><a href="portfoliov2.html">Galeria</a></li>
+              <li><a href="index.html#horarios">Horários</a></li>
+              <li><a href="parceriasv2.html">Parcerias</a></li>
+              <li><a href="lojav2.html">Loja</a></li>
+              <li><a href="noticiasv2.html">Notícias</a></li>
+              <li><a href="contactsv2.html">Contactos</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Serviços</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="servicosv2.html?f=personal#servicos-grid">Treino Personalizado</a></li>
+              <li><a href="servicosv2.html?f=online#servicos-grid">Acompanhamento Online</a></li>
+              <li><a href="servicosv2.html?f=musculacao#servicos-grid">Musculação</a></li>
+              <li><a href="servicosv2.html?f=aulas#servicos-grid">Aulas de Grupo</a></li>
+              <li><a href="servicosv2.html?f=fisioterapia#servicos-grid">Fisioterapia</a></li>
+  <li><a href="servicosv2.html?f=nutri%C3%A7%C3%A3o#servicos-grid">Nutrição</a></li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="footer-col">
+          <h3>Redes Sociais</h3>
+          <div class="social-links">
+            <a href="https://www.facebook.com/p/Vila-Plus-61552410020366/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/vilaplus.pt/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/351931999690" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <div class="floating-cta">
+    <a class="fab-contact pulse" id="fabContact" href="https://wa.me/351931999690" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+      <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+  </div>
+
+  <div class="scroll-hint" id="scrollHint" aria-hidden="true">
+    <i class="fas fa-angle-down"></i>
+  </div>
+
+  <!-- JS (mantido) -->
+<script>
+/* ============================
+   1) Scroll hint (seta a piscar)
+   ============================ */
+(() => {
+  const hint = document.getElementById('scrollHint');
+  if (!hint) return;
+  const toggleHint = () => {
+    const atBottom = window.scrollY + window.innerHeight >= document.body.scrollHeight - 50;
+    hint.classList.toggle('hide', atBottom);
+  };
+  window.addEventListener('scroll', toggleHint);
+  window.addEventListener('resize', toggleHint);
+  document.addEventListener('DOMContentLoaded', toggleHint);
+})();
+
+/* ==========================================
+   2) Botões "Ver mais" (about / valores)
+   ========================================== */
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.show-more');
+  if (!btn) return;
+
+  if (btn.dataset.toggle === 'about') {
+    const box = btn.closest('.about-col')?.querySelector('[data-collapsible]');
+    if (!box) return;
+    const open = box.style.display === 'block';
+    box.style.display = open ? 'none' : 'block';
+    btn.textContent = open ? 'Ver mais' : 'Ver menos';
+  }
+
+  if (btn.dataset.toggle === 'values') {
+    const grid = btn.closest('.about-values')?.querySelector('.values-grid');
+    if (!grid) return;
+    const extras = grid.querySelectorAll('.is-extra');
+    const anyHidden = [...extras].some(li => getComputedStyle(li).display === 'none');
+    extras.forEach(li => li.style.display = anyHidden ? 'list-item' : 'none');
+    btn.textContent = anyHidden ? 'Mostrar menos' : 'Mostrar todos';
+  }
+});
+
+/* ==========================================
+   3) INIT geral (uma única vez)
+   ========================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  // 3.1 Fechar barra de alerta (se existir)
+  const closeAlertBtn = document.getElementById('closeAlert');
+  const alertBar = document.getElementById('alertBar');
+  if (closeAlertBtn && alertBar) {
+    closeAlertBtn.addEventListener('click', () => {
+      alertBar.style.display = 'none';
+      const header = document.getElementById('header');
+      if (header) header.style.top = '0';
+      const hero = document.querySelector('.hero');
+      if (hero) hero.style.marginTop = 'var(--header-h)';
+    });
+  }
+
+  // 3.2 Menu mobile (handler ÚNICO + guard)
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('main-menu');
+  if (btn && menu && !btn.dataset.init) {
+    btn.dataset.init = '1';
+
+    const setExpanded = (val) => {
+      btn.setAttribute('aria-expanded', String(val));
+      const icon = btn.querySelector('i');
+      if (icon) icon.className = val ? 'fas fa-times' : 'fas fa-bars';
+      menu.classList.toggle('show', val);
+      // Lock body quando o menu está aberto (mobile)
+      document.body.style.overflow = (val && window.innerWidth <= 768) ? 'hidden' : '';
+    };
+
+    btn.addEventListener('click', () => {
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      setExpanded(!isExpanded);
+    });
+
+    // Fecha ao clicar num link (mobile)
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (window.innerWidth <= 768) setExpanded(false);
+      });
+    });
+
+    // Segurança extra: ao redimensionar para desktop, garante desbloqueio do body
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        menu.classList.remove('show');
+        setExpanded(false);
+      }
+    });
+  }
+
+  // 3.3 Header shadow on scroll
+  const header = document.getElementById('header');
+  const setShadow = () => header && header.classList.toggle('scrolled', window.scrollY > 100);
+  setShadow();
+  window.addEventListener('scroll', setShadow);
+
+  // 3.4 Smooth scroll com offset (header + alert bar)
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      const targetId = anchor.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      const targetEl = document.querySelector(targetId);
+      if (!targetEl) return;
+
+      e.preventDefault();
+      const headerH = header?.offsetHeight || 0;
+      const alertH = alertBar && alertBar.style.display !== 'none' ? alertBar.offsetHeight : 0;
+      const offset = headerH + alertH;
+      window.scrollTo({ top: targetEl.offsetTop - offset, behavior: 'smooth' });
+      history.pushState(null, '', targetId);
+    });
+  });
+
+  // 3.5 Reveal on scroll
+  const animateEls = document.querySelectorAll('.animate');
+  const checkScroll = () => {
+    animateEls.forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight - 150) el.classList.add('show');
+    });
+  };
+  checkScroll();
+  window.addEventListener('scroll', checkScroll);
+
+  // 3.6 Video pause/play quando sai do viewport (hero)
+  const heroVideo = document.querySelector('.hero video');
+  if ('IntersectionObserver' in window && heroVideo) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => entry.isIntersecting ? heroVideo.play().catch(()=>{}) : heroVideo.pause());
+    }, { threshold: 0.5 });
+    io.observe(heroVideo);
+  }
+
+  // 3.7 Cards de serviços clicáveis -> navegação
+  document.querySelectorAll('.services .service-card').forEach(card => {
+    const title = card.querySelector('h3')?.textContent.trim().toLowerCase();
+    const slugMap = {
+      'treino personalizado': 'personal',
+      'aulas de grupo': 'aulas',
+      'musculação': 'musculacao',
+      'fisioterapia': 'fisioterapia',
+      'nutrição': 'nutrição',
+      'acompanhamento online': 'online',
+    };
+    const slug = slugMap[title] || 'todos';
+    const url  = `servicosv2.html?f=${encodeURIComponent(slug)}#servicos-grid`;
+    const go = () => { window.location.href = url; };
+    card.style.cursor = 'pointer';
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `Ver ${title} nos serviços`);
+    card.addEventListener('click', go);
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  });
+
+  // 3.8 Formulário (Formspree)
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const btn = form.querySelector('button[type="submit"]');
+      const txt = btn.textContent;
+      try {
+        btn.textContent = 'A enviar...'; btn.disabled = true;
+        const res = await fetch(form.action, { method:'POST', body: formData, headers:{'Accept':'application/json'} });
+        if (res.ok) { alert('Obrigado pela mensagem. Entraremos em contacto brevemente.'); form.reset(); }
+        else {
+          const data = await res.json().catch(() => ({}));
+          const msg = (data.errors && data.errors.map(e => e.message).join(', ')) || 'Ocorreu um erro ao enviar. Tente novamente.';
+          alert(msg);
+        }
+      } catch (err) {
+        console.error('Erro no formulário:', err);
+        alert('Não foi possível enviar a mensagem. Verifica a ligação à internet.');
+      } finally {
+        btn.textContent = txt; btn.disabled = false;
+      }
+    });
+  }
+
+  // 3.9 iOS: prevenir zoom em inputs
+  if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    document.querySelectorAll('input, textarea, select').forEach(inp => {
+      inp.addEventListener('focus', function(){ this.style.fontSize='16px'; });
+    });
+  }
+});
+
+/* ==========================================
+   4) Performance scroll flag
+   ========================================== */
+(() => {
+  let to;
+  window.addEventListener('scroll', () => {
+    if (to) clearTimeout(to);
+    document.body.classList.add('scrolling');
+    to = setTimeout(() => document.body.classList.remove('scrolling'), 100);
+  });
+})();
+
+/* ==========================================
+   5) Reduce motion (respeita prefers-reduced-motion)
+   ========================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) return;
+  document.documentElement.style.setProperty('--transition','none');
+  document.querySelectorAll('*').forEach(el => {
+    const st = getComputedStyle(el);
+    if (st.animationName !== 'none' || st.transitionProperty !== 'none') {
+      el.style.animation = 'none';
+      el.style.transition = 'none';
+    }
+  });
+});
+
+/* ==========================================
+   6) HERO rotator (2 vídeos com crossfade)
+   ========================================== */
+(() => {
+  const BASE_PATH = '../assets/', EXT = '.mp4', TOTAL = 6;
+  const PLAYLIST = Array.from({length: TOTAL}, (_, i) => ({ src: `${BASE_PATH}${i+1}${EXT}` }));
+  const SWITCH_MS = 300000; // 5min
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const videos = document.querySelectorAll('.hero .hero-video');
+  if (videos.length < 2 || PLAYLIST.length === 0) return;
+
+  let i = 0, showing = 0, timer = null;
+  const setSource = (el, item) => { if (item) { el.src = item.src; el.load(); } };
+
+  setSource(videos[0], PLAYLIST[0]);
+  videos[0].classList.add('show'); videos[0].play().catch(()=>{});
+  if (PLAYLIST[1]) { setSource(videos[1], PLAYLIST[1]); videos[1].play().catch(()=>{}); }
+
+  const nextIndex = (idx) => (idx + 1) % PLAYLIST.length;
+
+  const crossfade = () => {
+    const hiding = showing, coming = showing ^ 1;
+    i = nextIndex(i);
+    setSource(videos[coming], PLAYLIST[i]);
+    const run = () => {
+      videos[coming].play().catch(()=>{});
+      videos[hiding].classList.remove('show');
+      videos[coming].classList.add('show');
+      showing = coming;
+      const preloadIdx = nextIndex(i);
+      setSource(videos[hiding], PLAYLIST[preloadIdx]);
+      videos[hiding].play().catch(()=>{});
+    };
+    if (videos[coming].readyState >= 2) run(); else videos[coming].addEventListener('canplay', run, {once:true});
+  };
+
+  if (!reduce && PLAYLIST.length > 1) {
+    if (typeof SWITCH_MS === 'number') timer = setInterval(crossfade, SWITCH_MS);
+    videos.forEach(v => v.addEventListener('ended', crossfade));
+  }
+
+  // Pausar quando o hero sai do viewport
+  if ('IntersectionObserver' in window) {
+    const hero = document.querySelector('.hero');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const play = entry.isIntersecting && !reduce;
+        videos.forEach(v => play ? v.play().catch(()=>{}) : v.pause());
+      });
+    }, {threshold: 0.5});
+    if (hero) obs.observe(hero);
+  }
+})();
+
+/* ==========================================
+   7) Horários + Aulas (status bar)
+   ========================================== */
+function initScheduleStatus() {
+  const SCHEDULE = {
+    1: [{start:"07:00", end:"13:00"}, {start:"16:00", end:"22:00"}],
+    2: [{start:"07:00", end:"13:00"}, {start:"16:00", end:"22:00"}],
+    3: [{start:"07:00", end:"13:00"}, {start:"16:00", end:"22:00"}],
+    4: [{start:"07:00", end:"13:00"}, {start:"16:00", end:"22:00"}],
+    5: [{start:"07:00", end:"13:00"}, {start:"16:00", end:"22:00"}],
+    6: [{start:"09:00", end:"17:00"}],
+    0: []
+  };
+  const CLASSES = {
+    1: [
+      {start:"09:00", end:"09:45", name:"Circuito"},
+      {start:"10:00", end:"10:45", name:"Pilates Clínico"},
+      {start:"11:00", end:"11:45", name:"Pilates Clínico"},
+      {start:"17:30", end:"18:15", name:"Step"},
+      {start:"18:15", end:"19:00", name:"Circuito"},
+      {start:"18:30", end:"19:15", name:"Pilates Clínico"},
+      {start:"19:30", end:"20:15", name:"Gap"},
+      {start:"20:15", end:"21:00", name:"Treino Funcional"},
+      {start:"20:15", end:"21:00", name:"Pilates Clínico"}
+    ],
+    2: [
+      {start:"07:05", end:"07:50", name:"Treino Funcional"},
+      {start:"09:15", end:"10:00", name:"Pilates Clínico"},
+      {start:"18:15", end:"19:00", name:"Pilates Clínico"},
+      {start:"19:15", end:"20:00", name:"HIIT"},
+      {start:"20:15", end:"21:00", name:"Aeróbica"}
+    ],
+    3: [
+      {start:"07:05", end:"07:50", name:"Gap"},
+      {start:"09:00", end:"09:45", name:"Treino Funcional"},
+      {start:"10:00", end:"10:45", name:"Pilates Clínico"},
+      {start:"18:15", end:"19:00", name:"Gap"},
+      {start:"18:15", end:"19:00", name:"Pilates Clínico"},
+      {start:"19:15", end:"20:00", name:"Zumba"},
+      {start:"20:00", end:"20:45", name:"Circuito"},
+      {start:"20:15", end:"21:00", name:"Step"}
+    ],
+    4: [
+      {start:"07:05", end:"07:50", name:"Circuito"},
+      {start:"09:15", end:"10:00", name:"Pilates Clínico"},
+      {start:"18:15", end:"19:00", name:"Treino Funcional"},
+      {start:"19:15", end:"20:00", name:"Pilates Clínico"},
+      {start:"20:15", end:"21:00", name:"Pilates Clínico"}
+    ],
+    5: [
+      {start:"07:05", end:"07:50", name:"Treino Funcional"},
+      {start:"09:00", end:"09:45", name:"Gap"},
+      {start:"10:00", end:"10:45", name:"Pilates Clínico"},
+      {start:"18:15", end:"19:00", name:"Step"},
+      {start:"19:15", end:"20:00", name:"Pilates Clínico"}
+    ],
+    6: [
+      {start:"09:15", end:"10:00", name:"Circuito"},
+      {start:"10:00", end:"10:45", name:"Pilates Clínico"},
+      {start:"11:00", end:"11:45", name:"Gap"},
+      {start:"12:00", end:"13:00", name:"Kickboxing"}
+    ],
+    0: []
+  };
+
+  const DAY_LABELS = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+  const TIMEZONE = "Europe/Lisbon";
+  const timeToMin = t => { const [h,m] = t.split(':').map(Number); return h*60 + m; };
+  const minToHHMM = x => `${String(Math.floor(x/60)).padStart(2,'0')}:${String(x%60).padStart(2,'0')}`;
+  const nowPT = () => new Date(new Date().toLocaleString('en-US',{timeZone:TIMEZONE}));
+
+  function calcOpen(){
+    const now = nowPT(); const d = now.getDay(); const cur = now.getHours()*60 + now.getMinutes();
+    const periods = SCHEDULE[d] || []; let open = false, closeAt = null;
+    for (const p of periods) { const s = timeToMin(p.start), e = timeToMin(p.end); if (cur >= s && cur < e) { open = true; closeAt = p.end; break; } }
+    const b = document.getElementById('openBadge'), t = document.getElementById('statusText'), h = document.getElementById('nextChange');
+    if (!b || !t || !h) return;
+    if (open) { b.className='badge badge-open'; t.textContent='Aberto agora'; h.textContent=`Fecha às ${closeAt}`; }
+    else {
+      const next = nextOpening(d, cur);
+      if (next) { b.className = next.minutesUntil<=120 ? 'badge badge-soon' : 'badge badge-closed'; t.textContent='Fechado agora'; h.textContent=`Abre ${next.when}`; }
+      else { b.className='badge badge-closed'; t.textContent='Fechado agora'; h.textContent=''; }
+    }
+  }
+  function nextOpening(day, cur){
+    const today = SCHEDULE[day]||[];
+    for (const p of today){ const s = timeToMin(p.start); if (s > cur) return {minutesUntil:s-cur, when:`às ${p.start}`}; }
+    for (let a=1; a<=7; a++){ const nd=(day+a)%7, next=SCHEDULE[nd]||[]; if (next.length){ const s=timeToMin(next[0].start); return {minutesUntil:a*1440 + s - cur, when:`${DAY_LABELS[nd]} às ${next[0].start}`}; } }
+    return null;
+  }
+
+  function calcClasses(){
+    const now = nowPT(); const d = now.getDay(); const cur = now.getHours()*60 + now.getMinutes();
+    const list = CLASSES[d] || []; const running = [];
+    for (const c of list){ const s=timeToMin(c.start), e=timeToMin(c.end); if (cur >= s && cur < e) running.push(c); }
+    const b=document.getElementById('classBadge'), t=document.getElementById('classStatusText'), h=document.getElementById('classHint');
+    if (!b || !t || !h) return;
+    if (running.length){
+      b.className='badge badge-open';
+      t.innerHTML = `A decorrer agora: ${running.map(c=>`<span class="pill">${c.name}</span>`).join(' ')}`;
+      const earliest = Math.min(...running.map(c=>timeToMin(c.end)));
+      h.textContent = `Termina às ${minToHHMM(earliest)}`;
+    } else {
+      const next = nextClass(d, cur);
+      if (next){
+        b.className = next.minutesUntil<=120 ? 'badge badge-soon' : 'badge badge-closed';
+        t.innerHTML = `Próxima aula: ${next.classes.map(c=>`<span class="pill">${c.name}</span>`).join(' ')}`;
+        h.textContent = next.when;
+      } else {
+        b.className='badge badge-closed'; t.textContent='Sem aulas programadas'; h.textContent='';
+      }
+    }
+  }
+  function nextClass(day, cur){
+    const today = CLASSES[day] || [];
+    for (const c of today){ const s=timeToMin(c.start); if (s > cur){ const same=today.filter(x=>timeToMin(x.start)===s); return {minutesUntil:s-cur, when:`às ${c.start}`, classes:same}; } }
+    for (let a=1; a<=7; a++){ const nd=(day+a)%7, next=CLASSES[nd]||[]; if (next.length){ const s=timeToMin(next[0].start); const same=next.filter(x=>timeToMin(x.start)===s); return {minutesUntil:a*1440 + s - cur, when:`${DAY_LABELS[nd]} às ${next[0].start}`, classes:same}; } }
+    return null;
+  }
+
+  const update = () => { calcOpen(); calcClasses(); };
+  update(); setInterval(update, 60000);
+}
+document.addEventListener('DOMContentLoaded', initScheduleStatus);
+
+/* ==========================================
+   8) ABOUT rotator (imagens)
+   ========================================== */
+(() => {
+  const ROOT = document.getElementById('aboutRotator');
+  if (!ROOT) return;
+  const dataAttr = ROOT.getAttribute('data-images') || '';
+  const PLAYLIST = dataAttr.split(',').map(s=>s.trim()).filter(Boolean);
+  if (PLAYLIST.length < 2) return;
+
+  const INTERVAL_MS = 300000;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const imgs = ROOT.querySelectorAll('.about-rotator-img');
+  if (imgs.length < 2) return;
+
+  const preload = src => { const im = new Image(); im.src = src; };
+  let i = 0, showing = 0, timer = null, running = false;
+
+  const setSrc = (el, src) => { if (src) el.src = src; };
+
+  setSrc(imgs[0], PLAYLIST[0]); imgs[0].classList.add('show');
+  setSrc(imgs[1], PLAYLIST[1]); preload(PLAYLIST[2]);
+  i = 1 % PLAYLIST.length;
+
+  const nextIndex = idx => (idx + 1) % PLAYLIST.length;
+
+  const crossfade = () => {
+    const hiding = showing, coming = showing ^ 1;
+    i = nextIndex(i);
+    setSrc(imgs[coming], PLAYLIST[i]);
+
+    const run = () => {
+      imgs[hiding].classList.remove('show');
+      imgs[coming].classList.add('show');
+      showing = coming;
+      const preloadIdx = nextIndex(i);
+      preload(PLAYLIST[preloadIdx]);
+      i = preloadIdx;
+    };
+
+    if (imgs[coming].complete) run();
+    else imgs[coming].addEventListener('load', run, {once:true});
+  };
+
+  const start = () => { if (running || reduce) return; running = true; timer = setInterval(crossfade, INTERVAL_MS); };
+  const stop  = () => { running = false; if (timer) clearInterval(timer); timer = null; };
+
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting ? start() : stop()), {threshold: 0.4});
+    obs.observe(ROOT);
+  } else { start(); }
+
+  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', e => e.matches ? stop() : start());
+})();
+</script>
+
+</body>
+</html>

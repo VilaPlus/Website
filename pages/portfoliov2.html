@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pt" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>Galeria | Vila Plus</title>
+
+  <!-- Meta SEO -->
+  <meta name="description" content="Explora álbuns de fotos e vídeos do VilaPlus: instalações, aulas, eventos e comunidade.">
+  <link rel="canonical" href="portfoliov2.html"/>
+
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/logoazulcinza.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logoazulcinza.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* ============== Design System (mobile first) ============== */
+    :root{
+      --azul:#2563eb; --azul-escuro:#1f5073; --cinza-fundo:#f8f9fb; --cinza-card:#f1f3f7;
+      --cinza-medio:#6b7280; --dourado:#d4af37; --branco:#ffffff; --preto:#111827;
+      --transition:all .3s ease; --radius:14px; --shadow:0 8px 24px rgba(0,0,0,.06);
+      --shadow-lg:0 18px 36px rgba(0,0,0,.12); --header-h:60px; --container-padding:1rem;
+      --section-padding: 3rem 0;
+    }
+    @media (min-width:768px){ :root{ --container-padding:2rem } }
+
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Lato',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--preto);background:var(--branco);line-height:1.6;padding-top:var(--header-h);overflow-x:hidden}
+    img,video{max-width:100%;height:auto;display:block}
+    a{color:inherit;text-decoration:none;transition:var(--transition);-webkit-tap-highlight-color:transparent}
+    h1,h2,h3,h4,h5,h6{font-family:'Playfair Display',serif;font-weight:700;line-height:1.2;margin:0 0 1rem;color:var(--azul-escuro)}
+    .container{width:100%;max-width:1200px;margin:0 auto;padding:0 var(--container-padding)}
+    section{padding:var(--section-padding);scroll-margin-top:var(--header-h)}
+
+    /* ============== HEADER (EXATAMENTE IGUAL AO CONTACTOS) ============== */
+    header{
+      position:fixed; top:0; left:0; width:100%; z-index:1000;
+      padding:.75rem 0; background:#fff;
+      box-shadow:0 2px 10px rgba(0,0,0,.05);
+      transition:var(--transition); height:var(--header-h);
+    }
+    header.scrolled{ box-shadow:0 4px 15px rgba(0,0,0,.08); padding:.5rem 0; }
+    .header-container{ display:flex; justify-content:space-between; align-items:center; height:100%; }
+    .logo-img{ height:40px; width:auto; transition:var(--transition); }
+    .logo-img:hover{ opacity:.9; transform:scale(1.03); }
+    nav ul{ display:flex; list-style:none; margin:0; padding:0; }
+    nav ul li{ margin-left:1.5rem; position:relative; }
+    nav ul li:first-child{ margin-left:0; }
+    nav ul li a{
+      font-weight:700; font-size:.85rem; letter-spacing:.5px; text-transform:uppercase;
+      color:var(--azul-escuro); padding:.5rem 0; display:block; position:relative;
+    }
+    nav ul li a::after{
+      content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px;
+      background:var(--dourado); transition:var(--transition);
+    }
+    nav ul li a:hover::after,
+    nav ul li a[aria-current="page"]::after{ width:100%; }
+    .mobile-menu-btn{
+      display:none; font-size:1.5rem; color:var(--azul-escuro); background:none; border:none;
+      padding:.5rem; min-height:44px; min-width:44px; align-items:center; justify-content:center;
+    }
+    @media (max-width:768px){
+      nav ul{
+        display:none; position:fixed; top:var(--header-h); left:0; width:100%;
+        background:#fff; flex-direction:column; padding:1rem;
+        box-shadow:0 10px 15px rgba(0,0,0,.1);
+        max-height:calc(100vh - var(--header-h)); overflow-y:auto;
+      }
+      nav ul.show{ display:flex; }
+      nav ul li{ margin:.75rem 0; }
+      .mobile-menu-btn{ display:flex; }
+    }
+
+    /* Botões (resto da página) */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 1.5rem;border:1px solid var(--dourado);color:var(--dourado);font-weight:700;letter-spacing:.5px;text-transform:uppercase;font-size:.85rem;cursor:pointer;transition:var(--transition);border-radius:10px;min-height:44px}
+    .btn:hover{background:var(--dourado);color:var(--branco)}
+    .btn:focus-visible{outline:3px solid #0000; box-shadow:0 0 0 3px rgba(212,175,55,.45)}
+
+    /* A11y helpers */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    :focus-visible{outline:2px solid var(--dourado);outline-offset:2px}
+
+    /* ============== Hero ============== */
+    .hero-galeria{min-height:46vh;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--branco);background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('../assets/projetos/off-season/1.jpg') center/cover no-repeat;margin-top:0;padding:3rem 1rem}
+    .hero-galeria h1{font-size:clamp(2rem,5vw,3rem);color:#fff}
+    .hero-galeria p{font-size:1.05rem;max-width:760px;margin:0 auto;opacity:.95;color:#eaf1ff}
+
+    /* ============== Barra de ações ============== */
+    .gallery-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+    .left-actions{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+    .search-wrap{flex:1;min-width:220px;display:flex;align-items:center;gap:.6rem;background:var(--branco);border:1px solid #e5e7eb;padding:.625rem .875rem;border-radius:10px}
+    .search-wrap i{color:var(--cinza-medio)}
+    .search-wrap input{border:none;outline:none;width:100%;font-size:.95rem;background:transparent}
+    .filters{display:flex;flex-wrap:wrap;gap:.5rem}
+    .chip{padding:.55rem .9rem;border:1px solid var(--azul);color:var(--azul);border-radius:999px;font-weight:700;font-size:.8rem;cursor:pointer;background:#fff}
+    .chip.active,.chip:hover{background:var(--azul);color:#fff}
+    .sorter{display:flex;align-items:center;gap:.5rem}
+    .sorter select{border:1px solid #e5e7eb;padding:.625rem .875rem;border-radius:10px;background:#fff;font-weight:700}
+
+    /* ============== Grelha de álbuns ============== */
+    .albuns-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
+    @media (min-width:992px){.albuns-grid{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}}
+    .album-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);cursor:pointer;display:flex;flex-direction:column;border-bottom:3px solid transparent}
+    .album-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-bottom-color:var(--dourado)}
+    .album-card:focus-visible{outline:3px solid #0000; box-shadow:0 0 0 4px rgba(37,99,235,.35)}
+    .album-thumb{position:relative;overflow:hidden;aspect-ratio:16/10;background:#e5e7eb}
+    .album-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+    .album-thumb video{width:100%;height:100%;object-fit:cover;display:block}
+    .album-card:hover .album-thumb img{transform:scale(1.06)}
+    .album-count{position:absolute;top:12px;right:12px;background:var(--dourado);color:#fff;padding:6px 10px;border-radius:999px;font-size:.78rem;font-weight:800}
+    .album-badge{position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,.55);color:#fff;padding:6px 10px;border-radius:8px;font-size:.75rem;font-weight:700}
+    .album-info{padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px}
+    .album-info h3{font-size:1.15rem;margin:0}
+    .album-meta-line{display:flex;flex-wrap:wrap;gap:10px;color:var(--cinza-medio);font-size:.9rem}
+    .album-meta-line i{color:var(--dourado)}
+    .album-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+    .tag{background:var(--cinza-fundo);color:var(--cinza-medio);font-size:.75rem;padding:4px 8px;border-radius:999px}
+    .empty-state{background:var(--cinza-fundo);border:1px dashed #d1d5db;border-radius:12px;padding:28px;text-align:center;color:var(--cinza-medio)}
+
+    /* ============== Slider (fullscreen) ============== */
+    .slider{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:2000;opacity:0;transition:opacity .25s ease}
+    .slider.active{display:flex;opacity:1;align-items:center;justify-content:center}
+    .slider-content{position:relative;width:min(96vw,1200px);height:min(86vh,800px);display:flex;align-items:center;justify-content:center}
+    .slide-media{max-width:100%;max-height:100%;object-fit:contain;border-radius:10px}
+    .slider-close{position:absolute;top:-56px;right:0;color:#fff;font-size:1.8rem;cursor:pointer;background:rgba(0,0,0,.5);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .slider-nav{position:absolute;top:50%;left:0;width:100%;display:flex;justify-content:space-between;transform:translateY(-50%);pointer-events:none}
+    .slider-prev,.slider-next{pointer-events:auto;color:#fff;font-size:1.6rem;cursor:pointer;background:rgba(0,0,0,.5);width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .slider-counter{position:absolute;bottom:-40px;left:0;right:0;text-align:center;color:#fff;font-weight:700}
+
+    /* ============== Footer (igual Contactos) ============== */
+    footer{background:var(--azul-escuro);color:var(--branco);padding:3rem 0 1.5rem}
+    .footer-container{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-bottom:3rem}
+    .footer-col h3{font-size:1.3rem;margin-bottom:1.25rem;color:#fff}
+    .footer-col p{color:var(--cinza-card);margin-bottom:1.25rem}
+    .footer-links ul{list-style:none;padding:0;margin:0}
+    .footer-links ul li{margin-bottom:.5rem}
+    .footer-links ul li a{color:var(--cinza-card);display:block;padding:.25rem 0;transition:var(--transition)}
+    .footer-links ul li a:hover{color:var(--dourado);padding-left:.25rem}
+    .social-links{display:flex;gap:.75rem}
+    .social-links a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;transition:var(--transition)}
+    .social-links a:hover{background:var(--dourado);transform:translateY(-3px)}
+    @media (min-width:768px){.footer-container{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:1024px){.footer-container{grid-template-columns:repeat(4,1fr)}}
+
+    /* ============== FAB (não usado aqui – mantido para consistência) ============== */
+    .floating-cta{position:fixed;right:1rem;bottom:1rem;z-index:9999}
+    .fab-contact{display:inline-flex;align-items:center;gap:.5rem;background:var(--dourado);color:#fff;border:0;border-radius:999px;padding:12px 16px;font-weight:800;letter-spacing:.3px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .2s ease,box-shadow .2s ease,opacity .2s ease;min-height:52px}
+    .fab-contact:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.3)}
+    .fab-contact.pulse{animation:fabPulse 2s infinite}
+    @keyframes fabPulse{0%{box-shadow:0 0 0 0 rgba(212,175,55,.55)}70%{box-shadow:0 0 0 16px rgba(212,175,55,0)}100%{box-shadow:0 0 0 0 rgba(212,175,55,0)}}
+    .fab-contact i{font-size:1.1rem}
+    @media (max-width:768px){.fab-contact span{display:none}.fab-contact{padding:14px}.fab-contact i{font-size:1.3rem}}
+
+    /* ============== Toast ============== */
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#111827;color:#fff;padding:10px 14px;border-radius:8px;opacity:0;pointer-events:none;transition:all .3s ease;z-index:3000}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    /* ============== Animações ============== */
+    .animate{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+    .animate.show{opacity:1;transform:translateY(0)}
+    .delay-1{transition-delay:.15s}.delay-2{transition-delay:.3s}.delay-3{transition-delay:.45s}
+
+    @media (prefers-reduced-motion:reduce){
+      *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+      html{scroll-behavior:auto}
+      .animate,.animate.show{transition:none;transform:none;opacity:1}
+      .fab-contact.pulse{animation:none}
+    }
+
+    /* Scroll hint */
+    .scroll-hint{position:fixed;bottom:1.5rem;left:1.5rem;z-index:9999;color:var(--dourado);font-size:1.8rem;animation:bounce 1.5s infinite;opacity:.8;cursor:default;pointer-events:none}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+    .scroll-hint.hide{display:none}
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header (igual Contactos) ===== -->
+  <header id="header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <img src="../assets/logoazulcinza.png" alt="VilaPlus Ginásio" class="logo-img" decoding="async">
+      </a>
+      <nav aria-label="Menu principal">
+        <ul id="main-menu">
+          <li><a href="index.html#home">Início</a></li>
+          <li><a href="servicosv2.html">Serviços</a></li>
+          <li><a href="projetosv2.html">Projetos</a></li>
+          <li><a href="portfoliov2.html" aria-current="page">Galeria</a></li>
+          <li><a href="index.html#horarios">Horários</a></li>
+          <li><a href="parceriasv2.html">Parcerias</a></li>
+          <li><a href="lojav2.html">Loja</a></li>
+          <li><a href="noticiasv2.html">Notícias</a></li>
+          <li><a href="contactsv2.html">Contactos</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero-galeria">
+      <div class="container">
+        <h1>Galeria</h1>
+        <p>Álbuns de fotos e vídeos: instalações, aulas, eventos e a nossa comunidade.</p>
+      </div>
+    </section>
+
+    <!-- Lista de Álbuns -->
+    <section class="galeria-section" id="galeria" aria-label="Lista de álbuns">
+      <div class="container">
+        <div class="section-title animate">
+          <h2>Álbuns Fotográficos</h2>
+          <p>Filtra por categoria, pesquisa por título, tags ou local e abre um álbum para ver o conteúdo em ecrã inteiro.</p>
+        </div>
+
+        <div class="gallery-actions animate delay-1">
+          <div class="left-actions">
+            <div class="filters" id="filters" role="tablist" aria-label="Filtros por categoria"></div>
+            <div class="sorter">
+              <label for="sort-select" class="sr-only">Ordenar</label>
+              <select id="sort-select" aria-label="Ordenar resultados">
+                <option value="recent">Mais recentes</option>
+                <option value="az">A–Z</option>
+                <option value="za">Z–A</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="search-wrap" for="search-input" aria-label="Pesquisar">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input id="search-input" type="search" placeholder="Pesquisar por título, tags ou local…" inputmode="search" autocomplete="off" />
+          </label>
+        </div>
+
+        <div class="albuns-grid" id="albuns-grid" aria-live="polite"></div>
+
+        <div class="empty-state" id="empty-state" hidden>
+          Sem resultados para este filtro/pesquisa. Ajusta os filtros ou limpa a pesquisa.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Slider (Fullscreen) -->
+  <div class="slider" id="slider" role="dialog" aria-modal="true" aria-label="Slide de média do álbum">
+    <div class="slider-content">
+      <button class="slider-close" onclick="closeSlider()" aria-label="Fechar"><i class="fas fa-times"></i></button>
+      <div class="slider-nav" aria-hidden="false">
+        <button class="slider-prev" onclick="changeSlide(-1)" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-next" onclick="changeSlide(1)" aria-label="Seguinte"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div id="slide-holder" class="slide-media" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"></div>
+      <div class="slider-counter" id="slider-counter"></div>
+    </div>
+  </div>
+
+  <!-- ===== Footer (igual Contactos) ===== -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col animate">
+          <h3>Vila Plus</h3>
+          <p>Saúde. Força. Comunidade.</p>
+          <p>O teu ginásio de eleição em Vila Caiz.</p>
+        </div>
+        <div class="footer-col animate delay-1">
+          <h3>Links Rápidos</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html#home">Início</a></li>
+              <li><a href="servicosv2.html">Serviços</a></li>
+              <li><a href="projetosv2.html">Projetos</a></li>
+              <li><a href="index.html#horarios">Horários</a></li>
+              <li><a href="parceriasv2.html">Parcerias</a></li>
+              <li><a href="lojav2.html">Loja</a></li>
+              <li><a href="noticiasv2.html">Notícias</a></li>
+              <li><a href="contactsv2.html">Contactos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-col animate delay-2">
+          <h3>Explora a Galeria</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="#galeria">Ver todos os álbuns</a></li>
+              <li><a href="#album=treino-personalizado">Treinos Personalizados</a></li>
+              <li><a href="#album=aulas-grupo">Aulas &amp; Avaliações</a></li>
+              <li><a href="#album=caminhada-10k-2025-05-pico960">Eventos Outdoor</a></li>
+              <li><a href="#album=workshop-nutricao-2025-02">Workshops e Formação</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col animate delay-3">
+          <h3>Redes Sociais</h3>
+          <div class="social-links">
+            <a href="https://www.facebook.com/p/Vila-Plus-61552410020366/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/vilaplus.pt/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/351931999690" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <div class="scroll-hint" id="scrollHint" aria-hidden="true">
+    <i class="fas fa-angle-down"></i>
+  </div>
+
+  <script>
+    // Scroll hint
+    (function(){
+      const hint = document.getElementById('scrollHint');
+      if(!hint) return;
+      function toggleHint(){
+        const scrollY = window.scrollY, winH = window.innerHeight, docH = document.body.scrollHeight;
+        if(scrollY + winH >= docH - 50) hint.classList.add('hide'); else hint.classList.remove('hide');
+      }
+      window.addEventListener('scroll', toggleHint);
+      window.addEventListener('resize', toggleHint);
+      document.addEventListener('DOMContentLoaded', toggleHint);
+    })();
+  </script>
+
+  <!-- ======= DATA ======= -->
+  <script>
+    const albuns = {
+      "workshop-nutricao-2025-02": {
+        title: "Workshop Nutrição",
+        date: "JANEIRO 2025",
+        dateSort: "2025-02-01",
+        location: "Vila Plus",
+        category: "Eventos",
+        tags: ["Nutrição","Workshop","Saúde"],
+        description: "Sessão prática e dinâmica sobre hábitos alimentares e estratégias para performance e recuperação.",
+        media: [
+          { type:"image", src:"../assets/nutricao/3f0a2043-2afa-417e-bdbb-d85f078843cd.jpg" },
+          { type:"image", src:"../assets/nutricao/4cd48e8d-d381-432f-b558-97d48b301724.jpg" },
+          { type:"image", src:"../assets/nutricao/6929aa3c-8065-4960-8eaa-b61a6ae2a2ac.jpg" },
+          { type:"image", src:"../assets/nutricao/bb735a02-9d2a-465e-86da-73f5103da4a4.jpg" },
+          { type:"image", src:"../assets/nutricao/bcda35a4-57a3-405a-a35b-ecd529fe1c69.jpg" }
+        ]
+      },
+      "carnaval-2025": {
+        title: "Carnaval 2025",
+        date: "MARÇO 2025",
+        dateSort: "2025-02-15",
+        location: "Vila Plus",
+        category: "Eventos",
+        tags: ["Carnaval","Comunidade","Diversão"],
+        description: "Aulas temáticas, disfarces e muita energia! Obrigado a todos pela participação.",
+        media: [
+          { type:"image", src:"../assets/carnaval/aff6b15a-d91e-4836-96f3-8733c012b190.jpg" },
+          { type:"image", src:"../assets/carnaval/d27a52f8-2bea-41c9-bef8-4f6056e7a4bf.jpg" }
+        ]
+      },
+      "caminhada-10k-2025-05-pico960": {
+        title: "Caminhada 10 km — Pico 960",
+        date: "MAIO 2025",
+        dateSort: "2025-05-10",
+        location: "Percurso Pico 960 (10 km)",
+        category: "Outdoor",
+        tags: ["Caminhada","Ar Livre","Comunidade"],
+        description: "Trilho de 10 km com vista incrível — foco em convívio, saúde e contacto com a natureza.",
+        media: [
+          { type:"image", src:"../assets/pico/4af96520-344f-46c7-97db-831e8ad4b906.jpg" },
+          { type:"image", src:"../assets/pico/4df96272-b002-4973-bb9b-5a6209f8fd60.jpg" },
+          { type:"image", src:"../assets/pico/ae28a9fd-e134-44c1-be55-5e9079b87641.jpg" }
+        ]
+      },
+      "aulas-grupo": {
+        title: "Pilates, Zumba & Avaliação Física",
+        date: "A Decorrer",
+        dateSort: "2024-04-01",
+        location: "Vila Plus",
+        category: "Aulas",
+        tags: ["Zumba","HIIT","Avaliação Fisica"],
+        description: "Energia e variedade — do HIIT ao Pilates, passa pela dança e cycling.",
+        media: [
+          { type:"image", src:"../assets/zumpi/c89ca5bd-c410-4176-94c7-b30b6986bd7f.jpg" },
+          { type:"image", src:"../assets/zumpi/237ea699-109a-4ed8-a45b-4e39173de3b6.jpg" },
+          { type:"image", src:"../assets/zumpi/2dca591e-c68a-45f0-ba8d-2071e0fb4509.jpg" },
+          { type:"image", src:"../assets/zumpi/2f13da4e-f434-406d-a398-17af186a753b.jpg" },
+          { type:"image", src:"../assets/zumpi/49712be2-0060-4ebb-b513-974be4631c1f.jpg" },
+          { type:"image", src:"../assets/zumpi/7a9696fc-7517-4cac-988e-d9dc46e0146e.jpg" },
+          { type:"image", src:"../assets/zumpi/a06b9b7b-c46e-4ec1-977b-fee7fe565344.jpg" },
+          { type:"image", src:"../assets/zumpi/a7a1e0c4-43d2-4789-9f41-a4ae6459f5e7.jpg" },
+          { type:"image", src:"../assets/zumpi/b48ce292-f13d-4a5e-94cc-da966df0a50c.jpg" },
+          { type:"image", src:"../assets/zumpi/c847bc0b-4af4-468d-a642-6a195f64105f.jpg" },
+          { type:"image", src:"../assets/zumpi/c88d69c7-674d-4efb-aacc-372fdf46a705.jpg" },
+          { type:"image", src:"../assets/zumpi/dc93feff-407d-4f5d-b2fc-88672638fe98.jpg" },
+          { type:"image", src:"../assets/zumpi/de420076-c555-4eda-85db-f7947fe5cdbb.jpg" },
+          { type:"image", src:"../assets/zumpi/f5fd6eab-2b74-4d02-a469-f098d3bf29a2.jpg" },
+          { type:"image", src:"../assets/zumpi/f8d74aa8-49a7-4adc-857e-b370d68c7dde.jpg" }
+        ]
+      },
+      "abertura": {
+        title: "Inauguração",
+        date: "OUTUBRO 2023",
+        dateSort: "2023-12-01",
+        location: "Vila Plus",
+        category: "Eventos",
+        tags: ["Início","Comunidade"],
+        description: "O começo desta caminhada — obrigado a todos os presentes!",
+        media: [
+          { type: "image", src: "../assets/inauguracao/0bfdc6bc-d98f-4491-b738-615dd6fb7dd2.jpg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.17 (1).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.17 (2).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.17.jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (1).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (2).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (3).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (4).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (5).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (6).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (7).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (8).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (9).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (10).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (11).jpeg" },
+          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18.jpeg" }
+        ]
+      },
+
+      "treino-personalizado": {
+        title: "Treino Personalizado",
+        date: "A Decorrer",
+        dateSort: "2025-01-01",
+        location: "Vila Plus",
+        category: "Aulas",
+        tags: ["Vídeos","Treino Personalizado"],
+        description: "Clipes de sessões de Treino Personalizado no Vila Plus.",
+        media: [
+          { type:"video", src:"../assets/1.mp4" },
+          { type:"video", src:"../assets/2.mp4" },
+          { type:"video", src:"../assets/3.mp4" },
+          { type:"video", src:"../assets/4.mp4" },
+          { type:"video", src:"../assets/5.mp4" },
+          { type:"video", src:"../assets/6.mp4" }
+        ]
+      }
+    };
+  </script>
+
+  <!-- ======= JS: header var ======= -->
+  <script>
+    (function () {
+      const header = document.getElementById('header');
+      if (!header) return;
+      const setHeaderVar = () => {
+        const h = header.offsetHeight || 60;
+        document.documentElement.style.setProperty('--header-h', h + 'px');
+      };
+      ['DOMContentLoaded','load','resize','scroll'].forEach(ev=>window.addEventListener(ev,setHeaderVar));
+      if ('ResizeObserver' in window) new ResizeObserver(setHeaderVar).observe(header);
+      setHeaderVar();
+    })();
+  </script>
+
+  <!-- ======= JS: menu + sombra ======= -->
+  <script>
+    (function(){
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mainMenu = document.getElementById('main-menu');
+      const header = document.getElementById('header');
+
+      mobileMenuBtn?.addEventListener('click', ()=>{
+        const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+        mobileMenuBtn.setAttribute('aria-expanded', String(!expanded));
+        mainMenu?.classList.toggle('show');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (icon) icon.className = expanded ? 'fas fa-bars' : 'fas fa-times';
+      });
+
+      mainMenu?.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', ()=>{
+          if (window.innerWidth <= 768) {
+            mainMenu.classList.remove('show');
+            mobileMenuBtn?.setAttribute('aria-expanded','false');
+            const icon = mobileMenuBtn?.querySelector('i');
+            if (icon) icon.className = 'fas fa-bars';
+          }
+        });
+      });
+
+      window.addEventListener('scroll', ()=>{
+        if (window.scrollY > 100) header?.classList.add('scrolled');
+        else header?.classList.remove('scrolled');
+      });
+    })();
+  </script>
+
+  <!-- ======= JS: animações ======= -->
+  <script>
+    (function(){
+      const animateEls = document.querySelectorAll('.animate');
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); observer.unobserve(e.target); } });
+      },{threshold:.12});
+      animateEls.forEach(el=>observer.observe(el));
+      window.__vilaObserver = observer;
+    })();
+  </script>
+
+  <!-- ======= JS: cards + filtros + slider ======= -->
+  <script>
+    let currentAlbumKey=null, currentIndex=0, lastFocusedCard=null;
+
+    const grid = document.getElementById('albuns-grid');
+    const emptyState = document.getElementById('empty-state');
+    const filtersEl = document.getElementById('filters');
+    const searchInput = document.getElementById('search-input');
+    const sortSelect = document.getElementById('sort-select');
+
+    const slider = document.getElementById('slider');
+    const sliderCounter = document.getElementById('slider-counter');
+
+    const normalize = s => (s||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+
+    // Chips de categoria
+    (function buildChips(){
+      const categories = ["Todos", ...Array.from(new Set(Object.values(albuns).map(a=>a.category)))];
+      categories.forEach((c,i)=>{
+        const chip = document.createElement('button');
+        chip.className = 'chip' + (i===0 ? ' active' : '');
+        chip.setAttribute('role','tab');
+        chip.setAttribute('aria-selected', i===0 ? 'true' : 'false');
+        chip.dataset.cat = c;
+        chip.textContent = c;
+        chip.addEventListener('click', ()=>{
+          document.querySelectorAll('.chip').forEach(ch=>{ ch.classList.remove('active'); ch.setAttribute('aria-selected','false'); });
+          chip.classList.add('active'); chip.setAttribute('aria-selected','true');
+          renderAlbumCards();
+        });
+        filtersEl.appendChild(chip);
+      });
+    })();
+
+    const passFilters = (a)=>{
+      const activeCat = document.querySelector('.chip.active')?.dataset.cat || 'Todos';
+      const q = normalize(searchInput.value);
+      const hay = `${normalize(a.title)} ${normalize(a.description)} ${normalize(a.location)} ${(a.tags||[]).map(normalize).join(' ')}`;
+      const matchesCat = activeCat==='Todos' || a.category===activeCat;
+      const matchesQuery = !q || hay.includes(q);
+      return matchesCat && matchesQuery;
+    };
+
+    const sortAlbums = entries => {
+      const mode = sortSelect.value;
+      return entries.sort(([,a],[,b])=>{
+        if(mode==='recent'){
+          if ((b.dateSort||'') === (a.dateSort||'')) return 0;
+          return (b.dateSort||'') > (a.dateSort||'') ? 1 : -1;
+        }
+        if(mode==='az') return a.title.localeCompare(b.title,'pt');
+        if(mode==='za') return b.title.localeCompare(a.title,'pt');
+        return 0;
+      });
+    };
+
+    function renderAlbumCards(){
+      grid.innerHTML = '';
+      const list = sortAlbums(Object.entries(albuns)).filter(([,a])=>passFilters(a));
+      emptyState.hidden = list.length>0;
+
+      list.forEach(([key,a])=>{
+        const totalMedia = (a.media||[]).length;
+        const onlyVideos = (a.media||[]).every(m=>m.type==='video');
+        const labelCount = onlyVideos
+          ? `${totalMedia} ${totalMedia===1?'vídeo':'vídeos'}`
+          : `${totalMedia} ${totalMedia===1?'conteúdo':'conteúdos'}`;
+
+        const card = document.createElement('article');
+        card.className = 'album-card animate';
+        card.setAttribute('tabindex','0');
+        card.setAttribute('role','button');
+        card.setAttribute('aria-label', `${a.title}, ${labelCount}`);
+        card.addEventListener('click', ()=>{ lastFocusedCard = card; openSlider(0,key); });
+        card.addEventListener('keypress', e=>{ if(e.key==='Enter'){ lastFocusedCard = card; openSlider(0,key); } });
+
+        const first = (a.media||[])[0];
+        const thumbHTML = (first?.type === 'image')
+          ? `<img loading="lazy" decoding="async" src="${first.src}" alt="${a.title}" sizes="(max-width: 600px) 100vw, 33vw">`
+          : `
+            <video
+              class="album-thumb-video"
+              src="${first?.src || ''}#t=0.1"
+              muted
+              loop
+              autoplay
+              playsinline
+              preload="metadata"
+              aria-label="${a.title} — pré-visualização"
+            ></video>
+          `;
+
+        card.innerHTML = `
+          <div class="album-thumb">
+            ${thumbHTML}
+            <span class="album-count">${labelCount}</span>
+            <span class="album-badge"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> ${a.category}</span>
+          </div>
+          <div class="album-info">
+            <span class="album-meta-line"><i class="fa-regular fa-calendar"></i> ${a.date} • <i class="fa-solid fa-location-dot"></i> ${a.location}</span>
+            <h3>${a.title}</h3>
+            <div class="album-tags">
+              ${(a.tags||[]).map(t=>`<span class="tag">#${t}</span>`).join('')}
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      const obs = window.__vilaObserver;
+      if (obs) document.querySelectorAll('.albuns-grid .animate').forEach(el=>obs.observe(el));
+
+      const thumbVideos = grid.querySelectorAll('.album-thumb-video');
+      if ('IntersectionObserver' in window){
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(e=>{
+            const v = e.target;
+            if (e.isIntersecting) { v.play().catch(()=>{}); }
+            else { v.pause(); }
+          });
+        }, {threshold:.2});
+        thumbVideos.forEach(v=>io.observe(v));
+      } else {
+        thumbVideos.forEach(v=>v.play().catch(()=>{}));
+      }
+    }
+
+    let searchTimer=null;
+    searchInput.addEventListener('input', ()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(renderAlbumCards, 160); });
+    sortSelect.addEventListener('change', renderAlbumCards);
+
+    /* ===== Slider ===== */
+    function getAlbumMedia(){ const a = albuns[currentAlbumKey]; return (a?.media||[]); }
+
+    function openSlider(startIndex, albumKey){
+      if (albumKey) currentAlbumKey = albumKey;
+      const items = getAlbumMedia();
+      if(!items.length) return;
+      currentIndex = Math.max(0, Math.min(startIndex||0, items.length-1));
+      renderSlide();
+      document.getElementById('slider').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      history.replaceState(null,'',`#album=${currentAlbumKey}`);
+      setTimeout(()=>document.querySelector('.slider-close')?.focus(), 0);
+    }
+
+    function closeSlider(){
+      document.getElementById('slider').classList.remove('active');
+      document.body.style.overflow = 'auto';
+      if(location.hash.startsWith('#album=')) history.replaceState(null,'','#');
+      if (lastFocusedCard) lastFocusedCard.focus();
+    }
+
+    function renderSlide(){
+      const list = getAlbumMedia();
+      const item = list[currentIndex];
+      if(!item) return;
+
+      const holder = document.getElementById('slide-holder');
+      holder.innerHTML = '';
+
+      if(item.type === 'video'){
+        const vid = document.createElement('video');
+        vid.id = 'slide-video';
+        vid.src = item.src;
+        vid.controls = true;
+        vid.autoplay = true;
+        vid.muted = true;
+        vid.playsInline = true;
+        vid.preload = 'metadata';
+        vid.style.maxWidth = '100%';
+        vid.style.maxHeight = '100%';
+        holder.appendChild(vid);
+      } else {
+        const img = document.createElement('img');
+        img.id = 'slide-img';
+        img.src = item.src;
+        img.alt = albuns[currentAlbumKey]?.title || 'Imagem do álbum';
+        img.className = 'slide-media';
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '100%';
+        img.style.objectFit = 'contain';
+        holder.appendChild(img);
+      }
+
+      sliderCounter.textContent = `${currentIndex+1} / ${list.length}`;
+
+      const prev = list[(currentIndex-1+list.length)%list.length];
+      const next = list[(currentIndex+1)%list.length];
+      [prev,next].filter(m=>m?.type==='image').forEach(m=>{ const i=new Image(); i.src=m.src; });
+    }
+
+    function changeSlide(delta){
+      const items = getAlbumMedia();
+      if(!items.length) return;
+      currentIndex = (currentIndex + delta + items.length) % items.length;
+      renderSlide();
+    }
+
+    window.changeSlide = changeSlide;
+    window.closeSlider = closeSlider;
+
+    document.addEventListener('keydown',(e)=>{
+      const slider = document.getElementById('slider');
+      if(!slider.classList.contains('active')) return;
+      if(e.key==='Escape') closeSlider();
+      if(e.key==='ArrowLeft') changeSlide(-1);
+      if(e.key==='ArrowRight') changeSlide(1);
+    });
+
+    (function(){
+      const area = document.querySelector('.slider-content');
+      let startX=0;
+      area.addEventListener('touchstart', e=>{ startX = e.changedTouches[0].screenX; }, {passive:true});
+      area.addEventListener('touchend', e=>{
+        const dx = e.changedTouches[0].screenX - startX;
+        if (Math.abs(dx) > 40) changeSlide(dx>0 ? -1 : 1);
+      }, {passive:true});
+    })();
+
+    function handleHash(){
+      const h = location.hash || '';
+      if(h.startsWith('#album=')){
+        const key = h.split('=')[1];
+        if(albuns[key]) openSlider(0,key);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', ()=>{
+      renderAlbumCards();
+      handleHash();
+    });
+  </script>
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    "name":"Galeria VilaPlus",
+    "description":"Álbuns de fotos e vídeos do VilaPlus.",
+    "hasPart":[
+      {"@type":"Collection","name":"Workshop Nutrição","url":"portfoliov2.html#album=workshop-nutricao-2025-02"},
+      {"@type":"Collection","name":"Carnaval 2025","url":"portfoliov2.html#album=carnaval-2025"},
+      {"@type":"Collection","name":"Caminhada 10 km — Pico 960","url":"portfoliov2.html#album=caminhada-10k-2025-05-pico960"},
+      {"@type":"Collection","name":"Aulas de Grupo","url":"portfoliov2.html#album=aulas-grupo"},
+      {"@type":"Collection","name":"Inauguração","url":"portfoliov2.html#album=abertura"},
+      {"@type":"Collection","name":"Treino Personalizado","url":"portfoliov2.html#album=treino-personalizado"}
+    ]
+  }
+  </script>
+  <script>
+  function handleHash(){
+    const h = location.hash || '';
+
+    // Link para um álbum: #album=chave
+    if (h.startsWith('#album=')) {
+      const key = decodeURIComponent(h.split('=')[1] || '');
+      if (albuns[key]) {
+        // Abre apenas se ainda não estiver esse álbum aberto
+        if (!document.getElementById('slider').classList.contains('active') || currentAlbumKey !== key) {
+          openSlider(0, key);
+        }
+      } else {
+        // (opcional) feedback se a chave não existir
+        const toast = document.getElementById('toast');
+        if (toast) { toast.textContent = 'Álbum não encontrado.'; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 1800); }
+      }
+      return;
+    }
+
+    // Link para a grelha: #galeria
+    if (h === '#galeria') {
+      const el = document.getElementById('galeria');
+      const headerH = (document.getElementById('header')?.offsetHeight || 0);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - headerH, behavior: 'smooth' });
+      // fecha o slider se estiver aberto
+      if (document.getElementById('slider').classList.contains('active')) closeSlider();
+      return;
+    }
+
+    // Qualquer outro hash: garantir que o slider fecha
+    if (document.getElementById('slider').classList.contains('active')) closeSlider();
+  }
+
+  // ⚠️ Adiciona isto: reage quando o hash muda (ex.: clique no footer)
+  window.addEventListener('hashchange', handleHash);
+
+  // Render inicial + abrir se já vier com hash
+  window.addEventListener('DOMContentLoaded', () => {
+    renderAlbumCards();
+    handleHash();
+  });
+</script>
+
+</body>
+</html>

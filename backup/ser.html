@@ -1,0 +1,3382 @@
+<!DOCTYPE html>
+<html lang="pt" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#2563eb" />
+  <title>Serviços | VilaPlus</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/logoazulcinza.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../assets/logoazulcinza.png" />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ==== CSS Reset Melhorado ==== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--preto);
+      background: var(--branco);
+      line-height: 1.6;
+      overflow-x: hidden;
+      text-rendering: optimizeSpeed;
+    }
+    
+    /* Remover decoração padrão de listas */
+    ul, ol {
+      list-style: none;
+    }
+    
+    /* Elementos de mídia responsivos */
+    img, picture, video, canvas, svg {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+    
+    /* Melhorar legibilidade de texto */
+    p, h1, h2, h3, h4, h5, h6 {
+      overflow-wrap: break-word;
+    }
+    
+    /* ==== Design System ==== */
+    :root {
+      --azul: #2563eb;
+      --azul-escuro: #1f5073;
+      --cinza-fundo: #f8f9fb;
+      --cinza-card: #f1f3f7;
+      --cinza-medio: #6b7280;
+      --dourado: #d4af37;
+      --dourado-claro: #e6c965;
+      --branco: #fff;
+      --preto: #111827;
+      --transition: .3s ease;
+      --transition-slow: .6s ease;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.05);
+    }
+    
+    /* Melhorar foco visual para navegação por teclado */
+    *:focus-visible {
+      outline: 2px solid var(--dourado);
+      outline-offset: 2px;
+    }
+    
+    /* Melhorar contraste para links */
+    a {
+      color: var(--azul);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    a:hover, a:focus {
+      color: var(--azul-escuro);
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: var(--azul-escuro);
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    /* Botões com área de toque aumentada */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.75rem;
+      min-height: 44px;
+      border: 1px solid var(--dourado);
+      color: var(--dourado);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      transition: var(--transition);
+      cursor: pointer;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      border-radius: 8px;
+      background: transparent;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--dourado);
+      transition: var(--transition);
+      z-index: -1;
+    }
+    
+    .btn:hover, .btn:focus {
+      color: var(--branco);
+    }
+    
+    .btn:hover::before, .btn:focus::before {
+      left: 0;
+    }
+    
+    .btn-filled {
+      background: var(--dourado);
+      color: var(--branco);
+    }
+    
+    .btn-filled::before {
+      background: var(--branco);
+    }
+    
+    .btn-filled:hover, .btn-filled:focus {
+      color: var(--dourado);
+    }
+    
+    section {
+      padding: 3rem 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+    
+    .section-title h2 {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      margin-bottom: 0.9375rem;
+      display: inline-block;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      display: block;
+      width: 5rem;
+      height: 3px;
+      background: var(--dourado);
+      margin: 1.25rem auto 0;
+      transition: var(--transition-slow);
+    }
+    
+    .section-title:hover h2::after {
+      width: 7.5rem;
+    }
+    
+    .section-title p {
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+      color: var(--cinza-medio);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    header{
+      position:fixed; top:0; left:0; width:100%; z-index:1000;
+      background:var(--branco); box-shadow:0 2px 10px rgba(0,0,0,.05);
+      transition:var(--transition); height:var(--header-height,60px);
+    }
+    header.scrolled{ box-shadow:0 4px 15px rgba(0,0,0,.08); }
+    .header-container{ display:flex; justify-content:space-between; align-items:center; height:100%; }
+    .logo-img{ height:40px; width:auto; transition:var(--transition); }
+    .logo-img:hover{ opacity:.9; transform:scale(1.03); }
+
+    nav ul{ display:flex; list-style:none; margin:0; padding:0; gap:1.25rem; }
+    nav ul li a{ font-weight:700; font-size:.85rem; letter-spacing:.5px; text-transform:uppercase; color:var(--azul-escuro); padding:.5rem 0; position:relative; display:block; }
+    nav ul li a::after{ content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px; background:var(--dourado); transition:var(--transition); }
+    nav ul li a:hover::after, nav ul li a[aria-current="page"]::after{ width:100%; }
+
+    .mobile-menu-btn{ display:none; font-size:1.5rem; color:var(--azul-escuro); background:none; border:none; padding:.5rem; min-height:44px; min-width:44px; align-items:center; justify-content:center; }
+
+    @media (max-width:768px){
+      nav ul{ display:none; position:fixed; top:var(--header-height,60px); left:0; width:100%; background:var(--branco);
+              flex-direction:column; padding:1rem; box-shadow:0 10px 15px rgba(0,0,0,.1); max-height:calc(100vh - var(--header-height,60px));
+              overflow-y:auto; }
+      nav ul.show{ display:flex; }
+      nav ul li{ margin:.75rem 0; }
+      .mobile-menu-btn{ display:flex; }
+    }
+    
+    /* ==== HERO (Serviços) — Melhorado para mobile first ==== */
+    .hero-servicos {
+      min-height: clamp(360px, 70vh, 780px);
+      max-height: 820px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--branco);
+      background:
+        linear-gradient(135deg, rgba(31,80,115,.85) 0%, rgba(31,80,115,.7) 100%),
+        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80')
+        center/cover no-repeat;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+      padding: clamp(1rem, 4vw, 2rem) 1.25rem;
+    }
+    
+    .hero-servicos::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--azul-escuro) 0%, rgba(31,80,115,.8) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(900px, 92vw);
+      margin: 0 auto;
+    }
+    
+    .hero-servicos h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      margin-bottom: clamp(0.625rem, 2vw, 1.25rem);
+      color: #fff;
+      line-height: 1.15;
+      text-shadow: 0 2px 10px rgba(0,0,0,.2);
+    }
+    
+    .hero-servicos p {
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+      max-width: 700px;
+      margin: 0 auto clamp(1.125rem, 3vw, 1.875rem);
+      opacity: 0.95;
+      line-height: 1.6;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: clamp(0.75rem, 3vw, 1.25rem);
+      flex-wrap: wrap;
+      margin-top: clamp(0.875rem, 3vw, 1.875rem);
+    }
+    
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: clamp(1rem, 4vw, 2.5rem);
+      margin-top: clamp(1.25rem, 5vw, 3.125rem);
+      flex-wrap: wrap;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 700;
+      display: block;
+    }
+    
+    .stat-label {
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      display: block;
+      margin-top: 0.25rem;
+    }
+    
+    /* ==== Media Queries para Header e Navegação ==== */
+    @media (max-width: 992px) {
+      .header-container {
+        position: relative;
+      }
+      
+      .mobile-menu-btn {
+        display: flex;
+        z-index: 1001;
+      }
+      
+      nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--branco);
+        flex-direction: column;
+        padding: 5rem 2rem 2rem;
+        box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        gap: 0;
+      }
+      
+      nav ul.show {
+        right: 0;
+      }
+      
+      nav ul li {
+        margin: 0;
+        border-bottom: 1px solid var(--cinza-card);
+      }
+      
+      nav ul li a {
+        display: block;
+        padding: 1rem 0;
+        font-size: 1rem;
+      }
+      
+      /* Overlay quando menu está aberto */
+      body.menu-open::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-servicos {
+        min-height: clamp(340px, 62vh, 560px);
+      }
+      
+      .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    
+    @media (min-height: 900px) and (min-width: 992px) {
+      .hero-servicos {
+        min-height: 70vh;
+        max-height: 760px;
+      }
+    }
+    
+    /* ==== Categorias & Cards ==== */
+    .categorias-servicos {
+      background: var(--cinza-fundo);
+      padding: 3.75rem 0;
+    }
+    
+    .categorias-container {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      gap: 0.9375rem;
+      margin-bottom: 2.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      scrollbar-width: thin;
+      -ms-overflow-style: none;
+      scrollbar-color: var(--dourado) transparent;
+    }
+    
+    .categorias-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    .categorias-container::-webkit-scrollbar-thumb {
+      background: var(--dourado);
+      border-radius: 3px;
+    }
+    
+    .categoria-btn {
+      padding: 0.75rem 1.5625rem;
+      background: var(--branco);
+      border: 2px solid var(--azul);
+      color: var(--azul);
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .categoria-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: var(--azul);
+      transition: var(--transition);
+      z-index: -1;
+      border-radius: 50px;
+    }
+    
+    .categoria-btn:hover::before,
+    .categoria-btn:focus::before,
+    .categoria-btn.active::before {
+      width: 100%;
+    }
+    
+    .categoria-btn:hover,
+    .categoria-btn:focus,
+    .categoria-btn.active {
+      color: var(--branco);
+    }
+    
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.875rem;
+      margin-top: 2.5rem;
+    }
+    
+    .servico-card {
+      background: var(--branco);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border-bottom: 3px solid transparent;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    .servico-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .servico-card:hover,
+    .servico-card:focus-within {
+      transform: translateY(-0.625rem);
+      border-bottom-color: var(--dourado);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .servico-imagem {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .servico-imagem::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 100%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+    
+    .servico-card:hover .servico-imagem::after {
+      opacity: 1;
+    }
+    
+    .servico-imagem img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-slow);
+    }
+    
+    .servico-card:hover .servico-imagem img {
+      transform: scale(1.1);
+    }
+    
+    .servico-info {
+      padding: 1.5625rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .servico-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.9375rem;
+      color: var(--azul-escuro);
+    }
+    
+    .servico-info p {
+      margin-bottom: 1.25rem;
+      color: var(--cinza-medio);
+      flex-grow: 1;
+    }
+    
+    .servico-beneficios {
+      margin-bottom: 1.5625rem;
+    }
+    
+    .servico-beneficios h4 {
+      font-size: 1rem;
+      margin-bottom: 0.625rem;
+      color: var(--azul-escuro);
+    }
+    
+    .beneficios-list {
+      list-style: none;
+    }
+    
+    .beneficios-list li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5625rem;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+    
+    .beneficios-list li:hover {
+      transform: translateX(5px);
+    }
+    
+    .beneficios-list li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      top: 0.125rem;
+      color: var(--dourado);
+      transition: var(--transition);
+    }
+    
+    .beneficios-list li:hover::before {
+      color: var(--azul);
+    }
+    
+    .servico-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    
+    .servico-categoria {
+      font-size: 0.8rem;
+      padding: 0.25rem 0.75rem;
+      background: var(--cinza-fundo);
+      border-radius: 20px;
+      color: var(--cinza-medio);
+      transition: var(--transition);
+    }
+    
+    .servico-card:hover .servico-categoria {
+      background: var(--azul);
+      color: var(--branco);
+    }
+    
+    /* ==== Destaques ==== */
+    .servicos-destaque {
+      background: var(--branco);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .servicos-destaque::before {
+      content: '';
+      position: absolute;
+      top: -6.25rem;
+      right: -6.25rem;
+      width: 18.75rem;
+      height: 18.75rem;
+      background: var(--dourado);
+      opacity: .05;
+      border-radius: 50%;
+      z-index: 0;
+    }
+    
+    .servicos-destaque::after {
+      content: '';
+      position: absolute;
+      bottom: -6.25rem;
+      left: -6.25rem;
+      width: 25rem;
+      height: 25rem;
+      background: var(--azul);
+      opacity: .05;
+      border-radius: 50%;
+      z-index: 0;
+    }
+    
+    .destaque-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.875rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .destaque-card {
+      background: var(--cinza-fundo);
+      padding: 1.875rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .destaque-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .destaque-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 0;
+      background: var(--dourado);
+      transition: var(--transition-slow);
+    }
+    
+    .destaque-card:hover::before,
+    .destaque-card:focus-within::before {
+      height: 100%;
+    }
+    
+    .destaque-card:hover,
+    .destaque-card:focus-within {
+      transform: translateY(-0.625rem);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .destaque-icon {
+      width: 5rem;
+      height: 5rem;
+      margin: 0 auto 1.25rem;
+      background: var(--dourado);
+      color: var(--branco);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      transition: var(--transition);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .destaque-card:hover .destaque-icon,
+    .destaque-card:focus-within .destaque-icon {
+      background: var(--branco);
+      color: var(--dourado);
+      box-shadow: 0 0 0 10px rgba(212,175,55,.2);
+    }
+    
+    /* ==== QUIZ ==== */
+    .quiz {
+      background: var(--branco);
+    }
+    
+    .quiz-wrap {
+      max-width: 950px;
+      margin: 0 auto;
+    }
+    
+    .quiz-steps {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    
+    .quiz-step-dot {
+      width: 0.625rem;
+      height: 0.625rem;
+      border-radius: 999px;
+      background: #ddd;
+      transition: var(--transition);
+    }
+    
+    .quiz-step-dot.active {
+      background: var(--dourado);
+    }
+    
+    .quiz-card {
+      background: var(--cinza-fundo);
+      border: 1px solid var(--cinza-card);
+      border-radius: 14px;
+      padding: 1.625rem;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.875rem;
+      margin-top: 0.875rem;
+    }
+    
+    .quiz-option {
+      border: 2px solid transparent;
+      background: var(--branco);
+      border-radius: 12px;
+      padding: 1.125rem;
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+    }
+    
+    .quiz-option i {
+      font-size: 1.3rem;
+      color: var(--azul);
+    }
+    
+    .quiz-option:hover,
+    .quiz-option:focus {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .quiz-option.selected {
+      border-color: var(--dourado);
+      background: linear-gradient(0deg, rgba(212,175,55,.08), rgba(212,175,55,.08)), #fff;
+    }
+    
+    .quiz-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.125rem;
+      gap: 0.625rem;
+    }
+    
+    .quiz-result {
+      margin-top: 1.125rem;
+      padding: 1rem;
+      border-left: 4px solid var(--dourado);
+      background: #fff;
+      border-radius: 8px;
+    }
+    
+    .quiz-result h4 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.625rem;
+      border-radius: 999px;
+      background: var(--cinza-fundo);
+      color: var(--azul-escuro);
+      margin: 0.25rem 0.375rem 0 0;
+    }
+    
+    .quiz-ctas {
+      display: flex;
+      gap: 0.625rem;
+      flex-wrap: wrap;
+      margin-top: 0.875rem;
+    }
+    
+    /* ==== Planos ==== */
+    .planos {
+      background: var(--cinza-fundo);
+    }
+    
+    .pricing {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .price-card {
+      background: #fff;
+      border: 1px solid var(--cinza-card);
+      border-radius: 14px;
+      padding: 1.625rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .price-card.popular {
+      border-color: var(--dourado);
+    }
+    
+    .price-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    
+    .price-title {
+      font-size: 1.25rem;
+      color: var(--azul-escuro);
+    }
+    
+    .price-tag {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--azul);
+    }
+    
+    .price-desc {
+      color: var(--cinza-medio);
+      margin-bottom: 0.875rem;
+    }
+    
+    .price-list {
+      list-style: none;
+      margin: 0 0 0.875rem 0;
+    }
+    
+    .price-list li {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+      margin: 0.5rem 0;
+    }
+    
+    .price-list li i {
+      color: var(--dourado);
+      margin-top: 0.1875rem;
+    }
+    
+    .ribbon {
+      position: absolute;
+      top: 0.75rem;
+      right: -2.5rem;
+      background: var(--dourado);
+      color: #fff;
+      padding: 0.375rem 3.125rem;
+      transform: rotate(35deg);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+    
+    /* ==== Horários ==== */
+    .horarios-aulas {
+      background: var(--cinza-fundo);
+    }
+    
+    .filtro-dias {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      gap: 0.625rem;
+      margin-bottom: 2.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      scrollbar-width: thin;
+      -ms-overflow-style: none;
+    }
+    
+    .filtro-dias::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    .filtro-dias::-webkit-scrollbar-thumb {
+      background: var(--dourado);
+      border-radius: 3px;
+    }
+    
+    .filtro-dia {
+      padding: 0.75rem 1.25rem;
+      background: var(--branco);
+      border: 2px solid var(--azul);
+      color: var(--azul);
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .filtro-dia:hover,
+    .filtro-dia:focus,
+    .filtro-dia.ativo {
+      background: var(--azul);
+      color: #fff;
+    }
+    
+    .horarios-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5625rem;
+    }
+    
+    .dia-horarios {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5625rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    
+    .dia-horarios:hover,
+    .dia-horarios:focus-within {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .dia-titulo {
+      text-align: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.9375rem;
+      border-bottom: 2px solid var(--cinza-card);
+      color: var(--azul-escuro);
+      position: relative;
+    }
+    
+    .dia-titulo::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3.75rem;
+      height: 2px;
+      background: var(--dourado);
+    }
+    
+    .aula-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--cinza-card);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .aula-item:last-child {
+      border-bottom: none;
+    }
+    
+    .aula-horario {
+      font-weight: 700;
+      color: var(--azul);
+      background: rgba(37,99,235,.1);
+      padding: 0.3125rem 0.625rem;
+      border-radius: 4px;
+      min-width: 6.25rem;
+      text-align: center;
+    }
+    
+    .aula-nome {
+      flex-grow: 1;
+      padding: 0 0.9375rem;
+      font-weight: 600;
+    }
+    
+    .hoje .dia-titulo {
+      color: var(--dourado);
+    }
+    
+    .hoje {
+      border: 2px solid var(--dourado);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hoje::before {
+      content: 'HOJE';
+      position: absolute;
+      top: 0.625rem;
+      right: -1.25rem;
+      background: var(--dourado);
+      color: #fff;
+      padding: 0.3125rem 1.5625rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transform: rotate(45deg);
+    }
+    
+    .legenda-horarios {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-top: 1.875rem;
+      flex-wrap: wrap;
+    }
+    
+    .legenda-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .legenda-cor {
+      width: 0.9375rem;
+      height: 0.9375rem;
+      border-radius: 3px;
+    }
+    
+    .legenda-hoje {
+      background: var(--dourado);
+    }
+    
+/* ==== Footer (igual às outras páginas, alinhado à esquerda) ==== */
+    footer{background:var(--azul-escuro);color:#fff;padding:3rem 0 1.5rem}
+    .footer-container{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-bottom:3rem;align-items:start}
+    @media (min-width:768px){.footer-container{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:1024px){.footer-container{grid-template-columns:repeat(4,1fr)}}
+    .footer-col{text-align:left}
+    .footer-col h3{font-size:1.3rem;margin:0 0 1.1rem;color:#fff;font-weight:700;line-height:1.2}
+    .footer-col p{margin:0 0 1.1rem;color:var(--cinza-card)}
+    .footer-links ul{list-style:none;margin:0;padding:0}
+    .footer-links li{margin:0 0 .5rem}
+    .footer-links a{color:#dfe6ff;font-size:.95rem;display:block;padding:.25rem 0}
+    .footer-links a:hover{color:var(--dourado);padding-left:.25rem}
+    .social-links{display:flex;gap:.75rem;justify-content:flex-start}
+    .social-links a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff;transition:var(--transition)}
+    .social-links a:hover{background:var(--dourado);transform:translateY(-3px)}
+    .footer-bottom{text-align:center;border-top:1px solid rgba(255,255,255,.12);padding-top:1.5rem;color:#dfe6ff;font-size:.9rem}
+    
+    
+    .floating-cta {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      z-index: 9999;
+    }
+    
+    .fab-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      background: var(--dourado);
+      color: #fff;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.75rem 1rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: var(--shadow-lg);
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+      min-height: 44px;
+    }
+    
+    .fab-contact:hover,
+    .fab-contact:focus {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.3);
+    }
+    
+    .fab-contact.pulse {
+      animation: fabPulse 2s infinite;
+    }
+    
+    @keyframes fabPulse {
+      0% { box-shadow: 0 0 0 0 rgba(212,175,55,.55); }
+      70% { box-shadow: 0 0 0 16px rgba(212,175,55,0); }
+      100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
+    }
+    
+    .fab-contact i {
+      font-size: 1.1rem;
+    }
+    
+    /* ==== Animações ==== */
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    
+        .animate{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out}
+    .animate.show{opacity:1;transform:translateY(0)}
+    .delay-1{transition-delay:.15s}.delay-2{transition-delay:.3s}.delay-3{transition-delay:.45s}
+
+    
+    /* ==== Esconder os blocos de detalhes inline (serão fonte de dados) ==== */
+    .servico-detalhes {
+      display: none !important;
+    }
+    
+    /* ==== MODAL de Serviço (com vídeo) ==== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(17,24,39,.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      backdrop-filter: saturate(120%) blur(2px);
+      padding: 1rem;
+    }
+    
+    .modal-overlay.aberto {
+      display: flex;
+      animation: fadeIn .15s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .modal {
+      width: min(1000px, 100%);
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      max-height: 86vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.125rem 1.375rem;
+      border-bottom: 1px solid var(--cinza-card);
+    }
+    
+    .modal-title {
+      font-size: 1.25rem;
+      color: var(--azul-escuro);
+    }
+    
+    .modal-close {
+      border: 0;
+      background: transparent;
+      font-size: 1.25rem;
+      cursor: pointer;
+      color: var(--cinza-medio);
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-body {
+      padding: 1.25rem;
+      overflow: auto;
+    }
+    
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.375rem;
+    }
+    
+    .modal-media {
+      position: relative;
+    }
+    
+    .modal-mainimg, .modal-mainvideo {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .modal-mainvideo {
+      background: #000;
+    }
+    
+    .modal-thumbs {
+      display: flex;
+      gap: 0.625rem;
+      margin-top: 0.625rem;
+      flex-wrap: wrap;
+    }
+    
+    .modal-thumb {
+      position: relative;
+      width: 110px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      opacity: .85;
+      border: 2px solid transparent;
+    }
+    
+    .modal-thumb.ativa {
+      opacity: 1;
+      border-color: var(--dourado);
+    }
+    
+    .modal-thumb.video::after {
+      content: '\f04b';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: #fff;
+      position: absolute;
+      inset: auto;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,.35);
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+    }
+    
+    .modal-info p {
+      color: var(--cinza-medio);
+    }
+    
+    .modal-meta {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.625rem;
+      margin: 0.75rem 0 1rem;
+    }
+    
+    .meta-card {
+      background: var(--cinza-fundo);
+      border: 1px solid var(--cinza-card);
+      border-radius: 10px;
+      padding: 0.75rem;
+    }
+    
+    .modal-actions {
+      display: flex;
+      gap: 0.625rem;
+      flex-wrap: wrap;
+      margin-top: 0.375rem;
+    }
+    
+    /* ===== SLIDER "Todos os Serviços" (mobile-first) ===== */
+    .servicos-slider-container {
+      position: relative;
+      margin: 1.5rem auto 0;
+      max-width: 1200px;
+      overflow: hidden;
+    }
+    
+    .servicos-slider {
+      display: flex;
+      transition: transform .5s ease;
+      will-change: transform;
+    }
+    
+    .servico-slide {
+      min-width: 88vw;
+      max-width: 88vw;
+      margin: 0 0.75rem;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border-bottom: 3px solid transparent;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .servico-slide:hover,
+    .servico-slide:focus-within {
+      transform: translateY(-6px);
+      border-bottom-color: var(--dourado);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .servico-slide .servico-imagem {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .servico-slide .servico-imagem img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s ease;
+    }
+    
+    .servico-slide:hover .servico-imagem img {
+      transform: scale(1.06);
+    }
+    
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.875rem;
+      margin-top: 1rem;
+    }
+    
+    .slider-btn {
+      background: var(--azul);
+      color: #fff;
+      border: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: .2s ease;
+      min-width: 44px;
+      min-height: 44px;
+    }
+    
+    .slider-btn:hover,
+    .slider-btn:focus {
+      background: var(--azul-escuro);
+      transform: scale(1.06);
+    }
+    
+    .slider-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .slider-dot {
+      width: 0.625rem;
+      height: 0.625rem;
+      border-radius: 50%;
+      background: var(--cinza-card);
+      transition: .2s ease;
+      cursor: pointer;
+    }
+    
+    .slider-dot.active {
+      background: var(--dourado);
+      transform: scale(1.15);
+    }
+    
+    /* ==== Media Queries para Layout Responsivo ==== */
+    @media (min-width: 480px) {
+      .container {
+        padding: 0 1.5rem;
+      }
+      
+      .quiz-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (min-width: 640px) {
+      .servicos-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .destaque-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .modal-meta {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .container {
+        padding: 0 2rem;
+      }
+      
+      .servico-slide {
+        min-width: 44vw;
+        max-width: 44vw;
+        margin: 0 0.9375rem;
+      }
+      
+      .servico-slide .servico-imagem {
+        height: 220px;
+      }
+      
+      .modal-grid {
+        grid-template-columns: 1.2fr .8fr;
+      }
+      
+      .pricing {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .horarios-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (min-width: 900px) {
+      .quiz-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .servicos-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .servico-slide {
+        min-width: 30vw;
+        max-width: 30vw;
+        margin: 0 0.9375rem;
+      }
+      
+      .servico-slide .servico-imagem {
+        height: 220px;
+      }
+      
+      .destaque-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .footer-container {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .pricing {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .horarios-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    @media (min-width: 1200px) {
+      .container {
+        padding: 0 2.5rem;
+      }
+    }
+    
+    /* Ajustes de acessibilidade para modo escuro */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --preto: #f3f4f6;
+        --branco: #1f2937;
+        --cinza-fundo: #111827;
+        --cinza-card: #374151;
+        --cinza-medio: #9ca3af;
+        --azul-escuro: #93c5fd;
+      }
+    }
+    
+    /* Ajustes para alto contraste */
+    @media (prefers-contrast: high) {
+      :root {
+        --azul: #0000ff;
+        --dourado: #ffd700;
+        --azul-escuro: #00008b;
+      }
+      
+      .btn {
+        border-width: 2px;
+      }
+    }
+    
+    /* Redução de movimento para quem prefere */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      
+      .animate {
+        transition: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+    
+    /* Melhorias de impressão */
+    @media print {
+      * {
+        background: transparent !important;
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+      
+      header, .floating-cta, .mobile-menu-btn {
+        display: none !important;
+      }
+      
+      .hero-servicos {
+        background: none !important;
+        color: black !important;
+        min-height: auto;
+        margin-top: 0;
+      }
+      
+      .hero-servicos::before {
+        display: none;
+      }
+      
+      .btn {
+        border: 1px solid black;
+        color: black;
+      }
+      
+      a[href]::after {
+        content: " (" attr(href) ")";
+      }
+      
+      .servico-card {
+        break-inside: avoid;
+      }
+    }
+
+
+
+    /* ==== CAROUSEL (mobile-first) ==== */
+.carousel{position:relative}
+.carousel-track{
+  display:flex; gap:1rem; overflow-x:auto; padding:.25rem;
+  scroll-snap-type:x mandatory; scroll-behavior:smooth; -webkit-overflow-scrolling:touch;
+}
+.carousel-track::-webkit-scrollbar{height:8px}
+.carousel-track::-webkit-scrollbar-thumb{background:var(--cinza-card);border-radius:4px}
+.slide{
+  flex:0 0 calc(100vw - 2rem); max-width:calc(100vw - 2rem); /* ocupa a largura útil do ecrã */
+  scroll-snap-align:start; background:#fff; border-radius:14px; box-shadow:var(--shadow-sm);
+  border-bottom:3px solid transparent; display:flex; flex-direction:column; overflow:hidden
+}
+.slide:focus-within,.slide:hover{border-bottom-color:var(--dourado);box-shadow:var(--shadow-lg)}
+.slide-media{height:48vw;max-height:300px;position:relative;overflow:hidden}
+.slide-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.slide:hover .slide-media img{transform:scale(1.05)}
+.slide-body{padding:1rem;display:flex;flex-direction:column;gap:.75rem}
+.slide h3{font-size:1.25rem;margin:0;color:var(--azul-escuro)}
+.muted{color:var(--cinza-medio)}
+.line-clamp-3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pill{font-size:.75rem;background:var(--cinza-fundo);color:var(--azul-escuro);border-radius:999px;padding:.25rem .6rem;display:inline-block}
+
+/* barra de ações STICKY para os botões ficarem sempre visíveis */
+.actions-bar{
+  position:sticky; bottom:0; left:0; right:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.7),#fff 35%);
+  backdrop-filter:saturate(120%) blur(2px);
+  padding:.75rem 1rem; display:flex; gap:.5rem; justify-content:space-between; align-items:center
+}
+.actions-bar .btn{flex:1}
+
+/* Controlo & Dots */
+.carousel-controls{display:flex;justify-content:center;align-items:center;gap:.75rem;margin-top:.75rem}
+.slider-btn{
+  background:var(--azul);color:#fff;border:0;width:2.5rem;height:2.5rem;border-radius:999px;
+  display:grid;place-items:center;cursor:pointer;transition:.2s ease;min-width:44px;min-height:44px
+}
+.slider-btn[disabled]{opacity:.5;cursor:not-allowed}
+.slider-btn:hover{background:#1e4fcc}
+.slider-dots{display:flex;gap:.4rem}
+.slider-dot{width:.55rem;height:.55rem;border-radius:50%;background:var(--cinza-card);border:0}
+.slider-dot[aria-current="true"]{background:var(--dourado)}
+
+/* Mostrar slider no mobile e grid no desktop */
+@media(min-width:1024px){
+  #servicos-carousel{display:none}
+  /* o teu grid já existe; certifica-te que está visível em desktop */
+  #servicos-grid{display:grid}
+}
+
+@media(min-width:1024px){
+  #servicos-carousel{display:none}
+  #servicos-grid{display:grid}
+}
+
+/* === Visibilidade slider vs grid === */
+/* Mobile-first: mostra o slider, esconde o grid */
+#servicos-carousel { display: block !important; }
+#servicos-grid     { display: none  !important; }
+
+/* Desktop (>=1024px): esconde o slider, mostra o grid */
+@media (min-width: 1024px) {
+  #servicos-carousel { display: none !important; }
+  #servicos-grid     { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+}
+
+/* Scroll hint */
+.scroll-hint {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 9999;
+  color: var(--dourado);
+  font-size: 1.8rem;
+  animation: bounce 1.5s infinite;
+  opacity: 0.8;
+  cursor: default;
+  pointer-events: none; /* só para mostrar, não clicar */
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.scroll-hint.hide {
+  display: none;
+}
+
+
+    
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="container header-container">
+      <a href="indexv2.html#home" class="logo">
+        <img src="../assets/logoazulcinza.png" alt="VilaPlus Ginásio" class="logo-img"/>
+      </a>
+      <nav aria-label="Menu principal">
+        <ul id="main-menu">
+          <li><a href="indexv2.html#home">Início</a></li>
+          <li><a href="servicosv2.html" aria-current="page">Serviços</a></li>
+          <li><a href="projetosv2.html">Projetos</a></li>
+          <li><a href="portfoliov2.html">Galeria</a></li>
+          <li><a href="indexv2.html#horarios">Horários</a></li>
+          <li><a href="parceriasv2.html">Parcerias</a></li>
+          <li><a href="lojav2.html">Loja</a></li>
+          <li><a href="noticiasv2.html">Notícias</a></li>
+          <li><a href="contactsv2.html">Contactos</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-menu">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero (Serviços) - MELHORADO -->
+  <section class="hero-servicos" role="banner" aria-labelledby="hero-heading" id="hero-servicos">
+    <div class="hero-content">
+      <h1 class="animate" id="hero-heading">Transformamos Objetivos em Realidade</h1>
+      
+      <div class="hero-buttons">
+        <a href="https://www.regyfit.com/admin2/modulos/crm/site_integrations/aula_experimental.php?id_box=2064&id_int=4&acs=d78b8f480898e2d6afd80418263be90f&lang=pt&site=n"
+          class="btn btn-filled animate delay-2">
+          <i class="fas fa-calendar-check" aria-hidden="true"></i> Marcar Aula Experimental
+        </a>
+        <a href="#servicos-lista" class="btn animate delay-3">
+          <i class="fas fa-search" aria-hidden="true"></i> Explorar Serviços
+        </a>
+      </div>
+      
+      <div class="hero-stats animate delay-3" aria-label="Estatísticas do ginásio">
+        <div class="stat-item">
+          <span class="stat-number">14+</span>
+          <span class="stat-label">Serviços</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">35+</span>
+          <span class="stat-label">Aulas Semanais</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Personalizado</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ (igual) -->
+  <section class="quiz" id="quiz" aria-labelledby="quiz-heading">
+    <div class="container quiz-wrap">
+      <div class="section-title animate">
+        <h2 id="quiz-heading">Qual o serviço mais adequado para ti?</h2>
+        <p>Responde a 3 perguntas rápidas e recebe recomendações personalizadas.</p>
+      </div>
+      <div class="quiz-steps" aria-label="Progresso do questionário">
+        <span class="quiz-step-dot active" data-step="1" aria-current="true"></span>
+        <span class="quiz-step-dot" data-step="2"></span>
+        <span class="quiz-step-dot" data-step="3"></span>
+      </div>
+      <div class="quiz-card animate delay-1" id="quizCard">
+        <div class="quiz-step" data-step="1">
+          <h3>1) Qual é o teu objetivo?</h3>
+          <div class="quiz-grid">
+            <div class="quiz-option" data-value="perda_gordura" role="button" tabindex="0"><i class="fa-solid fa-fire"></i><span>Perder peso</span></div>
+            <div class="quiz-option" data-value="ganho_massa" role="button" tabindex="0"><i class="fa-solid fa-dumbbell"></i><span>Ganhar massa muscular</span></div>
+            <div class="quiz-option" data-value="saude_bemestar" role="button" tabindex="0"><i class="fa-solid fa-heart-pulse"></i><span>Saúde & bem-estar</span></div>
+            <div class="quiz-option" data-value="reabilitacao" role="button" tabindex="0"><i class="fa-solid fa-user-nurse"></i><span>Reabilitação</span></div>
+          </div>
+          <div class="quiz-actions"><button class="btn" disabled>Voltar</button><button class="btn btn-filled" id="btnNext1" disabled>Continuar</button></div>
+        </div>
+        <div class="quiz-step" data-step="2" style="display:none">
+          <h3>2) Como preferes treinar?</h3>
+          <div class="quiz-grid">
+            <div class="quiz-option" data-value="grupo" role="button" tabindex="0"><i class="fa-solid fa-people-group"></i><span>Sozinho</span></div>
+            <div class="quiz-option" data-value="individual" role="button" tabindex="0"><i class="fa-solid fa-user-check"></i><span>Com um parceiro</span></div>
+            <div class="quiz-option" data-value="livre" role="button" tabindex="0"><i class="fa-solid fa-person-running"></i><span>Em grupo</span></div>
+          </div>
+          <div class="quiz-actions"><button class="btn" id="btnPrev2">Voltar</button><button class="btn btn-filled" id="btnNext2" disabled>Continuar</button></div>
+        </div>
+        <div class="quiz-step" data-step="3" style="display:none">
+          <h3>3) Dás preferência a que tipo de treino?</h3>
+          <div class="quiz-grid">
+            <div class="quiz-option" data-value="baixa" role="button" tabindex="0"><i class="fa-solid fa-feather-pointed"></i><span>Pernas</span></div>
+            <div class="quiz-option" data-value="media" role="button" tabindex="0"><i class="fa-solid fa-gauge"></i><span>Superior</span></div>
+            <div class="quiz-option" data-value="alta" role="button" tabindex="0"><i class="fa-solid fa-bolt"></i><span>Abdominais</span></div>
+            <div class="quiz-option" data-value="geral" role="button" tabindex="0"><i class="fa-solid fa-bolt"></i><span>Geral</span></div>
+
+          </div>
+          <div class="quiz-actions"><button class="btn" id="btnPrev3">Voltar</button><button class="btn btn-filled" id="btnFinish" disabled>Ver Recomendações</button></div>
+        </div>
+        <div class="quiz-result" id="quizResult" style="display:none">
+          <h4>Recomendações para ti 👇</h4>
+          <p id="quizText"></p>
+          <div id="quizBadges"></div>
+          <div class="quiz-ctas">
+            <a href="#servicos-lista" class="btn">Ver serviços recomendados</a>
+            <a href="#horarios-aulas" class="btn">Ver horários</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Categorias -->
+<section class="categorias-servicos" id="servicos-lista" aria-labelledby="servicos-heading">
+  <div class="container">
+    <div class="section-title animate">
+      <h2 id="servicos-heading">Explora os Nossos Serviços</h2>
+      <p>Seleciona uma categoria para filtrar os serviços disponíveis.</p>
+    </div>
+
+    <!-- Filtros -->
+    <div class="categorias-container animate delay-1" role="tablist" aria-label="Filtrar serviços por categoria">
+      <button class="categoria-btn active" data-categoria="todos" role="tab" aria-selected="true" aria-controls="servicos-grid">Todos os Serviços</button>
+      <button class="categoria-btn" data-categoria="personal" role="tab" aria-selected="false" aria-controls="servicos-grid">Treino Personalizado</button>
+      <button class="categoria-btn" data-categoria="aulas" role="tab" aria-selected="false" aria-controls="servicos-grid">Aulas de Grupo</button>
+      <button class="categoria-btn" data-categoria="musculacao" role="tab" aria-selected="false" aria-controls="servicos-grid">Musculação</button>
+      <button class="categoria-btn" data-categoria="fisioterapia" role="tab" aria-selected="false" aria-controls="servicos-grid">Fisioterapia</button>
+      <button class="categoria-btn" data-categoria="nutricao" role="tab" aria-selected="false" aria-controls="servicos-grid">Nutrição</button>
+      <button class="categoria-btn" data-categoria="online" role="tab" aria-selected="false" aria-controls="servicos-grid">Acompanhamento Online</button>
+    </div>
+
+    <!-- SLIDER: "Todos os Serviços" -->
+    <div class="carousel" aria-roledescription="carousel" aria-label="Lista de serviços" id="servicos-carousel">
+    <div class="carousel-track" id="carousel-track" role="group" aria-live="polite"></div>
+    <div class="carousel-controls" aria-hidden="false">
+        <button class="slider-btn" id="slider-prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+        <div class="slider-dots" id="slider-dots" role="tablist" aria-label="Paginação do carrossel"></div>
+        <button class="slider-btn" id="slider-next" aria-label="Seguinte"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    </div>
+
+
+    <div class="servicos-grid" id="servicos-grid" role="tabpanel">
+      <!-- Personal Training -->
+      <div class="servico-card" data-categoria="personal">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1350&q=80" alt="Treino Personalizado" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Treino Personalizado</h3>
+          <p>No Vila Plus, o treino é feito à tua medida. Cada exercício, cada série e cada desafio é pensado para te ajudar a alcançar os teus objetivos de forma segura e eficiente. Com o acompanhamento de um personal trainer, vais mais longe do que alguma vez imaginaste.</p>
+          <div class="servico-beneficios">
+            <h4>Vantagens:</h4>
+            <ul class="beneficios-list">
+              <li>Planos 100% personalizados</li>
+              <li>Acompanhamento individualizado</li>
+              <li>Adaptado às tuas necessidades e objetivos</li>
+              <li>Evolução segura e eficaz</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Personal Training</span>
+            <!-- (Sem "Saber Mais") — o botão "Detalhes" será inserido via JS -->
+          </div>
+
+          <!-- Detalhes para modal -->
+          <div class="servico-detalhes" id="detalhes-treino-personalizado">
+            <div class="detalhe-texto">
+              <p>Sessões de 50–60 minutos focadas nos teus objetivos (força, hipertrofia, perda de gordura ou performance). Avaliação inicial incluída, com reavaliações mensais. Plano de treino e feedback contínuo por WhatsApp.</p>
+            </div>
+            <div class="galeria-servico" role="list" aria-label="Galeria de Treino Personalizado">
+              <img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=1200&q=80" alt="PT - Máquina" role="listitem" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?auto=format&fit=crop&w=1200&q=80" alt="PT - Halteres" role="listitem" loading="lazy">
+              <img src="../assets/hero-poster.jpg" alt="Vídeo de treino" data-video="../assets/service-video.mp4" role="listitem" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="servico-card" data-categoria="personal">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1350&q=80" alt="Treino Personalizado" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Treino Personalizado Duo</h3>
+          <p>No Vila Plus, o treino é feito à tua medida e do teu parceiro. Cada exercício, cada série e cada desafio é pensado para vos ajudar a alcançar os vossos objetivos de forma segura e eficiente. Com o acompanhamento de um personal trainer, váo mais longe do que alguma vez imaginaram.</p>
+          <div class="servico-beneficios">
+            <h4>Vantagens:</h4>
+            <ul class="beneficios-list">
+              <li>Planos 100% personalizados</li>
+              <li>Motivação Redrobada</li>
+              <li>Adaptado às vossas necessidades e objetivos</li>
+              <li>Partilha para maximizar resultados</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Personal Training</span>
+            <!-- (Sem "Saber Mais") — o botão "Detalhes" será inserido via JS -->
+          </div>
+
+          <!-- Detalhes para modal -->
+          <div class="servico-detalhes" id="detalhes-treino-personalizado">
+            <div class="detalhe-texto">
+              <p>Sessões de 50–60 minutos focadas nos teus objetivos (força, hipertrofia, perda de gordura ou performance). Avaliação inicial incluída, com reavaliações mensais. Plano de treino e feedback contínuo por WhatsApp.</p>
+            </div>
+            <div class="galeria-servico" role="list" aria-label="Galeria de Treino Personalizado">
+              <img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=1200&q=80" alt="PT - Máquina" role="listitem" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?auto=format&fit=crop&w=1200&q=80" alt="PT - Halteres" role="listitem" loading="lazy">
+              <img src="../assets/hero-poster.jpg" alt="Vídeo de treino" data-video="../assets/service-video.mp4" role="listitem" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card-resumo Aulas de Grupo (mostra em "Todos") -->
+      <div class="servico-card" data-categoria="aulas-resumo">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80" alt="Aulas de Grupo" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Aulas de Grupo</h3>
+          <p>Um mix de energia e motivação com várias modalidades: Kickboxing, Pilates Clínico, Zumba, Step, Circuito, Treino Funcional, HIIT, Aeróbica, GAP. Vê a lista completa e horários no filtro "Aulas de Grupo".</p>
+
+          <div class="servico-beneficios">
+            <h4>Inclui:</h4>
+            <ul class="beneficios-list">
+              <li>Modalidades para todos os níveis</li>
+              <li>Foco em cardio, força e coordenação</li>
+              <li>Ambiente motivador e acompanhado</li>
+            </ul>
+          </div>
+
+          <div class="servico-meta">
+            <span class="servico-categoria">Aulas de Grupo</span>
+            <a href="#servicos-lista" class="btn"
+               onclick="document.querySelector('.categoria-btn[data-categoria=&quot;aulas&quot;]').click()">
+              Ver todas as aulas
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== AULAS DE GRUPO ===== -->
+      <!-- Kickboxing -->
+      <div class="servico-card" data-categoria="aulas">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&w=1350&q=80" alt="Kickboxing" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Kickboxing</h3>
+          <p>Aula energética que combina movimentos de combate com treino cardiovascular. Trabalhas força, resistência, coordenação e agilidade, enquanto libertas o stress e melhoras a tua forma física. <strong>Disponível aos sábados no Vila Plus.</strong></p>
+          <div class="servico-beneficios">
+            <h4>Benefícios:</h4>
+            <ul class="beneficios-list">
+              <li>Força e resistência</li>
+              <li>Coordenação e agilidade</li>
+              <li>Queima calórica elevada</li>
+              <li>Libertação de stress</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Aulas de Grupo</span>
+          </div>
+
+          <div class="servico-detalhes" id="detalhes-kickboxing">
+            <div class="detalhe-texto">
+              <p>Técnicas básicas de golpe, combinações com saco e trabalho de pés. Intensidades adaptadas por nível, com foco na técnica và segurança (uso de luvas recomendado).</p>
+            </div>
+            <div class="galeria-servico" role="list" aria-label="Galeria de Kickboxing">
+              <img src="https://images.unsplash.com/photo-1549052864-14d7e7bd9733?auto=format&fit=crop&w=1200&q=80" alt="Saco de Boxe" role="listitem" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1483721310020-03333e577078?auto=format&fit=crop&w=1200&q=80" alt="Luvas e ringue" role="listitem" loading="lazy">
+              <img src="../assets/hero-poster.jpg" alt="Vídeo Kickboxing" data-video="../assets/service-video.mp4" role="listitem" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pilates Clínico -->
+      <div class="servico-card" data-categoria="aulas">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1350&q=80" alt="Pilates Clínico" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Pilates Clínico</h3>
+          <p>Focado na reabilitação e prevenção de lesões, melhora a postura, a força do core (zona abdominal) e a flexibilidade, sempre com acompanhamento profissional.</p>
+          <div class="servico-beneficios">
+            <h4>Benefícios:</h4>
+            <ul class="beneficios-list">
+              <li>Reabilitação e prevenção</li>
+              <li>Postura e core</li>
+              <li>Flexibilidade</li>
+              <li>Acompanhamento profissional</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Aulas de Grupo</span>
+          </div>
+
+          <div class="servico-detalhes" id="detalhes-pilates">
+            <div class="detalhe-texto">
+              <p>Exercícios controlados com foco em respiração, ativação do core e mobilidade. Aulas em pequenos grupos para correção próxima e adaptações em caso de dor.</p>
+            </div>
+            <div class="galeria-servico" role="list" aria-label="Galeria de Pilates Clínico">
+              <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?auto=format&fit=crop&w=1200&q=80" alt="Pilates no tapete" role="listitem" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1517832207067-4db24a2ae47c?auto=format&fit=crop&w=1200&q=80" alt="Alongamentos" role="listitem" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zumba -->
+      <div class="servico-card" data-categoria="aulas">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80" alt="Zumba" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Zumba</h3>
+          <p>Diverte-te com ritmo de dança! Queima calorias, melhora a coordenação e garante energia positiva a cada aula.</p>
+          <div class="servico-beneficios">
+            <h4>Benefícios:</h4>
+            <ul class="beneficios-list">
+              <li>Queima calórica</li>
+              <li>Coordenação e ritmo</li>
+              <li>Boa disposição</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Aulas de Grupo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step -->
+      <div class="servico-card" data-categoria="aulas">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1605296866975-3f4d54f8a8bd?auto=format&fit=crop&w=1400&q=80" alt="Step" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Step</h3>
+          <p>Aula de cardio com exercícios no step, ideal para tonificar pernas e glúteos enquanto aumentas a resistência.</p>
+          <div class="servico-beneficios">
+            <h4>Benefícios:</h4>
+            <ul class="beneficios-list">
+              <li>Resistência cardiovascular</li>
+              <li>Tonificação de pernas e glúteos</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Aulas de Grupo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Circuito -->
+      <div class="servico-card" data-categoria="aulas">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&w=1400&q=80" alt="Circuito" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Circuito</h3>
+          <p>Treino dinâmico que combina força e cardio em estações. Mantém o ritmo elevado e trabalha todo o corpo de forma equilibrada.</p>
+          <div class="servico-beneficios">
+            <h4>Benefícios:</h4>
+            <ul class="beneficios-list">
+              <li>Corpo inteiro</li>
+              <li>Força + cardio</li>
+              <li>Ritmo elevado</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Aulas de Grupo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Funcional -->
+      <div class="servico-card" data-categoria="aulas">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1554284126-aa88f22d8b74?auto=format&fit=crop&w=1400&q=80" alt="Treino Funcional" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Funcional</h3>
+          <p>Exercícios que fortalecem os músculos e melhoram os movimentos do dia-a-dia, aumentando a resistência, o equilíbrio e a flexibilidade.</p>
+          <div class="servico-beneficios">
+            <h4>Benefícios:</h4>
+            <ul class="beneficios-list">
+              <li>Força funcional</li>
+              <li>Equilíbrio e mobilidade</li>
+              <li>Resistência</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Aulas de Grupo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HIIT -->
+      <div class="servico-card" data-categoria="aulas">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1521805103424-d8f8430e8937?auto=format&fit=crop&w=1400&q=80" alt="HIIT" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>HIIT</h3>
+          <p>Treino intervalado de alta intensidade com recuperações curtas — perfeito para queimar calorias e aumentar a capacidade cardiovascular.</p>
+          <div class="servico-beneficios">
+            <h4>Benefícios:</h4>
+            <ul class="beneficios-list">
+              <li>Grande gasto calórico</li>
+              <li>Eficiência de tempo</li>
+              <li>Capacidade cardiovascular</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Aulas de Grupo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aeróbica -->
+      <div class="servico-card" data-categoria="aulas">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1526401281623-3fa1cf0bfe49?auto=format&fit=crop&w=1400&q=80" alt="Aeróbica" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Aeróbica</h3>
+          <p>Aula de cardio que combina movimentos rítmicos para melhorar a resistência, a coordenação e a saúde cardiovascular.</p>
+          <div class="servico-beneficios">
+            <h4>Benefícios:</h4>
+            <ul class="beneficios-list">
+              <li>Resistência và coordenação</li>
+              <li>Saúde cardiovascular</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Aulas de Grupo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAP -->
+      <div class="servico-card" data-categoria="aulas">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1400&q=80" alt="GAP - Glúteos, Abdominais e Pernas" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>GAP (Glúteos, Abdominais e Pernas)</h3>
+          <p>Focado em tonificar glúteos, abdominais e pernas. Aumenta a força e promove uma definição muscular visível e equilibrada.</p>
+          <div class="servico-beneficios">
+            <h4>Benefícios:</h4>
+            <ul class="beneficios-list">
+              <li>Tonificação localizada</li>
+              <li>Força muscular</li>
+              <li>Definição equilibrada</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Aulas de Grupo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Musculação ===== -->
+      <div class="servico-card" data-categoria="musculacao">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1350&q=80" alt="Musculação" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Musculação</h3>
+          <p>Cada treino de musculação é pensado para ti. Combinamos exercícios com pesos e equipamentos para aumentar força, tonificar músculos e melhorar a tua resistência, sempre adaptado ao teu nível e objetivos.</p>
+          <div class="servico-beneficios">
+            <h4>Benefícios:</h4>
+            <ul class="beneficios-list">
+              <li>Força e massa muscular</li>
+              <li>Tonificação</li>
+              <li>Mais resistência</li>
+              <li>Equipamentos modernos</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Musculação</span>
+            <!-- (Sem "Saber Mais") — o botão "Detalhes" será inserido via JS -->
+          </div>
+
+          <div class="servico-detalhes" id="detalhes-musculacao">
+            <div class="detalhe-texto">
+              <p>Plano adaptado (full-body, push/pull/legs ou upper/lower) com progressão semanal. Técnicos disponíveis para correção e adaptações. Registo de cargas e evolução.</p>
+            </div>
+            <div class="galeria-servico" role="list" aria-label="Galeria de Musculação">
+              <img src="https://images.unsplash.com/photo-1519052536150-44abba148f47?auto=format&fit=crop&w=1200&q=80" alt="Halteres e barra" role="listitem" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1546484959-f7705e8aa2b2?auto=format&fit=crop&w=1200&q=80" alt="Máquinas modernas" role="listitem" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Fisioterapia ===== -->
+      <div class="servico-card" data-categoria="fisioterapia">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1584697964358-3e14ca57658b?auto=format&fit=crop&w=1350&q=80" alt="Fisioterapia" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Fisioterapia</h3>
+          <p>No Vila Plus cuidamos de ti de forma única. Seja para recuperar de uma lesão, melhorar o bem-estar ou o contorno corporal, temos fisioterapia, pressoterapia, drenagem linfática, crioterapia, cavitação, radiofrequência, HIFU e massagens relaxantes ou modeladoras.</p>
+          <div class="servico-beneficios">
+            <h4>Serviços:</h4>
+            <ul class="beneficios-list">
+              <li>Reabilitação</li>
+              <li>Pressoterapia &amp; drenagem</li>
+              <li>Tratamentos estéticos</li>
+              <li>Massagens especializadas</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Fisioterapia</span>
+            <!-- (Sem "Marcar Consulta") — o botão "Detalhes" será inserido via JS -->
+          </div>
+
+          <div class="servico-detalhes" id="detalhes-fisioterapia">
+            <div class="detalhe-texto">
+              <p>Avaliação funcional, plano terapêutico individualizado e educação para o movimento. Técnicas manuais, exercício terapêutico e equipamentos específicos quando indicado.</p>
+            </div>
+            <div class="galeria-servico" role="list" aria-label="Galeria de Fisioterapia">
+              <img src="https://images.unsplash.com/photo-1584985591819-5aa4f5ecf0c7?auto=format&fit=crop&w=1200&q=80" alt="Terapia manual" role="listitem" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1600959907703-125ba1374ad3?auto=format&fit=crop&w=1200&q=80" alt="Equipamentos de fisio" role="listitem" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Nutrição ===== -->
+      <div class="servico-card" data-categoria="nutricao">
+        <div class="servico-imagem">
+          <img src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=1350&q=80" alt="Nutrição" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Nutrição</h3>
+          <p>No Vila Plus, a nossa nutricionista cria planos personalizados para te ajudar a atingir os teus objetivos. Com acompanhamento dedicado, vais ganhar vitalidade, saúde e resultados concretos, adaptados ao teu estilo de vida.</p>
+          <div class="servico-beneficios">
+            <h4>Vantagens:</h4>
+            <ul class="beneficios-list">
+              <li>Planos personalizados</li>
+              <li>Ajuste ao teu estilo de vida</li>
+              <li>Resultados mensuráveis</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Nutrição</span>
+            <!-- (Sem "Agendar Consulta") — o botão "Detalhes" será inserido via JS -->
+          </div>
+
+          <div class="servico-detalhes" id="detalhes-nutricao">
+            <div class="detalhe-texto">
+              <p>Consulta inicial com avaliação de hábitos, restrições e objetivos. Plano prático com alternativas e receitas simples. Acompanhamento e ajustes quinzenais ou mensais.</p>
+            </div>
+            <div class="galeria-servico" role="list" aria-label="Galeria de Nutrição">
+              <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=1200&q=80" alt="Refeições equilibradas" role="listitem" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&w=1200&q=80" alt="Ingredientes frescos" role="listitem" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Acompanhamento Online ===== -->
+      <div class="servico-card" data-categoria="online">
+        <div class="servico-imagem">
+          <img src="../assets/servicos/acomp_online.jpg" alt="Acompanhamento Online" loading="lazy"/>
+        </div>
+        <div class="servico-info">
+          <h3>Acompanhamento Online</h3>
+          <p>Treina com orientação profissional onde estiveres. Recebe planos, acompanha a evolução e fala com a equipa por app/WhatsApp.</p>
+          <div class="servico-beneficios">
+            <h4>Opções:</h4>
+            <ul class="beneficios-list">
+              <li>App com planos de treino</li>
+              <li>Planos de treino + plano alimentar</li>
+              <li>Treino personalizado online</li>
+              <li>Treino personalizado online + plano alimentar</li>
+            </ul>
+          </div>
+          <div class="servico-meta">
+            <span class="servico-categoria">Online</span>
+            <!-- (Sem "Quero Saber Mais") — o botão "Detalhes" será inserido via JS -->
+          </div>
+
+          <div class="servico-detalhes" id="detalhes-online">
+            <div class="detalhe-texto">
+              <p>Integração por app para receber planos, vídeos de execução e chat com a equipa. Ajustes semanais conforme feedback e disponibilidade de material (ginásio ou casa).</p>
+            </div>
+            <div class="galeria-servico" role="list" aria-label="Galeria de Acompanhamento Online">
+              <img src="https://images.unsplash.com/photo-1594737625785-c6683fc54f01?auto=format&fit=crop&w=1200&q=80" alt="App de treino" role="listitem" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1598970434795-0c54fe7c0642?auto=format&fit=crop&w=1200&q=80" alt="Treino em casa" role="listitem" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.servicos-grid -->
+  </div>
+</section>
+
+
+
+  <!-- Planos / Destaques / Horários (iguais aos anteriores) -->
+  <section class="planos" id="planos" aria-labelledby="planos-heading">
+    <div class="container">
+      <div class="section-title animate">
+        <h2 id="planos-heading">Planos Vila Plus</h2>
+        <p>Temos vários planos para diferentes objetivos e rotinas. Preços variam consoante a duração e serviços incluídos. Envia mensagem para saber mais.</p>
+      </div>
+
+    <div class="pricing animate delay-1">
+      <!-- Sócios & Jogadores GCD Vila Caiz -->
+      <div class="price-card popular">
+        <div class="price-header">
+          <span class="price-title">Sócios &amp; Jogadores GCD Vila Caiz</span>
+          <span class="price-tag">-10%</span>
+        </div>
+      </div>
+
+      <!-- +60 & Estudantes -->
+      <div class="price-card popular">
+        <div class="price-header">
+          <span class="price-title">+60 &amp; Estudantes</span>
+          <span class="price-tag">-20%</span>
+        </div>
+      </div>
+
+      <!-- Casal -->
+      <div class="price-card popular">
+        <div class="price-header">
+          <span class="price-title">Casal</span>
+          <span class="price-tag">-10%</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:18px" class="animate delay-2" role="note">
+      <p>Descontos sujeitos a apresentação de comprovativos no ato da inscrição. Fala connosco para confirmar condições.</p>
+    </div>
+  </div>
+</section>
+
+  <section class="servicos-destaque" aria-labelledby="destaques-heading">
+    <div class="container">
+      <div class="section-title animate">
+        <h2 id="destaques-heading">Porquê escolher o Vila Plus</h2>
+        <p>Conhece os nossos diferenciais exclusivos.</p>
+      </div>
+      <div class="destaque-container">
+        <div class="destaque-card"><div class="destaque-icon"><i class="fas fa-user-md" aria-hidden="true"></i></div><h3>Profissionais Certificados</h3><p>Equipa multidisciplinar com formação especializada e experiência comprovada.</p></div>
+        <div class="destaque-card"><div class="destaque-icon"><i class="fas fa-dumbbell" aria-hidden="true"></i></div><h3>Equipamentos Modernos</h3><p>Máquinas de última geração e ambiente climatizado para o teu conforto.</p></div>
+        <div class="destaque-card"><div class="destaque-icon"><i class="fas fa-heart" aria-hidden="true"></i></div><h3>Acompanhamento Personalizado</h3><p>Planos adaptados às tuas necessidades e objetivos pessoais.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="horarios-aulas" class="horarios-aulas" aria-labelledby="horarios-heading">
+    <div class="container">
+      <div class="section-title animate">
+        <h2 id="horarios-heading">Horários das Aulas de Grupo</h2>
+        <p>Consulta os horários disponíveis e planeia os teus treinos.</p>
+      </div>
+      <div class="filtro-dias animate delay-1" role="tablist" aria-label="Filtrar horários por dia">
+        <button class="filtro-dia ativo" data-dia="todos" role="tab" aria-selected="true">Todos os Dias</button>
+        <button class="filtro-dia" data-dia="segunda" role="tab" aria-selected="false">Segunda-feira</button>
+        <button class="filtro-dia" data-dia="terca" role="tab" aria-selected="false">Terça-feira</button>
+        <button class="filtro-dia" data-dia="quarta" role="tab" aria-selected="false">Quarta-feira</button>
+        <button class="filtro-dia" data-dia="quinta" role="tab" aria-selected="false">Quinta-feira</button>
+        <button class="filtro-dia" data-dia="sexta" role="tab" aria-selected="false">Sexta-feira</button>
+        <button class="filtro-dia" data-dia="sabado" role="tab" aria-selected="false">Sábado</button>
+      </div>
+      <div class="horarios-container animate delay-2">
+        <div class="dia-horarios segunda" id="segunda"><h3 class="dia-titulo">Segunda-feira</h3>
+          <div class="aula-item"><span class="aula-horario">09:00-09:45</span><span class="aula-nome">Circuito</span></div>
+          <div class="aula-item"><span class="aula-horario">10:00-10:45</span><span class="aula-nome">Pilates Clínico</span></div>
+          <div class="aula-item"><span class="aula-horario">11:00-11:45</span><span class="aula-nome">Pilates Clínico</span></div>
+          <div class="aula-item"><span class="aula-horario">17:30-18:15</span><span class="aula-nome">Step</span></div>
+          <div class="aula-item"><span class="aula-horario">18:15-19:00</span><span class="aula-nome">Circuito</span></div>
+          <div class="aula-item"><span class="aula-horario">18:15-19:00</span><span class="aula-nome">Pilates Clínico</span></div>
+          <div class="aula-item"><span class="aula-horario">19:30-20:15</span><span class="aula-nome">Gap</span></div>
+          <div class="aula-item"><span class="aula-horario">20:15-21:00</span><span class="aula-nome">Treino Funcional</span></div>
+          <div class="aula-item"><span class="aula-horario">20:15-21:00</span><span class="aula-nome">Pilates Clínico</span></div>
+        </div>
+        <div class="dia-horarios terca" id="terca"><h3 class="dia-titulo">Terça-feira</h3>
+          <div class="aula-item"><span class="aula-horario">07:05-07:50</span><span class="aula-nome">Treino Funcional</span></div>
+          <div class="aula-item"><span class="aula-horario">09:15-10:00</span><span class="aula-nome">Pilates Clínico</span></div>
+          <div class="aula-item"><span class="aula-horario">18:15-19:00</span><span class="aula-nome">Pilates Clínico</span></div>
+          <div class="aula-item"><span class="aula-horario">19:15-20:00</span><span class="aula-nome">HIIT</span></div>
+          <div class="aula-item"><span class="aula-horario">20:15-21:00</span><span class="aula-nome">Aeróbica</span></div>
+        </div>
+        <div class="dia-horarios quarta" id="quarta"><h3 class="dia-titulo">Quarta-feira</h3>
+          <div class="aula-item"><span class="aula-horario">07:05-07:50</span><span class="aula-nome">Gap</span></div>
+          <div class="aula-item"><span class="aula-horario">09:00-09:45</span><span class="aula-nome">Treino Funcional</span></div>
+          <div class="aula-item"><span class="aula-horario">10:00-10:45</span><span class="aula-nome">Pilates Clínico</span></div>
+          <div class="aula-item"><span class="aula-horario">18:15-19:00</span><span class="aula-nome">Gap</span></div>
+          <div class="aula-item"><span class="aula-horario">18:15-19:00</span><span class="aula-nome">Pilates Clínico</span></div>
+          <div class="aula-item"><span class="aula-horario">19:15-20:00</span><span class="aula-nome">Zumba</span></div>
+          <div class="aula-item"><span class="aula-horario">20:00-20:45</span><span class="aula-nome">Circuito</span></div>
+          <div class="aula-item"><span class="aula-horario">20:00-20:45</span><span class="aula-nome">Step</span></div>
+        </div>
+        <div class="dia-horarios quinta" id="quinta"><h3 class="dia-titulo">Quinta-feira</h3>
+          <div class="aula-item"><span class="aula-horario">07:05-07:50</span><span class="aula-nome">Circuito</span></div>
+          <div class="aula-item"><span class="aula-horario">09:15-10:00</span><span class="aula-nome">Pilates Clínico</span></div>
+          <div class="aula-item"><span class="aula-horario">18:15-19:00</span><span class="aula-nome">Treino Funcional</span></div>
+          <div class="aula-item"><span class="aula-horario">19:15-20:00</span><span class="aula-nome">Pilates Clínico</span></div>
+          <div class="aula-item"><span class="aula-horario">20:15-21:00</span><span class="aula-nome">Pilates Clínico</span></div>
+        </div>
+        <div class="dia-horarios sexta" id="sexta"><h3 class="dia-titulo">Sexta-feira</h3>
+          <div class="aula-item"><span class="aula-horario">07:05-07:50</span><span class="aula-nome">Treino Funcional</span></div>
+          <div class="aula-item"><span class="aula-horario">09:00-09:45</span><span class="aula-nome">Gap</span></div>
+          <div class="aula-item"><span class="aula-horario">10:00-10:45</span><span class="aula-nome">Pilates Clínico</span></div>
+          <div class="aula-item"><span class="aula-horario">18:15-19:00</span><span class="aula-nome">Step</span></div>
+          <div class="aula-item"><span class="aula-horario">19:15-20:00</span><span class="aula-nome">Pilates Clínico</span></div>
+        </div>
+        <div class="dia-horarios sabado" id="sabado"><h3 class="dia-titulo">Sábado</h3>
+          <div class="aula-item"><span class="aula-horario">09:15-10:00</span><span class="aula-nome">Circuito</span></div>
+          <div class="aula-item"><span class="aula-horario">10:00-10:45</span><span class="aula-nome">Pilates Clínico</span></div>
+          <div class="aula-item"><span class="aula-horario">11:00-11:45</span><span class="aula-nome">Gap</span></div>
+          <div class="aula-item"><span class="aula-horario">11:00-11:45</span><span class="aula-nome">Vila Kids</span></div>
+          <div class="aula-item"><span class="aula-horario">12:00-13:00</span><span class="aula-nome">Kickboxing</span></div>
+        </div>
+      </div>
+      <div class="legenda-horarios animate delay-3"><div class="legenda-item"><div class="legenda-cor legenda-hoje"></div><span>Dia de hoje</span></div></div>
+      <div style="text-align:center;margin-top:30px" class="animate delay-3">
+        <p><strong>Nota:</strong> Os horários estão sujeitos a alterações. Confirma sempre na receção.</p>
+        <a href="https://www.regyfit.com/admin2/modulos/crm/site_integrations/aula_experimental.php?id_box=2064&id_int=4&acs=d78b8f480898e2d6afd80418263be90f&lang=pt&site=n" class="btn btn-filled" style="margin-top:15px">Reservar Aula</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col animate">
+          <h3>Vila Plus</h3>
+          <p>Saúde. Força. Comunidade.</p>
+          <p>O seu ginásio de eleição em Vila Caiz.</p>
+        </div>
+        <div class="footer-col animate delay-1">
+          <h3>Links Rápidos</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="indexv2.html#home">Início</a></li>
+              <li><a href="projetosv2.html">Projetos</a></li>
+              <li><a href="portfoliov2.html">Galeria</a></li>
+              <li><a href="indexv2.html#horarios">Horários</a></li>
+              <li><a href="parceriasv2.html">Parcerias</a></li>
+              <li><a href="lojav2.html">Loja</a></li>
+              <li><a href="noticiasv2.html">Notícias</a></li>
+              <li><a href="contactsv2.html">Contactos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-col animate delay-2">
+          <h3>Serviços</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="servicosv2.html#musculacao">Musculação</a></li>
+              <li><a href="servicosv2.html#aulas">Aulas de Grupo</a></li>
+              <li><a href="servicosv2.html#personal">Personal Training</a></li>
+              <li><a href="servicosv2.html#fisio">Fisioterapia</a></li>
+              <li><a href="servicosv2.html#nutricao">Nutrição</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-col animate delay-3">
+          <h3>Redes Sociais</h3>
+          <div class="social-links">
+            <a href="https://www.facebook.com/p/Vila-Plus-61552410020366/" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/vilaplus.pt/" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.link/pyak7l" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom animate">
+        <p>&copy; 2025 Ginásio VilaPlus. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Floating CTA -->
+  <div class="floating-cta">
+    <button class="fab-contact pulse" id="fabContact" aria-label="Marcar aula ou falar connosco">
+      <i class="fas fa-calendar-check" aria-hidden="true"></i>
+      <span>Marcar Aula</span>
+    </button>
+  </div>
+
+  <!-- Modal de Serviço (imagens + vídeo) -->
+  <div class="modal-overlay" id="servicoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal" role="document">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">Detalhes</h3>
+        <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-grid">
+          <div class="modal-media">
+            <img src="" alt="" class="modal-mainimg" id="modalMainImg" style="display:none">
+            <video class="modal-mainvideo" id="modalMainVideo" style="display:none" controls playsinline></video>
+            <div class="modal-thumbs" id="modalThumbs"></div>
+          </div>
+          <div class="modal-info">
+            <p id="modalDesc"></p>
+            <div class="modal-meta">
+              <div class="meta-card"><strong>Inclui</strong><p id="modalInclui" style="margin-top:6px"></p></div>
+              <div class="meta-card"><strong>Duração</strong><p id="modalDuracao" style="margin-top:6px"></p></div>
+            </div>
+            <div class="modal-actions" id="modalCTAs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint" id="scrollHint" aria-hidden="true">
+  <i class="fas fa-angle-down"></i>
+</div>
+
+
+<script>
+  // Mobile menu
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mainMenu = document.getElementById('main-menu');
+  const body = document.body;
+  
+  function toggleMenu() {
+    const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+    mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+    mainMenu.classList.toggle('show');
+    body.classList.toggle('menu-open');
+    
+    const icon = mobileMenuBtn.querySelector('i');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-times');
+  }
+  
+  mobileMenuBtn.addEventListener('click', toggleMenu);
+  
+  // Fechar menu ao clicar em um link
+  document.querySelectorAll('#main-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (mainMenu.classList.contains('show')) {
+        toggleMenu();
+      }
+    });
+  });
+
+  // Header shadow on scroll
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 100);
+  });
+
+  // Floating CTA
+  (function() {
+    const btn = document.getElementById('fabContact');
+    if (!btn) return;
+    
+    btn.addEventListener('click', () => {
+      window.location.href = 'https://www.regyfit.com/admin2/modulos/crm/site_integrations/aula_experimental.php?id_box=2064&id_int=4&acs=d78b8f480898e2d6afd80418263be90f&lang=pt&site=n';
+    });
+  })();
+
+  // Animate on scroll
+  function animateOnScroll() {
+    document.querySelectorAll('.animate').forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top < window.innerHeight - 100) {
+        el.classList.add('show');
+      }
+    });
+    
+    document.querySelectorAll('.servico-card').forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top < window.innerHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+    
+    document.querySelectorAll('.destaque-card').forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top < window.innerHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  
+  window.addEventListener('DOMContentLoaded', animateOnScroll);
+  window.addEventListener('scroll', animateOnScroll);
+
+  // --- Filtro de categorias (atualizado) ---
+  const categoriaBtns = document.querySelectorAll('.categoria-btn');
+  const servicoCards = document.querySelectorAll('.servico-card');
+
+  function aplicarFiltro(cat) {
+    servicoCards.forEach(card => {
+      const c = card.getAttribute('data-categoria');
+      let mostrar = false;
+      
+      if (cat === 'todos') {
+        mostrar = (c !== 'aulas');
+      } else if (cat === 'aulas') {
+        mostrar = (c === 'aulas');
+      } else {
+        mostrar = (c === cat);
+      }
+
+      if (c === 'aulas-resumo') {
+        mostrar = (cat === 'todos');
+      }
+
+      card.style.display = mostrar ? 'flex' : 'none';
+    });
+
+    if (typeof prepararBotoesDetalhes === 'function') {
+      setTimeout(prepararBotoesDetalhes, 0);
+    }
+  }
+
+  categoriaBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Atualizar estado dos tabs
+      categoriaBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      
+      aplicarFiltro(btn.getAttribute('data-categoria'));
+    });
+    
+    // Adicionar suporte a teclado para tabs
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+  });
+
+  // Estado inicial: "Todos" esconde as aulas e mostra o resumo
+  window.addEventListener('DOMContentLoaded', () => {
+    const btnTodos = document.querySelector('.categoria-btn[data-categoria="todos"]');
+    if (btnTodos) {
+      btnTodos.classList.add('active');
+      btnTodos.setAttribute('aria-selected', 'true');
+      aplicarFiltro('todos');
+    }
+  });
+
+  // Filtro de dias
+  const filtroDias = document.querySelectorAll('.filtro-dia');
+  const diasHorarios = document.querySelectorAll('.dia-horarios');
+  
+  filtroDias.forEach(f => {
+    f.addEventListener('click', () => {
+      // Atualizar estado dos tabs
+      filtroDias.forEach(x => {
+        x.classList.remove('ativo');
+        x.setAttribute('aria-selected', 'false');
+      });
+      
+      f.classList.add('ativo');
+      f.setAttribute('aria-selected', 'true');
+      
+      const dia = f.getAttribute('data-dia');
+      if (dia === 'todos') {
+        diasHorarios.forEach(d => d.style.display = 'block');
+      } else {
+        diasHorarios.forEach(d => d.style.display = 'none');
+        const el = document.getElementById(dia);
+        if (el) el.style.display = 'block';
+      }
+    });
+    
+    // Adicionar suporte a teclado para tabs
+    f.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        f.click();
+      }
+    });
+  });
+  
+  // Destacar o dia de hoje
+  (function() {
+    const map = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
+    const hoje = map[new Date().getDay()];
+    if (hoje !== 'domingo') {
+      const el = document.getElementById(hoje);
+      if (el) {
+        el.classList.add('hoje');
+      }
+    }
+  })();
+
+  // ==== QUIZ Logic ====
+  const quizState = { step: 1, respostas: {} };
+  const stepDots = document.querySelectorAll('.quiz-step-dot');
+  
+  function setStep(n) {
+    quizState.step = n;
+    document.querySelectorAll('.quiz-step').forEach(s => s.style.display = 'none');
+    const current = document.querySelector(`.quiz-step[data-step="${n}"]`);
+    if (current) current.style.display = 'block';
+    
+    stepDots.forEach(d => {
+      const isActive = Number(d.dataset.step) <= n;
+      d.classList.toggle('active', isActive);
+      if (isActive) {
+        d.setAttribute('aria-current', 'true');
+      } else {
+        d.removeAttribute('aria-current');
+      }
+    });
+    
+    document.getElementById('quizResult').style.display = 'none';
+    document.getElementById('quizCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  
+  // Step 1
+  const step1 = document.querySelector('.quiz-step[data-step="1"]');
+  const btnNext1 = document.getElementById('btnNext1');
+  
+  step1.querySelectorAll('.quiz-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      step1.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      quizState.respostas.objetivo = opt.dataset.value;
+      btnNext1.disabled = false;
+    });
+    
+    // Suporte a teclado
+    opt.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        opt.click();
+      }
+    });
+  });
+  
+  btnNext1.addEventListener('click', () => setStep(2));
+  
+  // Step 2
+  const step2 = document.querySelector('.quiz-step[data-step="2"]');
+  const btnPrev2 = document.getElementById('btnPrev2');
+  const btnNext2 = document.getElementById('btnNext2');
+  
+  step2.querySelectorAll('.quiz-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      step2.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      quizState.respostas.formato = opt.dataset.value;
+      btnNext2.disabled = false;
+    });
+    
+    // Suporte a teclado
+    opt.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        opt.click();
+      }
+    });
+  });
+  
+  if (btnPrev2) {
+    btnPrev2.addEventListener('click', () => setStep(1));
+  }
+  
+  btnNext2.addEventListener('click', () => setStep(3));
+  
+  // Step 3
+  const step3 = document.querySelector('.quiz-step[data-step="3"]');
+  const btnPrev3 = document.getElementById('btnPrev3');
+  const btnFinish = document.getElementById('btnFinish');
+  
+  step3.querySelectorAll('.quiz-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      step3.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      quizState.respostas.intensidade = opt.dataset.value;
+      btnFinish.disabled = false;
+    });
+    
+    // Suporte a teclado
+    opt.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        opt.click();
+      }
+    });
+  });
+  
+  if (btnPrev3) {
+    btnPrev3.addEventListener('click', () => setStep(2));
+  }
+  
+  btnFinish.addEventListener('click', () => {
+    const r = quizState.respostas;
+    const badges = [];
+    let texto = "Recomendamos: ";
+    
+    if (r.objetivo === 'perda_gordura') {
+      badges.push('HIIT', 'Circuito', 'Zumba');
+    }
+    if (r.objetivo === 'ganho_massa') {
+      badges.push('Musculação', 'Personal Training');
+    }
+    if (r.objetivo === 'saude_bemestar') {
+      badges.push('Pilates Clínico', 'Funcional');
+    }
+    if (r.objetivo === 'reabilitacao') {
+      badges.push('Fisioterapia', 'Pilates Clínico');
+    }
+    
+    if (r.formato === 'grupo') {
+      badges.push('Aulas de Grupo');
+    }
+    if (r.formato === 'individual') {
+      badges.push('Personal Training');
+    }
+    if (r.formato === 'livre') {
+      badges.push('Musculação');
+    }
+    
+    if (r.intensidade === 'baixa') {
+      badges.push('Baixa intensidade');
+    }
+    if (r.intensidade === 'media') {
+      badges.push('Média intensidade');
+    }
+    if (r.intensidade === 'alta') {
+      badges.push('Alta intensidade');
+    }
+    
+    texto += badges.slice(0, 3).join(' • ') + ".";
+    document.getElementById('quizText').textContent = texto;
+    
+    const badgesEl = document.getElementById('quizBadges');
+    badgesEl.innerHTML = '';
+    
+    [...new Set(badges)].forEach(b => {
+      const span = document.createElement('span');
+      span.className = 'badge';
+      span.textContent = b;
+      badgesEl.appendChild(span);
+    });
+    
+    document.getElementById('quizResult').style.display = 'block';
+    document.getElementById('quizResult').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  // ===== MODAL: abrir detalhes com imagens/vídeo =====
+  (function() {
+    const overlay = document.getElementById('servicoModal');
+    const closeBtn = document.getElementById('modalClose');
+    const titleEl = document.getElementById('modalTitle');
+    const imgEl = document.getElementById('modalMainImg');
+    const vidEl = document.getElementById('modalMainVideo');
+    const thumbsEl = document.getElementById('modalThumbs');
+    const descEl = document.getElementById('modalDesc');
+    const incluiEl = document.getElementById('modalInclui');
+    const duracaoEl = document.getElementById('modalDuracao');
+    const ctasEl = document.getElementById('modalCTAs');
+    
+    // Funções para mostrar imagem ou vídeo
+    function showImage(src, alt) {
+      vidEl.pause();
+      vidEl.removeAttribute('src');
+      vidEl.style.display = 'none';
+      
+      imgEl.src = src;
+      imgEl.alt = alt || '';
+      imgEl.style.display = 'block';
+    }
+    
+    function showVideo(src, poster) {
+      imgEl.style.display = 'none';
+      imgEl.removeAttribute('src');
+      
+      vidEl.style.display = 'block';
+      if (poster) {
+        vidEl.setAttribute('poster', poster);
+      } else {
+        vidEl.removeAttribute('poster');
+      }
+      
+      vidEl.src = src;
+      // Tentar reproduzir, mas capturar erros de autoplay
+      vidEl.play().catch(() => {
+        // Autoplay pode falhar, mas isso é normal
+      });
+    }
+    
+    // Abrir e fechar modal
+    function openModal() {
+      overlay.classList.add('aberto');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+      
+      // Adicionar listener para fechar com ESC
+      document.addEventListener('keydown', handleEscKey);
+    }
+
+    // DENTRO do IIFE do modal, perto de onde crias o botão "Detalhes" de cada card:
+function openFromCard(card){
+  const titleEl = document.getElementById('modalTitle');
+  const descEl  = document.getElementById('modalDesc');
+  const incluiEl = document.getElementById('modalInclui');
+  const duracaoEl = document.getElementById('modalDuracao');
+  const thumbsEl = document.getElementById('modalThumbs');
+  const imgEl = document.getElementById('modalMainImg');
+  const vidEl = document.getElementById('modalMainVideo');
+
+  // (é o mesmo código que usas no clique do teu botão "Detalhes")
+  const titulo = card.querySelector('h3')?.textContent?.trim() || 'Serviço';
+  const descCurta = card.querySelector('.servico-info > p')?.textContent?.trim() || '';
+  const bloco = card.querySelector('.servico-detalhes');
+  const imgHero = card.querySelector('.servico-imagem img')?.getAttribute('src') || '';
+  let descLonga = descCurta;
+  if (bloco) {
+    const pDet = bloco.querySelector('.detalhe-texto p');
+    if (pDet) descLonga = pDet.textContent.trim();
+  }
+  const ul = card.querySelector('.beneficios-list');
+  const inclui = ul ? [...ul.querySelectorAll('li')].map(li=>li.textContent.trim()).slice(0,4).join(', ') + '.' : 'Plano, acompanhamento e revisão periódica.';
+  const cat = card.getAttribute('data-categoria');
+  const duracaoSug = (cat === 'personal' || cat === 'fisioterapia') ? 'Sessões de 50–60 min' : (cat === 'aulas' ? 'Aulas de 45 min' : 'Sessões ajustadas ao objetivo');
+
+  const itens = [];
+  if (bloco && bloco.querySelector('.galeria-servico')) {
+    bloco.querySelectorAll('.galeria-servico img').forEach(img => {
+      const v = img.dataset.video;
+      if (v) itens.push({type:'video', src:v, thumb:img.src, poster:img.src, alt:img.alt||titulo});
+      else   itens.push({type:'image', src:img.src, alt:img.alt||titulo});
+    });
+  }
+  if (itens.length === 0 && imgHero) itens.push({type:'image', src:imgHero, alt:titulo});
+
+  // preencher modal
+  titleEl.textContent = `${titulo} — Detalhes`;
+  descEl.textContent = descLonga;
+  incluiEl.textContent = inclui;
+  duracaoEl.textContent = duracaoSug;
+
+  function showImage(src, alt){ vidEl.pause(); vidEl.removeAttribute('src'); vidEl.style.display='none'; imgEl.src=src; imgEl.alt=alt||''; imgEl.style.display='block'; }
+  function showVideo(src, poster){ imgEl.style.display='none'; imgEl.removeAttribute('src'); vidEl.style.display='block'; poster ? vidEl.setAttribute('poster',poster) : vidEl.removeAttribute('poster'); vidEl.src=src; vidEl.play().catch(()=>{}); }
+
+  const thumbs = document.getElementById('modalThumbs');
+  thumbs.innerHTML = '';
+  itens.forEach((it, i)=>{
+    const t = document.createElement('img');
+    t.src = it.thumb || it.src; t.alt = it.alt || titulo; t.className = 'modal-thumb' + (it.type==='video'?' video':'');
+    t.addEventListener('click', ()=>{
+      document.querySelectorAll('.modal-thumb').forEach(x=>x.classList.remove('ativa'));
+      t.classList.add('ativa');
+      it.type==='video' ? showVideo(it.src, it.poster) : showImage(it.src, it.alt);
+    });
+    thumbs.appendChild(t);
+  });
+  if (itens[0]) { // seleciona a 1ª
+    const first = thumbs.firstElementChild; if (first) first.click();
+  }
+
+  // abre o modal
+  document.getElementById('servicoModal').classList.add('aberto');
+  document.getElementById('servicoModal').setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  document.getElementById('modalClose').focus();
+}
+
+// torna acessível fora do IIFE:
+window.openServicoModalFromCard = openFromCard;
+
+    
+    function closeModal() {
+      overlay.classList.remove('aberto');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      vidEl.pause();
+      vidEl.removeAttribute('src');
+      
+      // Remover listener do ESC
+      document.removeEventListener('keydown', handleEscKey);
+    }
+    
+    function handleEscKey(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('aberto')) {
+        closeModal();
+      }
+    }
+    
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeModal();
+      }
+    });
+    
+    // Prepara os botões de detalhes em cada card
+    function prepararBotoesDetalhes() {
+      document.querySelectorAll('.servico-card').forEach(card => {
+        const meta = card.querySelector('.servico-meta');
+        if (!meta) return;
+        
+        // Remove quaisquer botões existentes na meta
+        meta.querySelectorAll('a.btn').forEach(a => a.remove());
+        
+        // Evita duplicação do botão
+        if (meta.querySelector('.btn-detalhes')) return;
+        
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-filled btn-detalhes';
+        btn.type = 'button';
+        btn.textContent = 'Detalhes';
+        meta.appendChild(btn);
+        
+        btn.addEventListener('click', () => {
+          const titulo = card.querySelector('h3')?.textContent?.trim() || 'Serviço';
+          const descCurta = card.querySelector('.servico-info > p')?.textContent?.trim() || '';
+          const bloco = card.querySelector('.servico-detalhes');
+          const imgHero = card.querySelector('.servico-imagem img')?.getAttribute('src') || '';
+          
+          let descLonga = descCurta;
+          if (bloco) {
+            const pDet = bloco.querySelector('.detalhe-texto p');
+            if (pDet) {
+              descLonga = pDet.textContent.trim();
+            }
+          }
+          
+          // Inclui/Duração
+          const inclui = (() => {
+            const ul = card.querySelector('.beneficios-list');
+            if (!ul) return 'Plano, acompanhamento e revisão periódica.';
+            return [...ul.querySelectorAll('li')].map(li => li.textContent.trim()).slice(0, 4).join(', ') + '.';
+          })();
+          
+          const cat = card.getAttribute('data-categoria');
+          const duracaoSug = (cat === 'personal' || cat === 'fisioterapia') ? 
+            'Sessões de 50–60 min' : 
+            (cat === 'aulas' ? 'Aulas de 45 min' : 'Sessões ajustadas ao objetivo');
+          
+          // Galeria (imgs + vídeos via data-video)
+          const itens = [];
+          if (bloco && bloco.querySelector('.galeria-servico')) {
+            bloco.querySelectorAll('.galeria-servico img').forEach(img => {
+              const v = img.dataset.video;
+              if (v) {
+                itens.push({
+                  type: 'video',
+                  src: v,
+                  thumb: img.src,
+                  poster: img.src,
+                  alt: img.alt || titulo
+                });
+              } else {
+                itens.push({
+                  type: 'image',
+                  src: img.src,
+                  alt: img.alt || titulo
+                });
+              }
+            });
+          }
+          
+          if (itens.length === 0 && imgHero) {
+            itens.push({
+              type: 'image',
+              src: imgHero,
+              alt: titulo
+            });
+          }
+          
+          // CTAs
+          // Apenas CTA2
+          ctasEl.innerHTML = '';
+
+          const isAulas = (cat === 'aulas');
+          const cta2 = document.createElement('a');
+          cta2.href = isAulas ? 'servicosv2.html#horarios-aulas' : 'indexv2.html#contact';
+          cta2.className = 'btn btn-filled';
+          cta2.textContent = isAulas ? 'Ver horários das aulas' : 'Saber Mais';
+
+          ctasEl.append(cta2);
+
+          
+          // Preencher modal
+          titleEl.textContent = `${titulo} — Detalhes`;
+          descEl.textContent = descLonga;
+          incluiEl.textContent = inclui;
+          duracaoEl.textContent = duracaoSug;
+          
+          // Thumbs + media principal
+          thumbsEl.innerHTML = '';
+          
+          function selectThumb(idx) {
+            document.querySelectorAll('.modal-thumb').forEach(x => x.classList.remove('ativa'));
+            const t = thumbsEl.children[idx];
+            if (t) t.classList.add('ativa');
+            
+            const item = itens[idx];
+            if (item.type === 'video') {
+              showVideo(item.src, item.poster);
+            } else {
+              showImage(item.src, item.alt);
+            }
+          }
+          
+          itens.forEach((it, i) => {
+            const t = document.createElement('img');
+            t.src = it.thumb || it.src;
+            t.alt = it.alt || titulo;
+            t.className = 'modal-thumb' + (it.type === 'video' ? ' video' : '');
+            t.addEventListener('click', () => selectThumb(i));
+            thumbsEl.appendChild(t);
+          });
+          
+          // Selecionar o primeiro thumb
+          if (itens.length > 0) {
+            selectThumb(0);
+          }
+          
+          openModal();
+        });
+      });
+    }
+    
+    window.addEventListener('DOMContentLoaded', prepararBotoesDetalhes);
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.categoria-btn')) {
+        setTimeout(prepararBotoesDetalhes, 0);
+      }
+    });
+  })();
+</script>
+
+<script>
+// === Mapeamento de respostas -> sugestões ===
+// Nota: no HTML actual, Step 2 tem valores:
+//  'grupo'  => label "Sozinho"
+//  'individual' => "Com parceiro"
+//  'livre'  => "Em grupo"
+// E no Step 3: 'baixa' (Pernas) -> inferiores, 'media' (Superior) -> superiores,
+//              'alta' (Abdominais) -> tratamos como 'geral', 'geral' -> geral.
+
+function normalizarFormato(v) {
+  if (v === 'grupo') return 'sozinho';
+  if (v === 'individual') return 'parceiro';
+  if (v === 'livre') return 'grupo';
+  return 'sozinho';
+}
+
+function normalizarFoco(v) {
+  if (v === 'baixa') return 'inferiores';
+  if (v === 'media') return 'superiores';
+  if (v === 'alta') return 'geral'; // "abdominais" não está nas regras; aproximamos a 'geral'
+  if (v === 'geral') return 'geral';
+  return 'geral';
+}
+
+// Tabela de recomendações baseada nas regras que enviaste
+function getRecomendacoes(objetivo, formatoRaw, focoRaw) {
+  const formato = normalizarFormato(formatoRaw);    // 'sozinho' | 'parceiro' | 'grupo'
+  const foco = normalizarFoco(focoRaw);             // 'inferiores' | 'superiores' | 'geral'
+
+  // Helpers
+  const J = (arr) => arr.join(' – ');
+
+  // ================== PERDER PESO ==================
+  if (objetivo === 'perda_gordura') {
+    if (formato === 'sozinho') {
+      return J(['PT Individual', 'Musculação', 'Nutrição']);
+    }
+    if (formato === 'parceiro') {
+      if (foco === 'inferiores') return J(['PT Duo', 'Musculação', 'GAP', 'STEP', 'AERÓBICA', 'HIIT', 'NUTRIÇÃO']);
+      if (foco === 'superiores') return J(['PT Duo', 'Musculação', 'Funcional', 'Circuito', 'Kickboxing', 'Nutrição']);
+      return J(['PT Duo', 'Musculação', 'HIIT', 'Kickboxing', 'Funcional', 'Circuito', 'Nutrição']); // geral
+    }
+    if (formato === 'grupo') {
+      if (foco === 'inferiores') return J(['GAP', 'STEP', 'AERÓBICA', 'HIIT', 'Kickboxing', 'NUTRIÇÃO']);
+      if (foco === 'superiores') return J(['Funcional', 'Circuito', 'Kickboxing', 'HIIT', 'Nutrição']);
+      return J(['HIIT', 'Kickboxing', 'Funcional', 'Circuito', 'Nutrição']); // geral
+    }
+  }
+
+  // ============ GANHO DE MASSA MUSCULAR ============
+  if (objetivo === 'ganho_massa') {
+    if (formato === 'sozinho') {
+      return J(['PT Individual', 'Musculação', 'Nutrição']);
+    }
+    if (formato === 'parceiro') {
+      if (foco === 'inferiores') return J(['PT Duo', 'Musculação', 'GAP', 'STEP', 'NUTRIÇÃO']);
+      if (foco === 'superiores') return J(['PT Duo', 'Musculação', 'Funcional', 'Circuito', 'Nutrição']);
+      return J(['PT Duo', 'Musculação', 'Funcional', 'Circuito', 'Nutrição']); // geral
+    }
+    if (formato === 'grupo') {
+      if (foco === 'inferiores') return J(['GAP', 'STEP', 'NUTRIÇÃO']);
+      if (foco === 'superiores') return J(['Funcional', 'Circuito', 'Nutrição']);
+      return J(['Funcional', 'Circuito', 'Nutrição']); // geral
+    }
+  }
+
+  // ========= SAÚDE E BEM-ESTAR =========
+  if (objetivo === 'saude_bemestar') {
+    if (formato === 'sozinho') {
+      return J(['PT Individual', 'Pt pilates', 'Musculação', 'Nutrição', 'Fisioterapia']);
+    }
+    if (formato === 'parceiro') {
+      if (foco === 'inferiores') return J(['PT Duo', 'Musculação', 'pilates', 'GAP', 'STEP', 'NUTRIÇÃO', 'Fisioterapia']);
+      if (foco === 'superiores') return J(['PT Duo', 'Musculação', 'pilates', 'Funcional', 'Circuito', 'Nutrição']);
+      return J(['PT Duo', 'Musculação', 'pilates', 'Funcional', 'Circuito', 'Nutrição', 'Fisioterapia']); // geral
+    }
+    if (formato === 'grupo') {
+      if (foco === 'inferiores') return J(['Pilates', 'GAP', 'STEP', 'zumba', 'NUTRIÇÃO', 'Fisioterapia']);
+      if (foco === 'superiores') return J(['Pilates', 'Funcional', 'Circuito', 'Nutrição', 'fisioterapia']);
+      return J(['Pilates', 'Funcional', 'Circuito', 'zumba', 'Nutrição', 'fisioterapia']); // geral
+    }
+  }
+
+  // =============== REABILITAÇÃO ===============
+  if (objetivo === 'reabilitacao') {
+    if (formato === 'sozinho') {
+      return J(['PT Individual', 'Musculação', 'Nutrição', 'Fisioterapia']);
+    }
+    if (formato === 'parceiro') {
+      // "Inferiores/Superiores/geral" -> uma só regra
+      return J(['PT Duo', 'Musculação', 'pillates', 'NUTRIÇÃO', 'Fisioterapia']);
+    }
+    if (formato === 'grupo') {
+      return J(['Pilates', 'funcional', 'nutrição', 'Fisioterapia']);
+    }
+  }
+
+  // Fallback (caso algo não bata certo)
+  return J(['Musculação', 'Funcional', 'Nutrição']);
+}
+
+// === Handler do botão "Ver Recomendações" (substitui o teu atual) ===
+btnFinish.addEventListener('click', () => {
+  const r = quizState.respostas;
+
+  // Construir texto e badges a partir da tabela acima
+  const recomendacaoTexto = getRecomendacoes(r.objetivo, r.formato, r.intensidade);
+  document.getElementById('quizText').textContent = recomendacaoTexto;
+
+  // Mostrar badges únicos (separando por " – ")
+  const badgesEl = document.getElementById('quizBadges');
+  badgesEl.innerHTML = '';
+  const termos = [...new Set(recomendacaoTexto.split('–').map(t => t.trim()))];
+  termos.forEach(t => {
+    const span = document.createElement('span');
+    span.className = 'badge';
+    span.textContent = t;
+    badgesEl.appendChild(span);
+  });
+
+  // Abrir bloco de resultado
+  const result = document.getElementById('quizResult');
+  result.style.display = 'block';
+  result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+</script>
+
+<script>
+(function(){
+  const track   = document.getElementById('carousel-track');
+  const dots    = document.getElementById('slider-dots');
+  const prevBtn = document.getElementById('slider-prev');
+  const nextBtn = document.getElementById('slider-next');
+  const grid    = document.getElementById('servicos-grid');
+
+  let currentIndex = 0, step = 0;
+
+  function visibleCards(){
+    return [...grid.querySelectorAll('.servico-card')].filter(c => getComputedStyle(c).display !== 'none');
+  }
+
+  function slideElFromCard(card, idx, total){
+    const img = card.querySelector('.servico-imagem img')?.src || '';
+    const titulo = card.querySelector('h3')?.textContent?.trim() || 'Serviço';
+    const desc = card.querySelector('.servico-info > p')?.textContent?.trim() || '';
+    const cat = card.getAttribute('data-categoria');
+    const pill = (cat==='aulas') ? 'Aulas de Grupo' : (titulo.includes('Treino') ? 'Personal Training' : (cat||'Serviço'));
+
+    const el = document.createElement('article');
+    el.className='slide'; el.tabIndex=-1;
+    el.setAttribute('aria-roledescription','slide');
+    el.setAttribute('aria-label', `${idx+1} de ${total}`);
+    el.innerHTML = `
+      <div class="slide-media"><img src="${img}" alt="${titulo}"></div>
+      <div class="slide-body">
+        <span class="pill">${pill}</span>
+        <h3>${titulo}</h3>
+        <p class="muted line-clamp-3">${desc}</p>
+      </div>
+      <div class="actions-bar">
+        <button class="btn" data-act="contacto">Contactar</button>
+        <button class="btn btn-filled" data-act="detalhes">Detalhes</button>
+      </div>`;
+    el.querySelector('[data-act="contacto"]').addEventListener('click',()=>{ location.href='contactsv2.html'; });
+    el.querySelector('[data-act="detalhes"]').addEventListener('click',()=>{ 
+      if (window.openServicoModalFromCard) window.openServicoModalFromCard(card);
+    });
+    return el;
+  }
+
+  function calcStep(){
+    const first = track.querySelector('.slide');
+    const gap = parseInt(getComputedStyle(track).gap) || 0;
+    step = first ? (first.getBoundingClientRect().width + gap) : (window.innerWidth);
+  }
+
+  function render(){
+    const cards = visibleCards();
+    track.innerHTML = ''; dots.innerHTML = '';
+    cards.forEach((card, i)=> track.appendChild(slideElFromCard(card, i, cards.length)));
+    cards.forEach((_, i)=>{
+      const b = document.createElement('button');
+      b.className='slider-dot'; b.type='button';
+      b.setAttribute('role','tab'); b.setAttribute('aria-label',`Ir para o slide ${i+1}`);
+      b.addEventListener('click',()=>scrollToIndex(i));
+      dots.appendChild(b);
+    });
+    currentIndex = 0; calcStep(); updateUI();
+  }
+
+  function scrollToIndex(i){
+    track.scrollTo({ left: i * step, behavior: 'smooth' });
+  }
+
+  function updateIndexFromScroll(){
+    currentIndex = Math.round(track.scrollLeft / step);
+    updateUI();
+  }
+
+  function updateUI(){
+    [...dots.children].forEach((d, i)=> d.toggleAttribute('aria-current', i===currentIndex));
+    prevBtn.disabled = (currentIndex<=0);
+    nextBtn.disabled = (currentIndex >= dots.children.length-1);
+  }
+
+  prevBtn.addEventListener('click', ()=>scrollToIndex(Math.max(0,currentIndex-1)));
+  nextBtn.addEventListener('click', ()=>scrollToIndex(Math.min(dots.children.length-1,currentIndex+1)));
+  track.addEventListener('scroll', ()=>requestAnimationFrame(updateIndexFromScroll));
+  window.addEventListener('resize', ()=>{ calcStep(); updateIndexFromScroll(); });
+
+  // Drag com rato (toque no mobile já funciona nativo)
+  let down=false, startX=0, startL=0;
+  track.addEventListener('pointerdown', e=>{ down=true; startX=e.clientX; startL=track.scrollLeft; track.setPointerCapture(e.pointerId); });
+  track.addEventListener('pointermove', e=>{ if(!down) return; track.scrollLeft = startL - (e.clientX - startX); });
+  track.addEventListener('pointerup', e=>{ if(!down) return; down=false; track.releasePointerCapture(e.pointerId);
+    // snap ao mais próximo
+    const nearest = Math.round(track.scrollLeft / step);
+    scrollToIndex(nearest);
+  });
+  track.addEventListener('pointercancel', ()=>{ down=false; });
+
+  // Re-render após mudar de categoria
+  document.querySelectorAll('.categoria-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> setTimeout(render, 0));
+  });
+
+  // Inicializa depois do teu aplicarFiltro('todos')
+  window.addEventListener('DOMContentLoaded', ()=> setTimeout(render, 0));
+})();
+</script>
+
+<script>
+  // depois de definires/acionares o teu checkScroll()
+  window.addEventListener('load', () => {
+    // força o footer-bottom a aparecer no load
+    document.querySelectorAll('.footer-bottom.animate').forEach(el => el.classList.add('show'));
+  });
+</script>
+
+<script>
+   (function(){
+  const hint = document.getElementById('scrollHint');
+  if(!hint) return;
+
+  function toggleHint(){
+    const scrollY = window.scrollY;
+    const winH = window.innerHeight;
+    const docH = document.body.scrollHeight;
+
+    // Se já chegou ao fim, esconder
+    if(scrollY + winH >= docH - 50) {
+      hint.classList.add('hide');
+    } else {
+      hint.classList.remove('hide');
+    }
+  }
+
+  window.addEventListener('scroll', toggleHint);
+  window.addEventListener('resize', toggleHint);
+  document.addEventListener('DOMContentLoaded', toggleHint);
+})();
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="pt" class="no-js">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Contactos | Vila Plus</title>
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/logoazulcinza.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logoazulcinza.png">
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    /* ==== Design System (mobile first) ==== */
+    :root {
+      --azul: #2563eb;
+      --azul-escuro: #1f5073;
+      --cinza-fundo: #f8f9fb;
+      --cinza-card: #f1f3f7;
+      --cinza-medio: #6b7280;
+      --dourado: #d4af37;
+      --branco: #ffffff;
+      --preto: #111827;
+      --transition: all 0.3s ease;
+      --radius: 12px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --header-h: 60px;
+      --container-padding: 1rem;
+      --section-padding: 3rem 0;
+    }
+
+    /* Reset e estilos base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--preto);
+      background: var(--branco);
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-top: var(--header-h);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--azul-escuro);
+      margin-bottom: 1rem;
+    }
+
+    h1 { font-size: 2.25rem; }
+    h2 { font-size: 1.875rem; }
+    h3 { font-size: 1.5rem; }
+    h4 { font-size: 1.25rem; }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--container-padding);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.5rem;
+      border: 1px solid var(--dourado);
+      color: var(--dourado);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      transition: var(--transition);
+      cursor: pointer;
+      border-radius: var(--radius);
+      min-height: 44px; /* Tamanho mínimo para toque */
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn:hover {
+      background: var(--dourado);
+      color: var(--branco);
+    }
+
+    .btn-filled {
+      background: var(--dourado);
+      color: var(--branco);
+    }
+
+    .btn-filled:hover {
+      background: transparent;
+      color: var(--dourado);
+    }
+
+    .btn-ghost {
+      border-color: #e5e7eb;
+      color: var(--azul-escuro);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--dourado);
+      color: var(--dourado);
+    }
+
+    section {
+      padding: var(--section-padding);
+      scroll-margin-top: 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title p {
+      font-size: 1.05rem;
+      color: var(--cinza-medio);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--dourado);
+      margin: 1rem auto 0;
+    }
+
+    /* ==== Header ==== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 0.75rem 0;
+      background: var(--branco);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: var(--transition);
+      height: var(--header-h);
+    }
+
+    header.scrolled {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      padding: 0.5rem 0;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+      transition: var(--transition);
+    }
+
+    .logo-img:hover {
+      opacity: 0.9;
+      transform: scale(1.03);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin-left: 1.5rem;
+      position: relative;
+    }
+
+    nav ul li a {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--azul-escuro);
+      padding: 0.5rem 0;
+      display: block;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--dourado);
+      transition: var(--transition);
+    }
+
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--azul-escuro);
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      min-height: 44px;
+      min-width: 44px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ==== Hero ==== */
+    .hero-contactos {
+      min-height: 40vh;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: var(--branco);
+      margin-top: 0;
+      background: linear-gradient(rgba(0,0,0,0.64), rgba(0,0,0,0.64)), 
+                 url('../assets/zumpi/hist.jpeg') center/cover no-repeat;
+      padding: 3rem 1rem;
+    }
+
+    .hero-contactos h1 {
+      font-size: 2.5rem;
+      color: var(--branco);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-contactos p {
+      font-size: 1.1rem;
+      opacity: 0.96;
+      max-width: 760px;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* ==== Cartões de contacto ==== */
+    .contactos-principais {
+      background: var(--cinza-fundo);
+    }
+
+    .contactos-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .contacto-card {
+      background: var(--branco);
+      border: 1px solid #eef0f3;
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .contacto-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .contacto-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      background: var(--dourado);
+      color: var(--branco);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+
+    /* ==== Mapa ==== */
+    .mapa-localizacao {
+      height: 300px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .mapa-localizacao iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ==== Formulário ==== */
+    .formulario-contacto {
+      background: var(--branco);
+    }
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .form-info, .form-content {
+      flex: 1;
+    }
+
+    .form-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contacto-item {
+      display: flex;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+
+    .contacto-item i {
+      color: var(--dourado);
+      margin-top: 0.25rem;
+      flex-shrink: 0;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+      appearance: none;
+      -webkit-appearance: none; /* Remove estilos padrão do iOS */
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--dourado);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
+    }
+
+    textarea.form-control {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    select.form-control {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1rem;
+      padding-right: 2.5rem;
+    }
+
+    /* ==== FAQ ==== */
+    .faq-section {
+      background: var(--cinza-fundo);
+    }
+
+    .faq-item {
+      background: var(--branco);
+      border: 1px solid #eef0f3;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .faq-question {
+      padding: 1.25rem;
+      background: var(--azul-escuro);
+      color: var(--branco);
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .faq-answer {
+      padding: 0 1.25rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 1.25rem;
+      max-height: 500px;
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+      transition: var(--transition);
+    }
+
+    /* ==== Chat (UI) ==== */
+    .chatbot-launcher {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--dourado);
+      color: var(--branco);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      z-index: 9999;
+      transition: var(--transition);
+    }
+
+    .chatbot-launcher:hover {
+      transform: translateY(-2px);
+      background: var(--azul-escuro);
+    }
+
+    .chatbot-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 90%;
+      max-width: 380px;
+      height: 70vh;
+      max-height: 520px;
+      background: var(--branco);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10000;
+      transform: translateY(20px);
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .chatbot-container.visible {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .chatbot-header {
+      background: var(--dourado);
+      color: var(--branco);
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chatbot-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+    }
+
+    .chatbot-btn-icon {
+      background: transparent;
+      border: none;
+      color: var(--branco);
+      font-size: 1rem;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chatbot-btn-icon:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .chatbot-conversation {
+      flex: 1;
+      padding: 1rem;
+      background: var(--cinza-fundo);
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .chat-message {
+      max-width: 85%;
+      padding: 0.75rem 1rem;
+      border-radius: 14px;
+      line-height: 1.4;
+    }
+
+    .user-message {
+      align-self: flex-end;
+      background: var(--dourado);
+      color: var(--branco);
+      border-bottom-right-radius: 4px;
+    }
+
+    .bot-message {
+      align-self: flex-start;
+      background: var(--branco);
+      border: 1px solid #eef0f3;
+      color: var(--preto);
+      border-bottom-left-radius: 4px;
+    }
+
+    .chatbot-quick-options {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      padding: 0.75rem;
+      border-top: 1px solid #eee;
+      background: var(--branco);
+    }
+
+    .quick-option {
+      border: 1px solid #e5e7eb;
+      background: var(--branco);
+      border-radius: 999px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .quick-option:hover {
+      border-color: var(--dourado);
+      color: var(--dourado);
+    }
+
+    .chatbot-input-area {
+      display: flex;
+      padding: 0.75rem;
+      border-top: 1px solid #eee;
+      background: var(--branco);
+    }
+
+    .chatbot-input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .chatbot-input:focus {
+      outline: none;
+      border-color: var(--dourado);
+    }
+
+    .chatbot-send-btn {
+      width: 44px;
+      height: 44px;
+      margin-left: 0.5rem;
+      border-radius: 50%;
+      border: none;
+      background: var(--dourado);
+      color: var(--branco);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--azul-escuro);
+      color: var(--branco);
+      padding: 3rem 0 1.5rem;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-col h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.25rem;
+      color: var(--branco);
+    }
+
+    .footer-col p {
+      color: var(--cinza-card);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links ul li a {
+      color: var(--cinza-card);
+      transition: var(--transition);
+      display: block;
+      padding: 0.25rem 0;
+    }
+
+    .footer-links ul li a:hover {
+      color: var(--dourado);
+      padding-left: 0.25rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.1);
+      color: var(--branco);
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background-color: var(--dourado);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--cinza-card);
+      font-size: 0.9rem;
+    }
+
+    /* ==== Animação ==== */
+    .animate {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .animate.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 { transition-delay: 0.15s; }
+    .delay-2 { transition-delay: 0.3s; }
+    .delay-3 { transition-delay: 0.45s; }
+
+
+    /* ==== Responsivo - Tablet e Desktop ==== */
+    @media (min-width: 768px) {
+      :root {
+        --container-padding: 2rem;
+        --section-padding: 4rem 0;
+      }
+
+      .contactos-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .form-container {
+        flex-direction: row;
+        gap: 3rem;
+      }
+
+      .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-contactos {
+        min-height: 50vh;
+        padding: 4rem 2rem;
+      }
+
+      .hero-contactos h1 {
+        font-size: 3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-container {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .contactos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      .mapa-localizacao {
+        height: 400px;
+      }
+    }
+
+    /* ==== Responsivo - Mobile ==== */
+    @media (max-width: 767px) {
+      :root {
+        --header-h: 60px;
+      }
+
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.75rem; }
+      h3 { font-size: 1.375rem; }
+
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      nav ul {
+        display: none;
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        width: 100%;
+        background: var(--branco);
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        max-height: calc(100vh - var(--header-h));
+        overflow-y: auto;
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 0.75rem 0;
+      }
+
+      .hero-contactos {
+        min-height: 40vh;
+        padding: 2rem 1rem;
+      }
+
+      .hero-contactos h1 {
+        font-size: 2rem;
+      }
+
+      .hero-contactos p {
+        font-size: 1rem;
+      }
+
+      .chatbot-container {
+        width: calc(100% - 2rem);
+        right: 1rem;
+        bottom: 1rem;
+        height: 65vh;
+      }
+
+      .chatbot-launcher {
+        right: 1rem;
+        bottom: 1rem;
+      }
+
+      .contacto-card {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Melhorias de acessibilidade */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    /* Melhorias para iOS */
+    @supports (-webkit-touch-callout: none) {
+      .hero-contactos {
+        min-height: -webkit-fill-available;
+        height: 40vh;
+      }
+    }
+
+    /* Scroll hint */
+.scroll-hint {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 9999;
+  color: var(--dourado);
+  font-size: 1.8rem;
+  animation: bounce 1.5s infinite;
+  opacity: 0.8;
+  cursor: default;
+  pointer-events: none; /* só para mostrar, não clicar */
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.scroll-hint.hide {
+  display: none;
+}
+
+/* ===== Nav: Desktop >=1024px / Mobile-Tablet <1024px ===== */
+
+/* Desktop por omissão */
+nav ul {
+  display: flex;               /* menu normal visível */
+  position: static;
+  width: auto;
+  background: transparent;
+  flex-direction: row;
+  padding: 0;
+  box-shadow: none;
+  max-height: none;
+  overflow: visible;
+  z-index: auto;
+}
+.mobile-menu-btn { display: none; }
+
+/* <1024px: usa menu mobile (hambúrguer) */
+@media (max-width: 1023px) {
+  .mobile-menu-btn { display: flex; }
+
+  nav ul {
+    display: none;             /* escondido até clicares no botão */
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    width: 100%;
+    background: var(--branco);
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    max-height: calc(100vh - var(--header-h));
+    overflow-y: auto;
+    z-index: 1001;             /* acima do header */
+  }
+  nav ul.show { display: flex; }
+
+  nav ul li { margin: 0.75rem 0; }
+}
+
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <img src="../assets/logoazulcinza.png" alt="VilaPlus Ginásio" class="logo-img">
+      </a>
+      <nav>
+        <ul id="main-menu">
+          <li><a href="index.html#home">Início</a></li>
+          <li><a href="servicosv2.html">Serviços</a></li>
+          <li><a href="projetosv2.html">Projetos</a></li>
+          <li><a href="portfoliov2.html">Galeria</a></li>
+          <li><a href="index.html#horarios">Horários</a></li>
+          <li><a href="parceriasv2.html">Parcerias</a></li>
+          <li><a href="lojav2.html">Loja</a></li>
+          <li><a href="noticiasv2.html">Notícias</a></li>
+          <li><a href="contactsv2.html" aria-current="page">Contactos</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-contactos">
+    <div class="container">
+      <h1 class="animate">Contactos</h1>
+      <p class="animate delay-1">Estamos aqui para ajudar. Escolhe a melhor forma de entrar em contacto connosco.</p>
+    </div>
+  </section>
+
+  <!-- Contactos principais -->
+  <section class="contactos-principais" id="contactos">
+    <div class="container">
+      <div class="section-title animate">
+        <h2>Como podemos ajudar?</h2>
+        <p>Escolhe a melhor forma de falar connosco.</p>
+      </div>
+      <div class="contactos-grid">
+        <div class="contacto-card animate delay-1">
+          <div class="contacto-icon"><i class="fas fa-phone"></i></div>
+          <h3>Telefone</h3>
+          <p>Marcações e informações gerais em horário de funcionamento.</p>
+          <a class="btn btn-filled" href="tel:+351931999690">+351 931 999 690</a>
+        </div>
+        <div class="contacto-card animate delay-2">
+          <div class="contacto-icon"><i class="fas fa-envelope"></i></div>
+          <h3>Email</h3>
+          <p>Respostas rápidas — normalmente no próprio/próximo dia útil.</p>
+          <a class="btn btn-filled" href="mailto:info@vilaplus.pt">info@vilaplus.pt</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Onde estamos (mapa) -->
+  <section id="localizacao">
+    <div class="container">
+      <div class="section-title animate">
+        <h2>Onde estamos</h2>
+        <p>Visita-nos para uma aula experimental e conhece o espaço.</p>
+      </div>
+      <div class="mapa-localizacao animate delay-1">
+        <iframe 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Rua%20Padre%20%C3%81lvaro%20da%20Silva%20Barbosa%2C%204600-782%20Vila%20Caiz&output=embed" 
+          allowfullscreen
+          aria-label="Localização do Vila Plus Ginásio">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulário -->
+  <section class="formulario-contacto" id="formulario">
+    <div class="container">
+      <div class="section-title animate">
+        <h2>Envia-nos uma mensagem</h2>
+        <p>Respeitamos a tua privacidade. Só usamos os dados para responder ao teu pedido.</p>
+      </div>
+      <div class="form-container">
+        <div class="form-info animate delay-1">
+          <h3>Informação útil</h3>
+          <div class="contacto-item">
+            <i class="fas fa-clock"></i>
+            <div>
+              <strong>Horário</strong>
+              <p>Seg–Sex: 07:00–13:00 • 16:00–22:00<br>Sáb: 09:00–17:00 • Dom: Fechado</p>
+            </div>
+          </div>
+          <div class="contacto-item">
+            <i class="fas fa-paper-plane"></i>
+            <div>
+              <strong>Aulas de grupo</strong>
+              <p>As experimentais <em> gratuitas </em>requerem <em>marcação</em>. Fala connosco para te reservarmos lugar.</p>
+            </div>
+          </div>
+        </div>
+        <div class="form-content animate delay-2">
+          <form id="contactForm" action="https://formspree.io/f/xqadoryk" method="POST">
+            <div class="form-group">
+              <label for="name">Nome*</label>
+              <input class="form-control" type="text" id="name" name="name" autocomplete="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email*</label>
+              <input class="form-control" type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Telefone</label>
+              <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label for="subject">Assunto*</label>
+              <select class="form-control" id="subject" name="subject" required>
+                <option value="">Seleciona um assunto</option>
+                <option>Aula Experimental</option>
+                <option>Informações Gerais</option>
+                <option>Planos e Mensalidades</option>
+                <option>Outro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Mensagem*</label>
+              <textarea class="form-control" id="message" name="message" required></textarea>
+            </div>
+            <!-- Honeypot -->
+            <input type="text" name="_gotcha" style="display:none">
+            <button type="submit" class="btn btn-filled">Enviar mensagem</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-title animate">
+        <h2>Perguntas Frequentes</h2>
+        <p>As respostas rápidas às dúvidas mais comuns.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item animate delay-1">
+          <div class="faq-question"><span>Existe algum período de fidelização?</span><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">
+            <p>Não! No Vila Plus acreditamos na liberdade de escolha. Os nossos planos são flexíveis e sem fidelização, treinas connosco enquanto fizer sentido para ti.</p>
+          </div>
+        </div>
+        <div class="faq-item animate delay-2">
+          <div class="faq-question"><span>Posso experimentar o ginásio antes de me inscrever? É necessário fazer marcação?</span><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">
+            <p>Claro! Oferecemos uma aula experimental para que possas conhecer o espaço, os serviços e a nossa equipa. Só precisas fazer marcação prévia para as aulas de grupo, incluindo as experimentais.</p>
+          </div>
+        </div>
+        <div class="faq-item animate delay-3">
+          <div class="faq-question"><span>Quais são os horários do ginásio e das aulas de grupo?</span><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">
+            <p>De segunda a sexta-feira, das 7h às 13h e das 16h às 22h. Ao sábado das 9h às 17h. Os horários das aulas variam, consulta o site ou as redes sociais para mais detalhes.</p>
+          </div>
+        </div>
+        <div class="faq-item animate delay-4">
+          <div class="faq-question"><span>Que planos de subscrição ou modalidades de pagamento existem?</span><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">
+            <p>Dispomos de mensalidades, pacotes de aulas e treinos personalizados. Contacta-nos para escolheres a melhor opção para ti.</p>
+          </div>
+        </div>
+        <div class="faq-item animate delay-5">
+          <div class="faq-question"><span>Que tipos de aulas de grupo existem e para quem são indicadas?</span><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">
+            <p>Temos Kickboxing, Pilates Clínico, Zumba, Step, Circuito, Funcional, HIIT, Aeróbica e GAP. Todas são adaptadas a diferentes níveis, desde iniciantes até avançados.</p>
+          </div>
+        </div>
+        <div class="faq-item animate delay-6">
+          <div class="faq-question"><span>Como funciona o treino personalizado?</span><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">
+            <p>É feito à medida dos teus objetivos, com acompanhamento individual de um personal trainer que orienta os exercícios e ajuda a atingir resultados de forma segura.</p>
+          </div>
+        </div>
+        <div class="faq-item animate delay-7">
+          <div class="faq-question"><span>Posso fazer acompanhamento com a nutricionista?</span><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">
+            <p>Sim! A nossa nutricionista realiza consultas individuais e cria planos alimentares personalizados, alinhados com os teus objetivos de treino e bem-estar.</p>
+          </div>
+        </div>
+        <div class="faq-item animate delay-8">
+          <div class="faq-question"><span>Que serviços de fisioterapia e tratamentos estéticos estão disponíveis?</span><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">
+            <p>Pressoterapia, drenagem linfática, cavitação, radiofrequência, HIFU e massagens relaxantes ou modeladoras. Cada tratamento é ajustado às tuas necessidades específicas.</p>
+          </div>
+        </div>
+        <div class="faq-item animate delay-9">
+          <div class="faq-question"><span>Existe alguma política de cancelamento ou reagendamento de aulas?</span><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">
+            <p>Sim. Podes cancelar ou reagendar aulas com aviso prévio — basta entrares em contacto connosco.</p>
+          </div>
+        </div>
+        <div class="faq-item animate delay-10">
+          <div class="faq-question"><span>Há estacionamento ou facilidade de transporte nas proximidades?</span><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">
+            <p>Sim, há estacionamento <strong>gratuito</strong> nas imediações e o acesso por transporte público é fácil e conveniente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chatbot -->
+  <div id="chatbot" class="chatbot-container" aria-live="polite" aria-label="Chat VilaPlus">
+    <div class="chatbot-header">
+      <div class="chatbot-title"><i class="fas fa-robot"></i><span>Assistente Vila Plus (Beta)</span></div>
+      <div>
+        <button id="chat-min" class="chatbot-btn-icon" aria-label="Minimizar"><i class="fas fa-minus"></i></button>
+        <button id="chat-close" class="chatbot-btn-icon" aria-label="Fechar"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <div id="chat-conv" class="chatbot-conversation"></div>
+    <div class="chatbot-quick-options">
+      <button class="quick-option" data-msg="aula experimental">Aula Experimental</button>
+      <button class="quick-option" data-msg="horários">Horários</button>
+      <button class="quick-option" data-msg="preços">Planos</button>
+      <button class="quick-option" data-msg="fisioterapia">Fisioterapia</button>
+      <button class="quick-option" data-msg="nutrição">Nutrição</button>
+    </div>
+    <div class="chatbot-input-area">
+      <input id="chat-input" type="text" class="chatbot-input" placeholder="Escreve a tua mensagem…">
+      <button id="chat-send" class="chatbot-send-btn" aria-label="Enviar"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <button id="chat-launch" class="chatbot-launcher" aria-label="Abrir chat"><i class="fas fa-comments"></i></button>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col animate">
+          <h3>Vila Plus</h3>
+          <p>Saúde. Força. Comunidade.</p>
+          <p>O teu ginásio de eleição em Vila Caiz.</p>
+        </div>
+        <div class="footer-col animate delay-1">
+          <h3>Links Rápidos</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html">Início</a></li>
+              <li><a href="servicosv2.html">Serviços</a></li>
+              <li><a href="projetosv2.html">Projetos</a></li>
+              <li><a href="portfoliov2.html">Galeria</a></li>
+              <li><a href="index.html#horarios">Horários</a></li>
+              <li><a href="parceriasv2.html">Parcerias</a></li>
+              <li><a href="lojav2.html">Loja</a></li>
+              <li><a href="noticiasv2.html">Notícias</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-col animate delay-2">
+          <h3>Nesta página</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="#contactos">Contactos principais</a></li>
+              <li><a href="#localizacao">Onde estamos</a></li>
+              <li><a href="#formulario">Formulário</a></li>
+              <li><a href="#faq">Perguntas Frequentes</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-col animate delay-3">
+          <h3>Redes Sociais</h3>
+          <div class="social-links">
+            <a href="https://www.facebook.com/p/Vila-Plus-61552410020366/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/vilaplus.pt/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/351931999690" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="scroll-hint" id="scrollHint" aria-hidden="true">
+  <i class="fas fa-angle-down"></i>
+</div>
+
+<script>
+  (function(){
+  const hint = document.getElementById('scrollHint');
+  if(!hint) return;
+
+  function toggleHint(){
+    const scrollY = window.scrollY;
+    const winH = window.innerHeight;
+    const docH = document.body.scrollHeight;
+
+    // Se já chegou ao fim, esconder
+    if(scrollY + winH >= docH - 50) {
+      hint.classList.add('hide');
+    } else {
+      hint.classList.remove('hide');
+    }
+  }
+
+  window.addEventListener('scroll', toggleHint);
+  window.addEventListener('resize', toggleHint);
+  document.addEventListener('DOMContentLoaded', toggleHint);
+})();
+
+</script>
+
+
+  <script>
+    // =============================================
+    // FUNÇÕES GERAIS E INICIALIZAÇÃO
+    // =============================================
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Menu mobile
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mainMenu = document.getElementById('main-menu');
+      
+      if (mobileMenuBtn && mainMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+          const isExpanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', !isExpanded);
+          mainMenu.classList.toggle('show');
+          
+          // Alterar ícone do botão
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.className = isExpanded ? 'fas fa-bars' : 'fas fa-times';
+          }
+        });
+        
+        // Fechar menu ao clicar em um item (apenas em mobile)
+        const menuItems = mainMenu.querySelectorAll('a');
+        menuItems.forEach(item => {
+          item.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+              mainMenu.classList.remove('show');
+              mobileMenuBtn.setAttribute('aria-expanded', 'false');
+              mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+            }
+          });
+        });
+      }
+
+      // Header shadow on scroll
+      const header = document.getElementById('header');
+      if (header) {
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+        });
+      }
+
+      // Smooth scroll para âncoras internas
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            const headerHeight = document.getElementById('header').offsetHeight;
+            const y = targetElement.offsetTop - headerHeight;
+            
+            window.scrollTo({
+              top: y,
+              behavior: 'smooth'
+            });
+            
+            // Atualizar URL sem recarregar a página
+            history.pushState(null, null, targetId);
+          }
+        });
+      });
+
+      // Reveal on scroll animation
+      const animateElements = document.querySelectorAll('.animate');
+      
+      function checkScroll() {
+        animateElements.forEach(el => {
+          const elementTop = el.getBoundingClientRect().top;
+          const elementVisible = 150;
+          
+          if (elementTop < window.innerHeight - elementVisible) {
+            el.classList.add('show');
+          }
+        });
+      }
+      
+      // Verificar elementos na inicialização
+      checkScroll();
+      
+      // E verificar durante o scroll
+      window.addEventListener('scroll', checkScroll);
+
+      function revealAllIfAtBottom() {
+        const atBottom = window.scrollY + window.innerHeight >= document.body.scrollHeight - 2;
+        if (atBottom) {
+          document.querySelectorAll('.animate:not(.show)').forEach(el => el.classList.add('show'));
+        }
+      }
+      revealAllIfAtBottom();
+      window.addEventListener('scroll', revealAllIfAtBottom);
+      window.addEventListener('resize', revealAllIfAtBottom);
+
+
+      // FAQ accordion
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+          document.querySelectorAll('.faq-item').forEach(i => {
+            if (i !== item) i.classList.remove('active');
+          });
+          item.classList.toggle('active');
+        });
+      });
+
+      // Formspree submit
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const formData = new FormData(contactForm);
+          const submitButton = contactForm.querySelector('button[type="submit"]');
+          const originalText = submitButton.textContent;
+          
+          try {
+            submitButton.textContent = 'A enviar...';
+            submitButton.disabled = true;
+            
+            const res = await fetch(contactForm.action, {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'Accept': 'application/json'
+              }
+            });
+            
+            if (res.ok) {
+              alert('Obrigado pela sua mensagem. Entraremos em contacto brevemente.');
+              contactForm.reset();
+            } else {
+              const data = await res.json().catch(() => ({}));
+              const msg = (data.errors && data.errors.map(e => e.message).join(', ')) || 'Ocorreu um erro ao enviar. Tente novamente.';
+              alert(msg);
+            }
+          } catch (err) {
+            console.error(err);
+            alert('Não foi possível enviar a mensagem (verifique a ligação).');
+          } finally {
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+          }
+        });
+      }
+
+      // Chat UI
+      const chat = document.getElementById('chatbot');
+      const launch = document.getElementById('chat-launch');
+      const closeBtn = document.getElementById('chat-close');
+      const minBtn = document.getElementById('chat-min');
+      const conv = document.getElementById('chat-conv');
+      const input = document.getElementById('chat-input');
+      const send = document.getElementById('chat-send');
+      
+      function openChat() {
+        chat.classList.add('visible');
+        input.focus();
+      }
+      
+      function closeChat() {
+        chat.classList.remove('visible');
+      }
+      
+      if (launch) launch.addEventListener('click', openChat);
+      if (closeBtn) closeBtn.addEventListener('click', closeChat);
+      if (minBtn) minBtn.addEventListener('click', () => chat.classList.toggle('visible'));
+      
+      // Quick options
+      document.querySelectorAll('.quick-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          input.value = btn.dataset.msg;
+          input.focus();
+        });
+      });
+      
+      // Fallback mini-bot
+      function appendMsg(text, cls = 'bot') {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `chat-message ${cls === 'user' ? 'user-message' : 'bot-message'}`;
+        msgDiv.innerHTML = text;
+        conv.appendChild(msgDiv);
+        conv.scrollTop = conv.scrollHeight;
+      }
+      
+      function replyFallback(q) {
+        const lower = q.toLowerCase();
+        if (lower.includes('hor') || lower.includes('horário')) {
+          return 'Horário: Seg–Sex 07:00–13:00 • 16:00–22:00; Sáb 09:00–17:00; Dom fechado.';
+        }
+        if (lower.includes('aula')) {
+          return 'Aula experimental: marcamos por aqui ou por telefone (+351 931 999 690). Diz-nos dia/horário preferido.';
+        }
+        if (lower.includes('preç') || lower.includes('plan')) {
+          return 'Enviamos os planos por email. Deixa-nos o teu endereço ou escreve para <a href="mailto:info@vilaplus.pt">info@vilaplus.pt</a>.';
+        }
+        if (lower.includes('fisi')) {
+          return 'Fisioterapia: reabilitação e prevenção. Podemos agendar avaliação inicial — queres sugerimos horários?';
+        }
+        if (lower.includes('nutri')) {
+          return 'Nutrição desportiva com plano personalizado. Queres marcar consulta?';
+        }
+        return 'Obrigado pela tua mensagem! Já te respondemos em breve. Se preferires, liga para <a href="tel:+351931999690">+351 931 999 690</a>.';
+      }
+      
+      function sendMsg() {
+        const msg = (input.value || '').trim();
+        if (!msg) return;
+        
+        appendMsg(msg, 'user');
+        input.value = '';
+        
+        // Resposta automática
+        setTimeout(() => appendMsg(replyFallback(msg)), 350);
+      }
+      
+      if (send) send.addEventListener('click', sendMsg);
+      if (input) {
+        input.addEventListener('keydown', e => {
+          if (e.key === 'Enter') sendMsg();
+        });
+      }
+
+      // Prevenir zoom em inputs em iOS
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        const inputs = document.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+          input.addEventListener('focus', function() {
+            this.style.fontSize = '16px'; // Prevenir zoom
+          });
+        });
+      }
+    });
+  </script>
+  <script>
+(function () {
+  const BREAKPOINT = 1023; // <1024 é mobile/tablet
+  const btn  = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('main-menu');
+  if (!btn || !menu) return;
+
+  function setIcon(open) {
+    const ic = btn.querySelector('i');
+    if (ic) ic.className = open ? 'fas fa-times' : 'fas fa-bars';
+  }
+  function isOpen(){ return menu.classList.contains('show'); }
+
+  // fechar ao clicar num link (apenas <1024)
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth <= BREAKPOINT) {
+        menu.classList.remove('show');
+        btn.setAttribute('aria-expanded', 'false');
+        setIcon(false);
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  // quando clicas no botão, trava/destrava scroll
+  btn.addEventListener('click', () => {
+    // corre depois do teu handler existente que faz o toggle
+    setTimeout(() => {
+      const open = isOpen();
+      document.body.style.overflow = open ? 'hidden' : '';
+      setIcon(open);
+    }, 0);
+  });
+
+  // ao aumentar para desktop, garante estado limpo
+  function sync() {
+    if (window.innerWidth > BREAKPOINT) {
+      document.body.style.overflow = '';
+      menu.classList.remove('show');
+      btn.setAttribute('aria-expanded', 'false');
+      setIcon(false);
+    }
+  }
+  window.addEventListener('resize', sync);
+  sync();
+})();
+</script>
+
+</body>
+</html>
