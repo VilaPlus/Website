@@ -1,0 +1,39 @@
+DirectoryIndex pages/index.html
+
+Options -Multiviews
+RewriteEngine On
+RewriteBase /
+
+########################################
+# 1) Redirecionar /index.html → /
+#    e /pages/index.html → /
+########################################
+
+RewriteCond %{THE_REQUEST} \s/+index\.html[\s?]
+RewriteRule ^index\.html$ / [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+pages/index\.html[\s?]
+RewriteRule ^pages/index\.html$ / [R=301,L]
+
+########################################
+# 2) Rotas bonitas → ficheiros reais
+########################################
+
+# Home
+RewriteRule ^$ /pages/index.html [L]
+
+# Páginas principais
+RewriteRule ^contactos/?$    /pages/contactsv2.html     [L]
+RewriteRule ^loja/?$         /pages/lojav2.html         [L]
+RewriteRule ^noticias/?$     /pages/noticiasv2.html     [L]
+RewriteRule ^parcerias/?$    /pages/parceriasv2.html    [L]
+RewriteRule ^galeria/?$      /pages/portfoliov2.html    [L]
+RewriteRule ^projetos/?$     /pages/projetosv2.html     [L]
+RewriteRule ^servicos/?$     /pages/servicosv2.html     [L]
+RewriteRule ^treinadores/?$  /pages/treinadoresv2.html  [L]
+
+########################################
+# 3) Página de erro 404 personalizada
+########################################
+
+ErrorDocument 404 /pages/404.html
