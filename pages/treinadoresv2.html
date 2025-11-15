@@ -571,12 +571,12 @@
   <!-- Header -->
   <header id="header">
     <div class="container header-container">
-      <a href="index.html" class="logo">
+      <a href="/" class="logo">
         <img src="../assets/logoazulcinza.png" alt="VilaPlus Ginásio" class="logo-img">
       </a>
       <nav>
         <ul id="main-menu">
-                    <li><a href="/#home">Início</a></li>
+          <li><a href="/#home">Início</a></li>
           <li><a href="/servicos">Serviços</a></li>
           <li><a href="/projetos">Projetos</a></li>
           <li><a href="/galeria">Galeria</a></li>
@@ -887,14 +887,14 @@
           <h3>Links Rápidos</h3>
           <div class="footer-links">
             <ul>
-              <li><a href="index.html">Início</a></li>
-              <li><a href="servicosv2.html">Serviços</a></li>
-              <li><a href="projetosv2.html">Projetos</a></li>
-              <li><a href="portfoliov2.html">Galeria</a></li>
-              <li><a href="index.html#horarios">Horários</a></li>
-              <li><a href="parceriasv2.html">Parcerias</a></li>
-              <li><a href="lojav2.html">Loja</a></li>
-              <li><a href="noticiasv2.html">Notícias</a></li>
+              <li><a href="/">Início</a></li>
+              <li><a href="/servicos">Serviços</a></li>
+              <li><a href="/projetos">Projetos</a></li>
+              <li><a href="/galeria">Galeria</a></li>
+              <li><a href="/#horarios">Horários</a></li>
+              <li><a href="/parcerias">Parcerias</a></li>
+              <li><a href="/loja">Loja</a></li>
+              <li><a href="/noticias">Notícias</a></li>
             </ul>
           </div>
         </div>
@@ -902,11 +902,12 @@
           <h3>Serviços</h3>
           <div class="footer-links">
             <ul>
-              <li><a href="servicosv2.html#musculacao">Musculação</a></li>
-              <li><a href="servicosv2.html#aulas">Aulas de Grupo</a></li>
-              <li><a href="servicosv2.html#personal">Treino Personalizados</a></li>
-              <li><a href="servicosv2.html#nutricao">Nutrição Desportiva</a></li>
-              <li><a href="servicosv2.html#online">Acompanhamento Online</a></li>
+              <li><a href="/servicos?f=personal#servicos-grid">Treino Personalizado</a></li>
+              <li><a href="/servicos?f=online#servicos-grid">Acompanhamento Online</a></li>
+              <li><a href="/servicos?f=musculacao#servicos-grid">Musculação</a></li>
+              <li><a href="/servicos?f=aulas#servicos-grid">Aulas de Grupo</a></li>
+              <li><a href="/servicos?f=fisioterapia#servicos-grid">Fisioterapia</a></li>
+  <li><a href="/servicos?f=nutri%C3%A7%C3%A3o#servicos-grid">Nutrição</a></li>
             </ul>
           </div>
         </div>
@@ -1331,7 +1332,7 @@
       const top=section.getBoundingClientRect().top+window.scrollY-h;
       window.scrollTo({top,behavior:'smooth'});
     }else{
-      location.href='contactsv2.html';
+      location.href='/contactos';
     }
   });
 </script>

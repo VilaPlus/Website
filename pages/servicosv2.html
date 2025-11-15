@@ -2254,20 +2254,20 @@
   <!-- Header -->
   <header id="header">
     <div class="container header-container">
-      <a href="index.html#home" class="logo">
+      <a href="/#home" class="logo">
         <img src="../assets/logoazulcinza.png" alt="VilaPlus Ginásio" class="logo-img"/>
       </a>
       <nav aria-label="Menu principal">
         <ul id="main-menu">
-          <li><a href="index.html#home">Início</a></li>
-          <li><a href="servicosv2.html" aria-current="page">Serviços</a></li>
-          <li><a href="projetosv2.html">Projetos</a></li>
-          <li><a href="portfoliov2.html">Galeria</a></li>
-          <li><a href="index.html#horarios">Horários</a></li>
-          <li><a href="parceriasv2.html">Parcerias</a></li>
-          <li><a href="lojav2.html">Loja</a></li>
-          <li><a href="noticiasv2.html">Notícias</a></li>
-          <li><a href="contactsv2.html">Contactos</a></li>
+          <li><a href="/#home">Início</a></li>
+          <li><a href="/servicos" aria-current="page">Serviços</a></li>
+          <li><a href="/projetos">Projetos</a></li>
+          <li><a href="/galeria">Galeria</a></li>
+          <li><a href="/#horarios">Horários</a></li>
+          <li><a href="/parcerias">Parcerias</a></li>
+          <li><a href="/loja">Loja</a></li>
+          <li><a href="/noticias">Notícias</a></li>
+          <li><a href="/contactos">Contactos</a></li>
         </ul>
       </nav>
       <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-menu">
@@ -3139,14 +3139,14 @@
           <h3>Links Rápidos</h3>
           <div class="footer-links">
             <ul>
-              <li><a href="index.html#home">Início</a></li>
-              <li><a href="projetosv2.html">Projetos</a></li>
-              <li><a href="portfoliov2.html">Galeria</a></li>
-              <li><a href="index.html#horarios">Horários</a></li>
-              <li><a href="parceriasv2.html">Parcerias</a></li>
-              <li><a href="lojav2.html">Loja</a></li>
-              <li><a href="noticiasv2.html">Notícias</a></li>
-              <li><a href="contactsv2.html">Contactos</a></li>
+              <li><a href="/#home">Início</a></li>
+              <li><a href="/projetos">Projetos</a></li>
+              <li><a href="/galeria">Galeria</a></li>
+              <li><a href="/#horarios">Horários</a></li>
+              <li><a href="/parcerias">Parcerias</a></li>
+              <li><a href="/loja">Loja</a></li>
+              <li><a href="/noticias">Notícias</a></li>
+              <li><a href="/contactos">Contactos</a></li>
             </ul>
           </div>
         </div>
@@ -3154,13 +3154,13 @@
           <h3>Serviços</h3>
           <div class="footer-links">
             <ul>
-              <li><a href="servicosv2.html?f=personal#servicos-grid">Treino Personalizado</a></li>
-              <li><a href="servicosv2.html?f=online#servicos-grid">Acompanhamento Online</a></li>
-              <li><a href="servicosv2.html?f=musculacao#servicos-grid">Musculação</a></li>
-              <li><a href="servicosv2.html?f=aulas#servicos-grid">Aulas de Grupo</a></li>
-              <li><a href="servicosv2.html?f=fisioterapia#servicos-grid">Fisioterapia</a></li>
-              <li><a href="servicosv2.html?f=nutri%C3%A7%C3%A3o#servicos-grid">Nutrição</a></li>
-              <li><a href="servicosv2.html?f=domicilio#servicos-grid">Treino ao Domicílio</a></li>
+              <li><a href="/servicos?f=personal#servicos-grid">Treino Personalizado</a></li>
+              <li><a href="/servicos?f=online#servicos-grid">Acompanhamento Online</a></li>
+              <li><a href="/servicos?f=musculacao#servicos-grid">Musculação</a></li>
+              <li><a href="/servicos?f=aulas#servicos-grid">Aulas de Grupo</a></li>
+              <li><a href="/servicos?f=fisioterapia#servicos-grid">Fisioterapia</a></li>
+              <li><a href="/servicos?f=nutri%C3%A7%C3%A3o#servicos-grid">Nutrição</a></li>
+              <li><a href="/servicos?f=domicilio#servicos-grid">Treino ao Domicílio</a></li>
             </ul>
           </div>
         </div>
@@ -3898,7 +3898,7 @@ if (itens.length === 0 && imgHero) {
       ctasEl.innerHTML = '';
       const isAulas = (cat === 'aulas');
       const cta2 = document.createElement('a');
-      cta2.href = isAulas ? 'servicosv2.html#horarios-aulas' : 'contactsv2.html';
+      cta2.href = isAulas ? '/servicos#horarios-aulas' : '/contactos';
       cta2.className = 'btn btn-filled';
       cta2.textContent = isAulas ? 'Ver horários das aulas' : 'Saber Mais';
       ctasEl.append(cta2);
@@ -4122,7 +4122,7 @@ btnFinish.addEventListener('click', () => {
         <button class="btn" data-act="contacto">Contactar</button>
         <button class="btn btn-filled" data-act="detalhes">Detalhes</button>
       </div>`;
-    el.querySelector('[data-act="contacto"]').addEventListener('click',()=>{ location.href='contactsv2.html'; });
+    el.querySelector('[data-act="contacto"]').addEventListener('click',()=>{ location.href='/contactos'; });
     el.querySelector('[data-act="detalhes"]').addEventListener('click',()=>{ 
       if (window.openServicoModalFromCard) window.openServicoModalFromCard(card);
     });
