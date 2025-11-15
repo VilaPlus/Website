@@ -1,0 +1,40 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/pages/index.html"
+    },
+    {
+      "source": "/servicos",
+      "destination": "/pages/servicosv2.html"
+    },
+    {
+      "source": "/parcerias",
+      "destination": "/pages/parceriasv2.html"
+    },
+    {
+      "source": "/contactos",
+      "destination": "/pages/contactsv2.html"
+    },
+    {
+      "source": "/loja",
+      "destination": "/pages/lojav2.html"
+    },
+    {
+      "source": "/noticias",
+      "destination": "/pages/noticiasv2.html"
+    },
+    {
+      "source": "/galeria",
+      "destination": "/pages/portfoliov2.html"
+    },
+    {
+      "source": "/projetos",
+      "destination": "/pages/projetosv2.html"
+    },
+    {
+      "source": "/treinadores",
+      "destination": "/pages/treinadoresv2.html"
+    }
+  ]
+}
