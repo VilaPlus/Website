@@ -338,124 +338,145 @@
   </script>
 
   <!-- ======= DATA ======= -->
-  <script>
-    const albuns = {
-      "workshop-nutricao-2025-02": {
-        title: "Workshop Nutrição",
-        date: "JANEIRO 2025",
-        dateSort: "2025-02-01",
-        location: "Vila Plus",
-        category: "Eventos",
-        tags: ["Nutrição","Workshop","Saúde"],
-        description: "Sessão prática e dinâmica sobre hábitos alimentares e estratégias para performance e recuperação.",
-        media: [
-          { type:"image", src:"../assets/nutricao/3f0a2043-2afa-417e-bdbb-d85f078843cd.jpg" },
-          { type:"image", src:"../assets/nutricao/4cd48e8d-d381-432f-b558-97d48b301724.jpg" },
-          { type:"image", src:"../assets/nutricao/6929aa3c-8065-4960-8eaa-b61a6ae2a2ac.jpg" },
-          { type:"image", src:"../assets/nutricao/bb735a02-9d2a-465e-86da-73f5103da4a4.jpg" },
-          { type:"image", src:"../assets/nutricao/bcda35a4-57a3-405a-a35b-ecd529fe1c69.jpg" }
-        ]
-      },
-      "carnaval-2025": {
-        title: "Carnaval 2025",
-        date: "MARÇO 2025",
-        dateSort: "2025-02-15",
-        location: "Vila Plus",
-        category: "Eventos",
-        tags: ["Carnaval","Comunidade","Diversão"],
-        description: "Aulas temáticas, disfarces e muita energia! Obrigado a todos pela participação.",
-        media: [
-          { type:"image", src:"../assets/carnaval/aff6b15a-d91e-4836-96f3-8733c012b190.jpg" },
-          { type:"image", src:"../assets/carnaval/d27a52f8-2bea-41c9-bef8-4f6056e7a4bf.jpg" }
-        ]
-      },
-      "caminhada-10k-2025-05-pico960": {
-        title: "Caminhada 10 km — Pico 960",
-        date: "MAIO 2025",
-        dateSort: "2025-05-10",
-        location: "Percurso Pico 960 (10 km)",
-        category: "Outdoor",
-        tags: ["Caminhada","Ar Livre","Comunidade"],
-        description: "Trilho de 10 km com vista incrível — foco em convívio, saúde e contacto com a natureza.",
-        media: [
-          { type:"image", src:"../assets/pico/4af96520-344f-46c7-97db-831e8ad4b906.jpg" },
-          { type:"image", src:"../assets/pico/4df96272-b002-4973-bb9b-5a6209f8fd60.jpg" },
-          { type:"image", src:"../assets/pico/ae28a9fd-e134-44c1-be55-5e9079b87641.jpg" }
-        ]
-      },
-      "aulas-grupo": {
-        title: "Pilates, Zumba & Avaliação Física",
-        date: "A Decorrer",
-        dateSort: "2024-04-01",
-        location: "Vila Plus",
-        category: "Aulas",
-        tags: ["Zumba","HIIT","Avaliação Fisica"],
-        description: "Energia e variedade — do HIIT ao Pilates, passa pela dança e cycling.",
-        media: [
-          { type:"image", src:"../assets/zumpi/c89ca5bd-c410-4176-94c7-b30b6986bd7f.jpg" },
-          { type:"image", src:"../assets/zumpi/237ea699-109a-4ed8-a45b-4e39173de3b6.jpg" },
-          { type:"image", src:"../assets/zumpi/2dca591e-c68a-45f0-ba8d-2071e0fb4509.jpg" },
-          { type:"image", src:"../assets/zumpi/2f13da4e-f434-406d-a398-17af186a753b.jpg" },
-          { type:"image", src:"../assets/zumpi/49712be2-0060-4ebb-b513-974be4631c1f.jpg" },
-          { type:"image", src:"../assets/zumpi/7a9696fc-7517-4cac-988e-d9dc46e0146e.jpg" },
-          { type:"image", src:"../assets/zumpi/a06b9b7b-c46e-4ec1-977b-fee7fe565344.jpg" },
-          { type:"image", src:"../assets/zumpi/a7a1e0c4-43d2-4789-9f41-a4ae6459f5e7.jpg" },
-          { type:"image", src:"../assets/zumpi/b48ce292-f13d-4a5e-94cc-da966df0a50c.jpg" },
-          { type:"image", src:"../assets/zumpi/c847bc0b-4af4-468d-a642-6a195f64105f.jpg" },
-          { type:"image", src:"../assets/zumpi/c88d69c7-674d-4efb-aacc-372fdf46a705.jpg" },
-          { type:"image", src:"../assets/zumpi/dc93feff-407d-4f5d-b2fc-88672638fe98.jpg" },
-          { type:"image", src:"../assets/zumpi/de420076-c555-4eda-85db-f7947fe5cdbb.jpg" },
-          { type:"image", src:"../assets/zumpi/f5fd6eab-2b74-4d02-a469-f098d3bf29a2.jpg" },
-          { type:"image", src:"../assets/zumpi/f8d74aa8-49a7-4adc-857e-b370d68c7dde.jpg" }
-        ]
-      },
-      "abertura": {
-        title: "Inauguração",
-        date: "OUTUBRO 2023",
-        dateSort: "2023-12-01",
-        location: "Vila Plus",
-        category: "Eventos",
-        tags: ["Início","Comunidade"],
-        description: "O começo desta caminhada — obrigado a todos os presentes!",
-        media: [
-          { type: "image", src: "../assets/inauguracao/0bfdc6bc-d98f-4491-b738-615dd6fb7dd2.jpg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.17 (1).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.17 (2).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.17.jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (1).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (2).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (3).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (4).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (5).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (6).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (7).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (8).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (9).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (10).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (11).jpeg" },
-          { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18.jpeg" }
-        ]
-      },
+<script>
+  const albuns = {
+    "workshop-nutricao-2025-02": {
+      title: "Workshop Nutrição",
+      date: "JANEIRO 2025",
+      dateSort: "2025-02-01",
+      location: "Vila Plus",
+      category: "Eventos",
+      tags: ["Nutrição","Workshop","Saúde"],
+      description: "Sessão prática e dinâmica sobre hábitos alimentares e estratégias para performance e recuperação.",
+      media: [
+        { type:"image", src:"../assets/nutricao/3f0a2043-2afa-417e-bdbb-d85f078843cd.jpg" },
+        { type:"image", src:"../assets/nutricao/4cd48e8d-d381-432f-b558-97d48b301724.jpg" },
+        { type:"image", src:"../assets/nutricao/6929aa3c-8065-4960-8eaa-b61a6ae2a2ac.jpg" },
+        { type:"image", src:"../assets/nutricao/bb735a02-9d2a-465e-86da-73f5103da4a4.jpg" },
+        { type:"image", src:"../assets/nutricao/bcda35a4-57a3-405a-a35b-ecd529fe1c69.jpg" }
+      ]
+    },
+    "carnaval-2025": {
+      title: "Carnaval 2025",
+      date: "MARÇO 2025",
+      dateSort: "2025-02-15",
+      location: "Vila Plus",
+      category: "Eventos",
+      tags: ["Carnaval","Comunidade","Diversão"],
+      description: "Aulas temáticas, disfarces e muita energia! Obrigado a todos pela participação.",
+      media: [
+        { type:"image", src:"../assets/carnaval/aff6b15a-d91e-4836-96f3-8733c012b190.jpg" },
+        { type:"image", src:"../assets/carnaval/d27a52f8-2bea-41c9-bef8-4f6056e7a4bf.jpg" }
+      ]
+    },
+    "caminhada-10k-2025-05-pico960": {
+      title: "Caminhada 10 km — Pico 960",
+      date: "MAIO 2025",
+      dateSort: "2025-05-10",
+      location: "Percurso Pico 960 (10 km)",
+      category: "Outdoor",
+      tags: ["Caminhada","Ar Livre","Comunidade"],
+      description: "Trilho de 10 km com vista incrível — foco em convívio, saúde e contacto com a natureza.",
+      media: [
+        { type:"image", src:"../assets/pico/4af96520-344f-46c7-97db-831e8ad4b906.jpg" },
+        { type:"image", src:"../assets/pico/4df96272-b002-4973-bb9b-5a6209f8fd60.jpg" },
+        { type:"image", src:"../assets/pico/ae28a9fd-e134-44c1-be55-5e9079b87641.jpg" }
+      ]
+    },
+    "aulas-grupo": {
+      title: "Pilates, Zumba & Avaliação Física",
+      date: "A Decorrer",
+      dateSort: "2024-04-01",
+      location: "Vila Plus",
+      category: "Aulas",
+      tags: ["Zumba","HIIT","Avaliação Fisica"],
+      description: "Energia e variedade — do HIIT ao Pilates, passa pela dança e cycling.",
+      media: [
+        { type:"image", src:"../assets/zumpi/c89ca5bd-c410-4176-94c7-b30b6986bd7f.jpg" },
+        { type:"image", src:"../assets/zumpi/237ea699-109a-4ed8-a45b-4e39173de3b6.jpg" },
+        { type:"image", src:"../assets/zumpi/2dca591e-c68a-45f0-ba8d-2071e0fb4509.jpg" },
+        { type:"image", src:"../assets/zumpi/2f13da4e-f434-406d-a398-17af186a753b.jpg" },
+        { type:"image", src:"../assets/zumpi/49712be2-0060-4ebb-b513-974be4631c1f.jpg" },
+        { type:"image", src:"../assets/zumpi/7a9696fc-7517-4cac-988e-d9dc46e0146e.jpg" },
+        { type:"image", src:"../assets/zumpi/a06b9b7b-c46e-4ec1-977b-fee7fe565344.jpg" },
+        { type:"image", src:"../assets/zumpi/a7a1e0c4-43d2-4789-9f41-a4ae6459f5e7.jpg" },
+        { type:"image", src:"../assets/zumpi/b48ce292-f13d-4a5e-94cc-da966df0a50c.jpg" },
+        { type:"image", src:"../assets/zumpi/c847bc0b-4af4-468d-a642-6a195f64105f.jpg" },
+        { type:"image", src:"../assets/zumpi/c88d69c7-674d-4efb-aacc-372fdf46a705.jpg" },
+        { type:"image", src:"../assets/zumpi/dc93feff-407d-4f5d-b2fc-88672638fe98.jpg" },
+        { type:"image", src:"../assets/zumpi/de420076-c555-4eda-85db-f7947fe5cdbb.jpg" },
+        { type:"image", src:"../assets/zumpi/f5fd6eab-2b74-4d02-a469-f098d3bf29a2.jpg" },
+        { type:"image", src:"../assets/zumpi/f8d74aa8-49a7-4adc-857e-b370d68c7dde.jpg" }
+      ]
+    },
+    "abertura": {
+      title: "Inauguração",
+      date: "OUTUBRO 2023",
+      dateSort: "2023-12-01",
+      location: "Vila Plus",
+      category: "Eventos",
+      tags: ["Início","Comunidade"],
+      description: "O começo desta caminhada — obrigado a todos os presentes!",
+      media: [
+        { type: "image", src: "../assets/inauguracao/0bfdc6bc-d98f-4491-b738-615dd6fb7dd2.jpg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.17 (1).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.17 (2).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.17.jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (1).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (2).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (3).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (4).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (5).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (6).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (7).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (8).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (9).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (10).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18 (11).jpeg" },
+        { type: "image", src: "../assets/inauguracao/WhatsApp Image 2025-09-12 at 12.23.18.jpeg" }
+      ]
+    },
 
-      "treino-personalizado": {
-        title: "Treino Personalizado",
-        date: "A Decorrer",
-        dateSort: "2025-01-01",
-        location: "Vila Plus",
-        category: "Aulas",
-        tags: ["Vídeos","Treino Personalizado"],
-        description: "Clipes de sessões de Treino Personalizado no Vila Plus.",
-        media: [
-          { type:"video", src:"../assets/1.mp4" },
-          { type:"video", src:"../assets/2.mp4" },
-          { type:"video", src:"../assets/3.mp4" },
-          { type:"video", src:"../assets/4.mp4" },
-          { type:"video", src:"../assets/5.mp4" },
-          { type:"video", src:"../assets/6.mp4" }
-        ]
-      }
-    };
-  </script>
+    "treino-personalizado": {
+      title: "Treino Personalizado",
+      date: "A Decorrer",
+      dateSort: "2025-01-01",
+      location: "Vila Plus",
+      category: "Aulas",
+      tags: ["Vídeos","Treino Personalizado"],
+      description: "Clipes de sessões de Treino Personalizado no Vila Plus.",
+      media: [
+        { type:"video", src:"../assets/1.mp4" },
+        { type:"video", src:"../assets/2.mp4" },
+        { type:"video", src:"../assets/3.mp4" },
+        { type:"video", src:"../assets/4.mp4" },
+        { type:"video", src:"../assets/5.mp4" },
+        { type:"video", src:"../assets/6.mp4" }
+      ]
+    },
+
+    "blackfriday-2025": {
+  title: "Black Friday no Vila Plus",
+  date: "NOVEMBRO 2025",
+  dateSort: "2025-11-28",
+  location: "Vila Plus",
+  category: "Eventos",
+  tags: ["Black Friday","Campanhas","Promoções"],
+  description: "Campanha Black Friday — capa em imagem, mas o álbum abre apenas com o vídeo.",
+  
+  // 👇 AGORA SÓ O VÍDEO APARECE NO SLIDER
+  media: [
+    { type:"video", src:"../assets/noticias/blackfvideo.mp4" }
+  ],
+
+  // 👇 A CAPA SEM ENTRAR NO MEDIA (thumbnail)
+  cover: "../assets/noticias/blackf.PNG"
+}
+
+
+  };
+</script>
+
 
   <!-- ======= JS: header var ======= -->
   <script>
@@ -593,7 +614,7 @@
         card.addEventListener('click', ()=>{ lastFocusedCard = card; openSlider(0,key); });
         card.addEventListener('keypress', e=>{ if(e.key==='Enter'){ lastFocusedCard = card; openSlider(0,key); } });
 
-        const first = (a.media||[])[0];
+        const first = a.cover ? { type:"image", src:a.cover } : (a.media||[])[0];
         const thumbHTML = (first?.type === 'image')
           ? `<img loading="lazy" decoding="async" src="${first.src}" alt="${a.title}" sizes="(max-width: 600px) 100vw, 33vw">`
           : `
