@@ -310,12 +310,11 @@
 
 @media (max-width:768px){
   .news-header nav ul{
-    /* estado fechado */
     display:none;
     position:fixed;
     left:0; right:0;
     top: calc(var(--alert-bar-h, 0px) + var(--header-h));
-    bottom:0; /* ocupa até ao fundo */
+    bottom:0;
     background: var(--branco);
     flex-direction: column;
     gap: .25rem;
@@ -323,11 +322,9 @@
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     box-shadow: 0 10px 15px rgba(0,0,0,.1);
-    z-index: 3000; /* acima do header/alert */
+    z-index: 3000;
   }
   .news-header nav ul.show{ display:flex; }
-
-  /* Itens grandes e fáceis de clicar */
   .news-header nav ul li a{
     display:block;
     padding: .9rem 0;
@@ -336,13 +333,9 @@
     border-bottom: 1px solid #eee;
   }
   .news-header nav ul li:last-child a{ border-bottom:0; }
-
-  /* botão hambúrguer visível no mobile (já tens) */
   .mobile-menu-btn{ display:flex; }
 }
 
-
-  /* Ajuste do 1º bloco com header fixo + alert bar */
   .hero, section#home{
     margin-top:calc(var(--alert-bar-h,0px) + var(--header-h));
     height:calc(100dvh - var(--alert-bar-h,0px) - var(--header-h));
@@ -455,8 +448,7 @@
 }
 .news-header nav a::after{ bottom:-4px; height:2px; }
 
-/* ===== BLACK FRIDAY POPUP ===== */
-
+/* ===== BLACK FRIDAY POPUP (reutilizado como Campanha) ===== */
 .bf-popup{
   position:fixed;
   inset:0;
@@ -471,12 +463,10 @@
   pointer-events:none;
   transition:opacity .35s ease;
 }
-
 .bf-popup.show{
   opacity:1;
   pointer-events:auto;
 }
-
 .bf-popup-content{
   background:linear-gradient(160deg,#ffffff 0%, #f9fafb 60%);
   border-radius:16px;
@@ -488,12 +478,10 @@
   animation:popIn .45s ease forwards;
   border:2px solid var(--dourado);
 }
-
 @keyframes popIn{
   0%{ transform:scale(.8); opacity:0 }
   100%{ transform:scale(1); opacity:1 }
 }
-
 .bf-close{
   position:absolute;
   top:10px;
@@ -505,32 +493,28 @@
   color:var(--azul-escuro);
   transition:.2s;
 }
-
 .bf-close:hover{
   color:var(--dourado);
   transform:scale(1.1);
 }
-
 .bf-title{
   font-size:1.5rem;
   margin-bottom:1rem;
   font-family:'Playfair Display',serif;
   color:var(--azul-escuro);
 }
-
 .bf-text{
   color:#333;
   line-height:1.6;
-  margin-bottom:1.8rem;
+  margin-bottom:1.2rem;
   font-size:1rem;
 }
-
 .bf-buttons{
   display:flex;
   flex-direction:column;
   gap:.75rem;
+  margin-top:.75rem;
 }
-
 .bf-btn-main{
   background:var(--dourado);
   color:white;
@@ -544,12 +528,10 @@
   box-shadow:0 3px 10px rgba(0,0,0,.2);
   transition:.25s ease;
 }
-
 .bf-btn-main:hover{
   background:#c6a231;
   transform:translateY(-2px);
 }
-
 .bf-btn-secondary{
   background:transparent;
   border:1px solid var(--azul-escuro);
@@ -560,12 +542,14 @@
   cursor:pointer;
   transition:.25s;
 }
-
 .bf-btn-secondary:hover{
   background:#f1f5f9;
 }
-
-
+.bf-text strong{ color: var(--azul-escuro); }
+@media (max-width: 480px){
+  .bf-popup-content{ padding: 1.5rem; }
+  .bf-title{ font-size: 1.35rem; }
+}
 </style>
 </head>
 <body>
@@ -578,10 +562,7 @@
     </a>
   </div>
 
-
-
-
-  <!-- HEADER (igual ao dos Contactos; posicionado abaixo da alert bar) -->
+  <!-- HEADER -->
   <header id="header" class="news-header">
     <div class="container header-container">
       <a href="/" class="logo">
@@ -857,7 +838,6 @@
   </div>
 </section>
 
-
   <!-- Contactos -->
   <section class="contact" id="contact">
     <div class="container">
@@ -944,7 +924,7 @@
     </div>
   </section>
 
-  <!-- FOOTER (igual ao dos Contactos) -->
+  <!-- FOOTER -->
   <footer class="footer-news">
     <div class="container">
       <div class="footer-container">
@@ -980,11 +960,10 @@
               <li><a href="/servicos?f=musculacao#servicos-grid">Musculação</a></li>
               <li><a href="/servicos?f=aulas#servicos-grid">Aulas de Grupo</a></li>
               <li><a href="/servicos?f=fisioterapia#servicos-grid">Fisioterapia</a></li>
-  <li><a href="/servicos?f=nutri%C3%A7%C3%A3o#servicos-grid">Nutrição</a></li>
+              <li><a href="/servicos?f=nutri%C3%A7%C3%A3o#servicos-grid">Nutrição</a></li>
             </ul>
           </div>
         </div>
-
 
         <div class="footer-col">
           <h3>Redes Sociais</h3>
@@ -997,6 +976,32 @@
       </div>
     </div>
   </footer>
+
+  <!-- ===== POPUP: Campanha de Adesão (abre ao entrar) ===== -->
+  <div class="bf-popup" id="bfPopup" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Campanha de adesão">
+    <div class="bf-popup-content">
+      <button class="bf-close" type="button" aria-label="Fechar" data-bf-close>&times;</button>
+
+      <div class="bf-title">Campanha de adesão</div>
+
+      <p class="bf-text">
+        <strong>Últimas Vagas!</strong><br>
+        Adere já.<br>
+        Campanha limitada.
+      </p>
+
+      <div class="bf-buttons">
+        <button class="bf-btn-main" type="button" id="bfLeadBtn">
+          Deixa os teus dados
+        </button>
+      </div>
+
+      <p class="bf-text" style="margin-top:1rem; margin-bottom:0;">
+        <strong>Como aderir?</strong><br>
+        Deixa os teus dados e aguarda o nosso contacto ou não percas tempo e passa na receção do ginásio.
+      </p>
+    </div>
+  </div>
 
   <!-- Floating WhatsApp -->
   <div class="floating-cta">
@@ -1137,7 +1142,7 @@ document.addEventListener('DOMContentLoaded', () => {
   checkScroll();
   window.addEventListener('scroll', checkScroll);
 
-  // 3.6 Video pause/play quando sai do viewport (hero)
+  // 3.6 Video pause/play quando sais do viewport (hero)
   const heroVideo = document.querySelector('.hero video');
   if ('IntersectionObserver' in window && heroVideo) {
     const io = new IntersectionObserver(entries => {
@@ -1272,7 +1277,6 @@ document.addEventListener('DOMContentLoaded', () => {
     videos.forEach(v => v.addEventListener('ended', crossfade));
   }
 
-  // Pausar quando o hero sai do viewport
   if ('IntersectionObserver' in window) {
     const hero = document.querySelector('.hero');
     const obs = new IntersectionObserver(entries => {
@@ -1410,67 +1414,18 @@ function initScheduleStatus() {
   update(); setInterval(update, 60000);
 }
 document.addEventListener('DOMContentLoaded', initScheduleStatus);
-
-/* ==========================================
-   8) ABOUT rotator (imagens)
-   ========================================== */
-(() => {
-  const ROOT = document.getElementById('aboutRotator');
-  if (!ROOT) return;
-  const dataAttr = ROOT.getAttribute('data-images') || '';
-  const PLAYLIST = dataAttr.split(',').map(s=>s.trim()).filter(Boolean);
-  if (PLAYLIST.length < 2) return;
-
-  const INTERVAL_MS = 300000;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const imgs = ROOT.querySelectorAll('.about-rotator-img');
-  if (imgs.length < 2) return;
-
-  const preload = src => { const im = new Image(); im.src = src; };
-  let i = 0, showing = 0, timer = null, running = false;
-
-  const setSrc = (el, src) => { if (src) el.src = src; };
-
-  setSrc(imgs[0], PLAYLIST[0]); imgs[0].classList.add('show');
-  setSrc(imgs[1], PLAYLIST[1]); preload(PLAYLIST[2]);
-  i = 1 % PLAYLIST.length;
-
-  const nextIndex = idx => (idx + 1) % PLAYLIST.length;
-
-  const crossfade = () => {
-    const hiding = showing, coming = showing ^ 1;
-    i = nextIndex(i);
-    setSrc(imgs[coming], PLAYLIST[i]);
-
-    const run = () => {
-      imgs[hiding].classList.remove('show');
-      imgs[coming].classList.add('show');
-      showing = coming;
-      const preloadIdx = nextIndex(i);
-      preload(PLAYLIST[preloadIdx]);
-      i = preloadIdx;
-    };
-
-    if (imgs[coming].complete) run();
-    else imgs[coming].addEventListener('load', run, {once:true});
-  };
-
-  const start = () => { if (running || reduce) return; running = true; timer = setInterval(crossfade, INTERVAL_MS); };
-  const stop  = () => { running = false; if (timer) clearInterval(timer); timer = null; };
-
-  if ('IntersectionObserver' in window) {
-    const obs = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting ? start() : stop()), {threshold: 0.4});
-    obs.observe(ROOT);
-  } else { start(); }
-
-  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', e => e.matches ? stop() : start());
-})();
 </script>
 
+<!-- ===== SCRIPT DO POPUP (Campanha) ===== -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const popup   = document.getElementById('bfPopup');
-  const moreBtn = document.getElementById('bfMoreBtn');
+  const popup = document.getElementById('bfPopup');
+  const leadBtn = document.getElementById('bfLeadBtn');
+  const form = document.getElementById('contactForm');
+  const nameInput = document.getElementById('name');
+  const header = document.getElementById('header');
+  const alertBar = document.getElementById('alertBar');
+
   if (!popup) return;
 
   const closePopup = () => {
@@ -1499,10 +1454,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape' && popup.classList.contains('show')) closePopup();
   });
 
-  if (moreBtn) {
-    moreBtn.addEventListener('click', () => {
+  if (leadBtn) {
+    leadBtn.addEventListener('click', () => {
       closePopup();
-      window.location.href = '/noticias';
+      if (!form) return;
+
+      const headerH = header?.offsetHeight || 0;
+      const alertH = (alertBar && alertBar.style.display !== 'none') ? alertBar.offsetHeight : 0;
+      const offset = headerH + alertH + 12;
+
+      const top = form.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+
+      setTimeout(() => { if (nameInput) nameInput.focus({ preventScroll: true }); }, 700);
     });
   }
 
@@ -1510,7 +1474,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(openPopup, 600);
 });
 </script>
-
 
 </body>
 </html>
